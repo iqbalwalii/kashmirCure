@@ -1,13 +1,19 @@
 .main {
-  background: #ddd6d6c9;
-  padding: 1rem;
+  background: #fff;
+  border: 1px solid #21212118;
   border-radius: 10px;
+  padding: 1rem;
   margin: 1rem 0 0 2rem;
   font-family: 'Poppins', sans-serif;
 }
 
 .main h2 {
   margin-bottom: 3rem;
+}
+
+.main hr {
+  width: 150px;
+  margin: 2rem 0;
 }
 
 .main ul {
@@ -17,10 +23,12 @@
 }
 
 .main ul li {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   cursor: pointer;
-  color: #000;
+  color: #000000a4;
   text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .main ul li:hover {

@@ -3,7 +3,9 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background-color: #f5f1f1 !important;
+  background-color: #ddfcfd44 !important;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
@@ -13,4 +15,9 @@ a {
 
 * {
   box-sizing: border-box;
+}
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 0.9rem;
+  }
 }
