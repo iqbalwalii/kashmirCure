@@ -16,6 +16,18 @@ a {
 * {
   box-sizing: border-box;
 }
+.appointments {
+  background: #fff;
+  padding: 1rem;
+  margin-top: 2rem;
+  border: 1px solid #21212118;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+}
+.appointments .action {
+  display: flex;
+  justify-content: space-around;
+}
 @media screen and (max-width: 900px) {
   html {
     font-size: 0.9rem;

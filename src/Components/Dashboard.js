@@ -12,6 +12,7 @@ import Dash from "../styles/Dashboard.module.css";
 const Dashboard = () => {
   return (
     <Container>
+      {/* Counters Start */}
       <Row>
         <Col className={Dash.counters}>
           <div className={Dash.counter}>
@@ -65,6 +66,7 @@ const Dashboard = () => {
           </div>
         </Col>
       </Row>
+      {/* Counters End*/}
     </Container>
   );
 };
