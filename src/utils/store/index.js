@@ -10,15 +10,13 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.setActiveTab: {
       return {
         ...state,
-        tab: { ...payload },
+        tab: payload,
       };
     }
-
     // Default Case
     default:
       return state;
   }
 };
-
 const store = createStore(reducer);
 export default store;

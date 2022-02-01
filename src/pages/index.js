@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import Dashboard from "../Components/Dashboard";
-import Appointment from "../Components/Appointments";
+import Consultations from "../Components/Consultations";
 import Side from "../Components/Navigator";
 import { Container, Row, Col } from "react-bootstrap";
-export default function Home() {
+import { connect } from "react-redux";
+import Doctors from "../Components/Doctors";
+import Patients from "../Components/Patients";
+import Reviews from "../Components/Reviews";
+function Home(props) {
   return (
     <>
       <Row>
@@ -11,15 +15,23 @@ export default function Home() {
           <Side />
         </Col>
         <Col xs={12} sm={9}>
-          <Dashboard />
-          <Row>
-            <Col sm={8}>
-              <Appointment />
-            </Col>
-            <Col sm={4}></Col>
-          </Row>
+          {props.tab === "dashboard" ? (
+            <Dashboard />
+          ) : props.tab === "app" ? (
+            <Consultations />
+          ) : props.tab === "doctor" ? (
+            <Doctors />
+          ) : props.tab === "patient" ? (
+            <Patients />
+          ) : (
+            <Reviews />
+          )}
         </Col>
       </Row>
     </>
   );
 }
+const mapStateToProps = (state) => {
+  return { ...state };
+};
+export default connect(mapStateToProps)(Home);

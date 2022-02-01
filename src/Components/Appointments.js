@@ -3,7 +3,7 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 import { CheckCircle, Eye, XCircle } from "react-bootstrap-icons";
 const Appointments = () => {
   return (
-    <Container>
+    <>
       <div className="appointments">
         <h4>Recent Appoitments</h4>
         <Table striped bordered hover>
@@ -129,7 +129,7 @@ const Appointments = () => {
           </tbody>
         </Table>
       </div>
-    </Container>
+    </>
   );
 };
 

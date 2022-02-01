@@ -7,20 +7,26 @@ import {
   PeopleFill,
   Journal,
   ArrowBarRight,
+  StarFill,
 } from "react-bootstrap-icons";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-const Navigator = () => {
-  const [active, setActive] = useState("dashboard");
-  useEffect(() => {
-    console.log(active);
-  }, [active]);
+const Navigator = (props) => {
+  const onTabHandler = (value) => {
+    props.dispatch({
+      type: "SET_ACTIVE_TAB",
+      payload: value,
+    });
+  };
+  // useEffect(() => {
+  //   console.log(props);
+  // }, [props.tab]);
   return (
     <div className={Sidebar.main}>
       <h2>K-Cure</h2>
       <ul>
-        <li onClick={(e) => setActive("dashboard")}>
-          {active === "dashboard" ? (
+        <li onClick={() => onTabHandler("dashboard")}>
+          {props.tab === "dashboard" ? (
             <div style={{ color: "#0579ff" }}>
               <GridFill /> &nbsp;
               <span>Dashboard</span>
@@ -32,8 +38,8 @@ const Navigator = () => {
             </div>
           )}
         </li>
-        <li onClick={(e) => setActive("App")}>
-          {active === "App" ? (
+        <li onClick={() => onTabHandler("app")}>
+          {props.tab === "app" ? (
             <div style={{ color: "#0579ff" }}>
               <BriefcaseFill /> &nbsp;
               <span>Appointments</span>
@@ -45,8 +51,8 @@ const Navigator = () => {
             </div>
           )}
         </li>
-        <li onClick={(e) => setActive("doctor")}>
-          {active === "doctor" ? (
+        <li onClick={() => onTabHandler("doctor")}>
+          {props.tab === "doctor" ? (
             <div style={{ color: "#0579ff" }}>
               <PersonFill /> &nbsp;
               <span>Doctors</span>
@@ -58,8 +64,8 @@ const Navigator = () => {
             </div>
           )}
         </li>
-        <li onClick={(e) => setActive("patient")}>
-          {active === "patient" ? (
+        <li onClick={() => onTabHandler("patient")}>
+          {props.tab === "patient" ? (
             <div style={{ color: "#0579ff" }}>
               <PeopleFill /> &nbsp;
               <span>Patients</span>
@@ -68,6 +74,19 @@ const Navigator = () => {
             <div>
               <PeopleFill /> &nbsp;
               <span>Patients</span>
+            </div>
+          )}
+        </li>
+        <li onClick={() => onTabHandler("reviews")}>
+          {props.tab === "reviews" ? (
+            <div style={{ color: "#0579ff" }}>
+              <StarFill /> &nbsp;
+              <span>Reviews</span>
+            </div>
+          ) : (
+            <div>
+              <StarFill /> &nbsp;
+              <span>Reviews</span>
             </div>
           )}
         </li>

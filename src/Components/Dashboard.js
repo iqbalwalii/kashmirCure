@@ -9,12 +9,13 @@ import {
 } from "react-bootstrap-icons";
 // import { Dash } from "react-bootstrap-icons";
 import Dash from "../styles/Dashboard.module.css";
+import Appointment from "./Appointments";
 const Dashboard = () => {
   return (
     <Container>
       {/* Counters Start */}
       <Row>
-        <Col className={Dash.counters}>
+        <Col className={Dash.counters} xs={12}>
           <div className={Dash.counter}>
             <div className={Dash.counterIcon} style={{ background: "#FF6270" }}>
               <PeopleFill size={28} />
@@ -67,6 +68,12 @@ const Dashboard = () => {
         </Col>
       </Row>
       {/* Counters End*/}
+      <Row>
+        <Col sm={8}>
+          <Appointment />
+        </Col>
+        <Col sm={4}></Col>
+      </Row>
     </Container>
   );
 };
