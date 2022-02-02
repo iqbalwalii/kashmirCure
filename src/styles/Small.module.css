@@ -1,0 +1,22 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  background-color: #21b3ab;
+  background-image: url("https://i.pinimg.com/originals/ee/84/e6/ee84e6c4f71311cac5b0624e31ea9b51.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main .body {
+  background: #212121;
+  color: #f5f5f5;
+  font-size: 2rem;
+  position: relative;
+  top: 50%;
+  width: 50%;
+  left: 20%;
+  padding: 20px;
+  border-radius: 20px;
+}
+/*# sourceMappingURL=Small.module.css.map */
