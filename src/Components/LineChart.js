@@ -70,7 +70,7 @@ export const data = {
   ],
 };
 
-export default function Chart() {
+export default function LineChart() {
   return (
     <>
       <Line options={options} data={data} />

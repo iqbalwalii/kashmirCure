@@ -4,7 +4,7 @@ import { CheckCircle, Eye, XCircle } from "react-bootstrap-icons";
 const Appointments = () => {
   return (
     <>
-      <div className="appointments">
+      <div className="appointments_main">
         <h6>Recent Appoitments</h6>
         <Table striped bordered hover>
           <thead>
@@ -13,6 +13,7 @@ const Appointments = () => {
               <th>Name</th>
               <th>Gender</th>
               <th>Date</th>
+              <th>Time</th>
             </tr>
           </thead>
           <tbody>
@@ -21,30 +22,35 @@ const Appointments = () => {
               <td>Irfan</td>
               <td>Male</td>
               <td>01-02-2022</td>
+              <td>05:32 PM</td>
             </tr>
             <tr>
               <td>2</td>
               <td>Irfan</td>
               <td>Male</td>
               <td>01-02-2022</td>
+              <td>05:32 PM</td>
             </tr>
             <tr>
               <td>3</td>
               <td>Irfan</td>
               <td>Male</td>
               <td>01-02-2022</td>
+              <td>05:32 PM</td>
             </tr>
             <tr>
               <td>4</td>
               <td>Irfan</td>
               <td>Male</td>
               <td>01-02-2022</td>
+              <td>05:32 PM</td>
             </tr>
             <tr>
               <td>5</td>
               <td>Irfan</td>
               <td>Male</td>
               <td>01-02-2022</td>
+              <td>05:32 PM</td>
             </tr>
           </tbody>
         </Table>

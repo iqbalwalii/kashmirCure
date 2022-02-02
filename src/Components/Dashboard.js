@@ -12,6 +12,8 @@ import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
+import PriceChart from "./PriceChart";
+import PieChart from "./PieChart";
 const Dashboard = () => {
   return (
     <Container>
@@ -83,7 +85,7 @@ const Dashboard = () => {
           <Appointment />
         </Col>
         <Col sm={4}>
-          <BarChart />
+          <PieChart />
         </Col>
       </Row>
     </Container>

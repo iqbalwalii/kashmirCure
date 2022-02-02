@@ -27,39 +27,25 @@ export const options = {
     },
     title: {
       display: false,
-      text: "Patients",
+      text: "Revenue",
     },
   },
 };
 
-const labels = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const nums = [
-  10000, 6000, 7000, 8000, 9000, 10000, 12000, 8000, 9000, 10000, 12000, 8000,
-];
+const labels = ["M", "T", "W", "T", "F", "S", "S"];
+
+const nums = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120];
 export const data = {
   labels,
   datasets: [
     {
       label: "Revenue",
       data: labels.map((label, index) => nums[index]),
-      backgroundColor: "#408AFD",
+      backgroundColor: "#00C4FA",
     },
   ],
 };
 
-export default function BarChart() {
+export default function PriceChart() {
   return <Bar options={options} data={data} />;
 }

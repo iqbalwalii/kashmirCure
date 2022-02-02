@@ -5,7 +5,7 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #ddfcfd44 !important;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 a {
@@ -24,6 +24,20 @@ a {
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
 }
+.appointments_main {
+  background: #fff;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid #21212118;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+}
+.appointments_main th {
+  font-size: 0.8rem;
+}
+.appointments_main tr {
+  font-size: 0.8rem;
+}
 .appointments .review {
   width: 450px;
 }
@@ -41,12 +55,7 @@ a {
   /* padding: 0.1rem; */
   margin: 1rem;
 }
-.appointments th {
-  font-size: 0.8rem;
-}
-.appointments tr {
-  font-size: 0.8rem;
-}
+
 .device {
   display: none;
 }
