@@ -41,6 +41,12 @@ a {
   /* padding: 0.1rem; */
   margin: 1rem;
 }
+.appointments th {
+  font-size: 0.8rem;
+}
+.appointments tr {
+  font-size: 0.8rem;
+}
 .device {
   display: none;
 }

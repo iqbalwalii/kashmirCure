@@ -10,6 +10,8 @@ import {
 // import { Dash } from "react-bootstrap-icons";
 import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
 const Dashboard = () => {
   return (
     <Container>
@@ -69,10 +71,20 @@ const Dashboard = () => {
       </Row>
       {/* Counters End*/}
       <Row>
+        <Col sm={6}>
+          <LineChart />
+        </Col>
+        <Col sm={6}>
+          <BarChart />
+        </Col>
+      </Row>
+      <Row>
         <Col sm={8}>
           <Appointment />
         </Col>
-        <Col sm={4}></Col>
+        <Col sm={4}>
+          <BarChart />
+        </Col>
       </Row>
     </Container>
   );
