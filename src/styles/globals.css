@@ -23,6 +23,7 @@ a {
   border: 1px solid #21212118;
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
+  cursor: pointer;
 }
 .appointments_main {
   background: #fff;
@@ -31,6 +32,7 @@ a {
   border: 1px solid #21212118;
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
+  cursor: pointer;
 }
 .appointments_main th {
   font-size: 0.8rem;
@@ -58,6 +60,11 @@ a {
 
 .device {
   display: none;
+}
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media screen and (max-width: 900px) {
   html {

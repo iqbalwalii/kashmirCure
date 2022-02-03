@@ -5,13 +5,13 @@ import { Pie } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const data = {
-  labels: ["IOS", "ANDROID"],
+  labels: ["Week1", "Week2", "Week3", "Week4"],
   datasets: [
     {
       label: "Installs",
-      data: [40, 60],
-      backgroundColor: ["#1E74FF", "#FF6384"],
-      borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+      data: [4000, 9000, 4000, 5000],
+      backgroundColor: ["#1E74FF", "#FF6384", "#FE764B", "#70CF98"],
+      borderColor: ["#74A0FF", "#FF8691", "#FE936A", "#79CFB3"],
       borderWidth: 1,
     },
   ],
