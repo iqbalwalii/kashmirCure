@@ -7,7 +7,22 @@ import Doctors from '../Components/Doctors';
 import Patients from '../Components/Patients';
 import Reviews from '../Components/Reviews';
 import Device from '../Components/Device';
+
+async function getDocs() {
+	try {
+		fetch('https://kashmircure.herokuapp.com/api/doctors')
+			.then((result) => result.json())
+			.then((result) => console.log('first', result))
+			.catch((err) => console.log('inside err', err));
+	} catch (error) {
+		console.log('http errr: >>', error);
+	}
+}
+
+
+
 function Home(props) {
+	getDocs()
 	return (
 		<>
 			<Device />
