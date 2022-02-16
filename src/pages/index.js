@@ -7,10 +7,19 @@ import Doctors from '../Components/Doctors';
 import Patients from '../Components/Patients';
 import Reviews from '../Components/Reviews';
 import Device from '../Components/Device';
+import Axios from '../utils/axios';
 
-
+async function getDocs() {
+	try {
+		const result = await Axios.get('/api/doctors');
+		console.log('first', result);
+	} catch (error) {
+		console.log('http errr: >>', error);
+	}
+}
 
 function Home(props) {
+	getDocs();
 	return (
 		<>
 			<Device />

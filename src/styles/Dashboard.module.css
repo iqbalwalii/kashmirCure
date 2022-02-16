@@ -1,66 +1,50 @@
 .counters {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	background: #fff;
-	padding: 1rem;
-	margin-top: 1rem;
-	/* border: 1px solid #21212118; */
-	box-shadow: 2px 2px 10px #ebebeb;
-
-	border-radius: 10px;
-	font-family: 'Poppins', sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #fff;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid #21212118;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .counters .counter {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .counters .counter .counterIcon {
-	color: #fff;
-	padding: 0.5rem;
-	border-radius: 50%;
-	height: 50px;
-	width: 50px;
-	margin-right: 0.5rem;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
+  color: #fff;
+  padding: .5rem;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin-right: .5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .counters .counter .details {
-	margin-left: 5px;
-}
-.counters .counter .details h6 {
-	color: #000000a4;
-	font-weight: normal;
-	margin-bottom: 4px;
-}
-.counters .counter .details h5 {
-	font-weight: bold;
+  color: #000000a4;
 }
 
 .counters .counter .details .counterNumber {
-	color: #212121;
-}
-
-.charts {
-	margin: 10px 0;
-	padding: 0.5rem;
-	box-shadow: 2px 2px 10px #ebebeb;
+  color: #212121;
 }
 /*# sourceMappingURL=Dashboard.module.css.map */
