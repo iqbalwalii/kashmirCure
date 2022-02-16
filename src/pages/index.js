@@ -7,6 +7,9 @@ import Doctors from '../Components/Doctors';
 import Patients from '../Components/Patients';
 import Reviews from '../Components/Reviews';
 import Device from '../Components/Device';
+
+
+
 function Home(props) {
 	return (
 		<>
