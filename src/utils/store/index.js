@@ -2,6 +2,8 @@ import { createStore } from "redux";
 import ACTIONS from "./actions";
 const initialState = {
   tab: "dashboard",
+  doctors: [],
+  patients: [],
 };
 const reducer = (state = initialState, action) => {
   const { payload, type } = action;
@@ -11,6 +13,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         tab: payload,
+      };
+    }
+    case ACTIONS.getDoctors: {
+      return {
+        ...state,
+        doctors: payload,
+      };
+    }
+    case ACTIONS.getPatients: {
+      return {
+        ...state,
+        doctors: payload,
       };
     }
     // Default Case

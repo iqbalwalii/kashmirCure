@@ -1,89 +1,51 @@
-import React from 'react';
-import { Container, Table } from 'react-bootstrap';
-const Doctors = () => {
-	return (
-		<>
-			<div className='appointments'>
-				<h4>Doctors</h4>
-				<Table striped hover>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Gender</th>
-							<th>Speciality</th>
-							<th>Rating</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>Pulmonologist</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>7</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>8</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-						<tr>
-							<td>9</td>
-							<td>Irfan</td>
-							<td>Male</td>
-							<td>01-02-2022</td>
-							<td>02:34 PM</td>
-						</tr>
-					</tbody>
-				</Table>
-			</div>
-		</>
-	);
-};
+import React, { useEffect } from "react";
+import { Container, Table } from "react-bootstrap";
+import { connect } from "react-redux";
+// import doc from "../services/fetchDoctors";
+const Doctors = (props) => {
+  //   useEffect(() => {
+  //     fetch("https://kashmircure.herokuapp.com/api/doctor")
+  //       .then((result) => result.json())
+  //       .then((result) =>
+  //         props.dispatch({ type: "GET_DOCTORS", payload: result.data })
+  //       )
+  //       .catch((err) => console.log("inside err", err));
+  //     console.log(props);
+  //   }, []);
+  return (
+    <>
+      <div className="appointments">
+        <h4>Doctors</h4>
+        <Table striped hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Speciality</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.doctors?.map((doctor, index) => {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{doctor.name}</td>
+                  <td>{doctor.gender}</td>
+                  <td>{doctor?.specializations?.map((e) => e?.name + ", ")}</td>
 
-export default Doctors;
+                  <td>{doctor.stus === 0 ? "Not Approved" : "Approved"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </div>
+    </>
+  );
+};
+const mapStateToProps = (state) => {
+  return { ...state, doctors: state.doctors };
+};
+export default connect(mapStateToProps)(Doctors);
