@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
 import { connect } from "react-redux";
-// import doc from "../services/fetchDoctors";
+import Link from "next/link";
+import { getDoctors } from "../services/DoctorService";
+import { useRouter } from "next/router";
 const Doctors = (props) => {
-  //   useEffect(() => {
-  //     fetch("https://kashmircure.herokuapp.com/api/doctor")
-  //       .then((result) => result.json())
-  //       .then((result) =>
-  //         props.dispatch({ type: "GET_DOCTORS", payload: result.data })
-  //       )
-  //       .catch((err) => console.log("inside err", err));
-  //     console.log(props);
-  //   }, []);
+  useEffect(() => {
+    getDoctors().then((res) => {
+      console.log(res);
+      props.dispatch({ type: "GET_DOCTORS", payload: res });
+      console.log(props);
+    });
+  }, []);
+  const router = useRouter();
   return (
     <>
       <div className="appointments">
@@ -27,16 +28,19 @@ const Doctors = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.doctors?.map((doctor, index) => {
+            {props?.doctors.map((doctor, index) => {
               return (
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{doctor.name}</td>
-                  <td>{doctor.gender}</td>
-                  <td>{doctor?.specializations?.map((e) => e?.name + ", ")}</td>
-
-                  <td>{doctor.stus === 0 ? "Not Approved" : "Approved"}</td>
-                </tr>
+                <Link>
+                  <tr key={doctor._id}>
+                    <td>{index + 1}</td>
+                    <td>{doctor.name}</td>
+                    <td>{doctor.gender}</td>
+                    <td>
+                      {doctor?.specializations?.map((e) => e?.name + ", ")}
+                    </td>
+                    <td>{doctor.stus === 0 ? "Not Approved" : "Approved"}</td>
+                  </tr>
+                </Link>
               );
             })}
           </tbody>

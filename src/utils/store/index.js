@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.getPatients: {
       return {
         ...state,
-        doctors: payload,
+        patients: payload,
       };
     }
     // Default Case

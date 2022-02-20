@@ -1,22 +1,16 @@
 import React, { useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
-import patientList from "../services/fetchPatients";
+import { getPatients } from "../services/PatientService";
+import { connect } from "react-redux";
 const Patients = (props) => {
   useEffect(() => {
-    fetch("https://kashmircure.herokuapp.com/api/patients")
-      .then((result) => result.json())
-      .then(
-        (result) => console.log(result)
-        // props.dispatch({ type: "GET_DOCTORS", payload: result.data })
-      )
-      .catch((err) => console.log("inside err", err));
-
-    console.log(props);
+    getPatients().then((res) => {
+      props.dispatch({ type: "GET_PATIENTS", payload: res });
+      console.log(props);
+    });
   }, []);
-  const List = patientList();
-  console.log(List);
   return (
-    <>
+    <Container>
       <div className="appointments">
         <h4>Patients</h4>
         <Table striped hover>
@@ -25,89 +19,37 @@ const Patients = (props) => {
               <th>#</th>
               <th>Name</th>
               <th>Gender</th>
-              <th>Treated By</th>
-              <th>Concern</th>
-              <th>Date</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>Dr. Ghulam Qadir</td>
-              <td>Cardiology</td>
-              <td>2-5-2021</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>Dr Masse</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Ashrafi Shivalli</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>Cardiology</td>
-              <td>02:34 PM</td>
-            </tr>
+            {props?.patients.map((patient, index) => {
+              return (
+                // <Link href="/doctor/[id]" as={`/doctor/${patient._id}`}>
+                <tr key={patient._id}>
+                  <td>{index + 1}</td>
+                  <td>{patient.name}</td>
+                  <td>{patient.gender}</td>
+                  <td>{patient.phone}</td>
+                  <td>{patient?.address.city}</td>
+                  <td>{patient?.address.state}</td>
+                  <td>{patient.staus === 0 ? "Not Treated" : "Treated"}</td>
+                </tr>
+                // </Link>
+              );
+            })}
           </tbody>
         </Table>
       </div>
-    </>
+    </Container>
   );
 };
-
-export default Patients;
+const mapStateToProps = (state) => {
+  return {
+    patients: state.patients,
+  };
+};
+export default connect(mapStateToProps)(Patients);

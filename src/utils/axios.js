@@ -1,6 +1,5 @@
 import Axios from "axios";
-const baseURL =
-  process.env.NODE_ENV === "production" ? "/" : "http://localhost:4000";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 const axios = Axios.create({
   baseURL,
   headers: {
