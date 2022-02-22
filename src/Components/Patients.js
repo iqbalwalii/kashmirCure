@@ -6,11 +6,10 @@ const Patients = (props) => {
   useEffect(() => {
     getPatients().then((res) => {
       props.dispatch({ type: "GET_PATIENTS", payload: res });
-      console.log(props);
     });
   }, []);
   return (
-    <Container>
+    <>
       <div className="appointments">
         <h4>Patients</h4>
         <Table striped hover>
@@ -44,7 +43,7 @@ const Patients = (props) => {
           </tbody>
         </Table>
       </div>
-    </Container>
+    </>
   );
 };
 const mapStateToProps = (state) => {

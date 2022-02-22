@@ -5,3 +5,9 @@ export async function getDoctors() {
   const doctors = data.data;
   return doctors;
 }
+
+export async function getDoctor(id) {
+  const { data } = await Axios.get(`/doctor/${id}`);
+  const doctor = data.data;
+  return doctor;
+}
