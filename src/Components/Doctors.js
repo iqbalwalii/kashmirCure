@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 const Doctors = (props) => {
   useEffect(() => {
     getDoctors().then((res) => {
-      props.dispatch({ type: "GET_DOCTORS", payload: res });
+      console.log(res);
+      props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
     });
   }, []);
   const router = useRouter();

@@ -8,7 +8,8 @@ const Doctor = (props) => {
   const router = useRouter();
   useEffect(() => {
     getDoctor(router.query.id).then((res) => {
-      props.dispatch({ type: "GET_DOCTOR", payload: res });
+      console.log(res.doctor);
+      props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
     });
   }, [router.query.id]);
   return (
@@ -19,8 +20,9 @@ const Doctor = (props) => {
             Kashmir <span style={{ color: "blue" }}>Cure</span>
           </h1>
         </Col>
-        <Col xs={12} md={{ span: 1, offset: 5 }}>
-          <Button>Edit</Button>
+        <Col xs={12} md={{ span: 2, offset: 4 }}>
+          <Button variant="info">Update</Button>
+          <Button variant="danger">Delete</Button>
         </Col>
       </Row>
       <Row>
@@ -49,36 +51,18 @@ const Doctor = (props) => {
               <td>{props.doctor.category}</td>
             </tr>
             <tr>
-              <td>Hospital Affilations</td>
-              <td>
-                {props.doctor.hospital_affiliations.map((hospital) => {
-                  return hospital + ", ";
-                })}
-              </td>
-            </tr>
-            <tr>
-              <td>Qualifications</td>
-              <td>
-                {props.doctor.qualifications.map((hospital) => {
-                  return hospital + ", ";
-                })}
-              </td>
-            </tr>
-            <tr>
-              <td>Hospital Affilations</td>
-              <td>
-                {props.doctor.specializations.map((hospital) => {
-                  return hospital + ", ";
-                })}
-              </td>
-            </tr>
-            <tr>
               <td>Recommendation Count</td>
               <td>{props.doctor.recommendation_count}</td>
             </tr>
             <tr>
               <td>Status</td>
-              <td>{props.doctor.status === 0 ? "Not Active" : "Active"}</td>
+              <td>
+                {props.doctor.status === 0 ? (
+                  <Button variant="danger">Not Active</Button>
+                ) : (
+                  <Button variant="success">Active</Button>
+                )}
+              </td>
             </tr>
           </tbody>
         </Table>
