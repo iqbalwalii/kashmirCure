@@ -1,6 +1,8 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-const Appointments = () => {
+import { connect } from "react-redux";
+const Appointments = (props) => {
+  const { appointments } = props;
   return (
     <>
       <div className="appointments_main">
@@ -10,52 +12,32 @@ const Appointments = () => {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Gender</th>
               <th>Date</th>
-              <th>Time</th>
+              <th>Age</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Irfan</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>05:32 PM</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Irfan</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>05:32 PM</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Irfan</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>05:32 PM</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Irfan</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>05:32 PM</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Irfan</td>
-              <td>Male</td>
-              <td>01-02-2022</td>
-              <td>05:32 PM</td>
-            </tr>
+            {appointments?.slice(0, 5)?.map((patient, index) => {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{patient?.name}</td>
+                  <td>{patient?.start_time.slice(0, 10)}</td>
+                  <td>{patient?.age}</td>
+                  <td>{patient?.appointment_status}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </div>
     </>
   );
 };
-
-export default Appointments;
+const mapStateToProps = (state) => {
+  return {
+    appointments: state.appointments,
+  };
+};
+export default connect(mapStateToProps)(Appointments);

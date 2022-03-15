@@ -34,6 +34,18 @@ const reducer = (state = initialState, action) => {
         doctor: payload,
       };
     }
+    case ACTIONS.getAppointments: {
+      return {
+        ...state,
+        appointments: payload,
+      };
+    }
+    case ACTIONS.getAds: {
+      return {
+        ...state,
+        ads: payload,
+      };
+    }
     // Default Case
     default:
       return state;

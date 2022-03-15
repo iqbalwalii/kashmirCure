@@ -16,3 +16,8 @@ export async function setStatus(id, status) {
   const { data } = await Axios.put(`/doctor/${id}`, status);
   return data;
 }
+
+export async function deleteDoctor(id) {
+  const { data } = await Axios.delete(`/doctors/${id}`);
+  return data;
+}

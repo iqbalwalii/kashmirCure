@@ -1,12 +1,13 @@
 import Dashboard from "../Components/Dashboard";
-import Consultations from "../Components/Consultations";
 import Side from "../Components/Navigator";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import Doctors from "../Components/Doctors";
 import Patients from "../Components/Patients";
 import Reviews from "../Components/Reviews";
 import Device from "../Components/Device";
+import Consultations from "../Components/Consultations";
+import Ads from "../Components/Advertisements";
 function Home(props) {
   return (
     <>
@@ -24,6 +25,8 @@ function Home(props) {
             <Doctors />
           ) : props.tab === "patient" ? (
             <Patients />
+          ) : props.tab === "ads" ? (
+            <Ads />
           ) : (
             <Reviews />
           )}
