@@ -5,12 +5,11 @@ import { connect } from "react-redux";
 const Patients = (props) => {
   useEffect(() => {
     getPatients().then((res) => {
-      props.dispatch({ type: "GET_PATIENTS", payload: res });
-      console.log(props);
+      props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
     });
   }, []);
   return (
-    <Container>
+    <>
       <div className="appointments">
         <h4>Patients</h4>
         <Table striped hover>
@@ -29,14 +28,14 @@ const Patients = (props) => {
             {props?.patients.map((patient, index) => {
               return (
                 // <Link href="/doctor/[id]" as={`/doctor/${patient._id}`}>
-                <tr key={patient._id}>
+                <tr key={patient?._id}>
                   <td>{index + 1}</td>
-                  <td>{patient.name}</td>
-                  <td>{patient.gender}</td>
-                  <td>{patient.phone}</td>
-                  <td>{patient?.address.city}</td>
-                  <td>{patient?.address.state}</td>
-                  <td>{patient.staus === 0 ? "Not Treated" : "Treated"}</td>
+                  <td>{patient?.name}</td>
+                  <td>{patient?.gender}</td>
+                  <td>{patient?.phone}</td>
+                  <td>{patient?.address?.city}</td>
+                  <td>{patient?.address?.state}</td>
+                  <td>{patient?.staus === 0 ? "Not Treated" : "Treated"}</td>
                 </tr>
                 // </Link>
               );
@@ -44,7 +43,7 @@ const Patients = (props) => {
           </tbody>
         </Table>
       </div>
-    </Container>
+    </>
   );
 };
 const mapStateToProps = (state) => {

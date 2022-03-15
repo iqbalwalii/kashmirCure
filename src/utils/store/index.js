@@ -4,6 +4,7 @@ const initialState = {
   tab: "dashboard",
   doctors: [],
   patients: [],
+  doctor: {},
 };
 const reducer = (state = initialState, action) => {
   const { payload, type } = action;
@@ -25,6 +26,24 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         patients: payload,
+      };
+    }
+    case ACTIONS.getDoctor: {
+      return {
+        ...state,
+        doctor: payload,
+      };
+    }
+    case ACTIONS.getAppointments: {
+      return {
+        ...state,
+        appointments: payload,
+      };
+    }
+    case ACTIONS.getAds: {
+      return {
+        ...state,
+        ads: payload,
       };
     }
     // Default Case

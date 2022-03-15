@@ -5,11 +5,10 @@ import Link from "next/link";
 import { getDoctors } from "../services/DoctorService";
 import { useRouter } from "next/router";
 const Doctors = (props) => {
+  const { doctors } = props;
   useEffect(() => {
     getDoctors().then((res) => {
-      console.log(res);
-      props.dispatch({ type: "GET_DOCTORS", payload: res });
-      console.log(props);
+      props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
     });
   }, []);
   const router = useRouter();
@@ -28,9 +27,9 @@ const Doctors = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props?.doctors.map((doctor, index) => {
+            {doctors.map((doctor, index) => {
               return (
-                <Link>
+                <Link href={`/doctor/${doctor._id}`}>
                   <tr key={doctor._id}>
                     <td>{index + 1}</td>
                     <td>{doctor.name}</td>
