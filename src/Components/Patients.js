@@ -1,13 +1,21 @@
 import React, { useEffect } from "react";
-import { Container, Table } from "react-bootstrap";
-import { getPatients } from "../services/PatientService";
+import { Container, Table, Button } from "react-bootstrap";
+import { getPatients, deletePatient } from "../services/PatientService";
 import { connect } from "react-redux";
+import { Trash } from "react-bootstrap-icons";
 const Patients = (props) => {
   useEffect(() => {
     getPatients().then((res) => {
       props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
     });
   }, []);
+  const onDeleteHandler = (id) => {
+    deletePatient(id).then(() => {
+      getPatients().then((res) => {
+        props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
+      });
+    });
+  };
   return (
     <>
       <div className="appointments">
@@ -22,6 +30,7 @@ const Patients = (props) => {
               <th>City</th>
               <th>State</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -36,6 +45,14 @@ const Patients = (props) => {
                   <td>{patient?.address?.city}</td>
                   <td>{patient?.address?.state}</td>
                   <td>{patient?.staus === 0 ? "Not Treated" : "Treated"}</td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      onClick={() => onDeleteHandler(patient?._id)}
+                    >
+                      <Trash />
+                    </Button>
+                  </td>
                 </tr>
                 // </Link>
               );

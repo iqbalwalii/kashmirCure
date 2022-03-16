@@ -46,6 +46,12 @@ const reducer = (state = initialState, action) => {
         ads: payload,
       };
     }
+    case ACTIONS.setAd: {
+      return {
+        ...state,
+        ad: payload,
+      };
+    }
     // Default Case
     default:
       return state;

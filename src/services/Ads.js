@@ -5,12 +5,26 @@ export async function getAds() {
   return data;
 }
 
-export async function createAd(page, limit) {
-  const { data } = await Axios.post("/ads");
+export async function createAd(input) {
+  const { data } = await Axios.post("/ads", input);
   return data;
 }
 
 export async function deleteAd(id) {
   const { data } = await Axios.delete(`/ads/${id}`);
+  return data;
+}
+export async function PostAd(id, file) {
+  var formData = new FormData();
+  formData.append("adImage", file);
+  const { data } = await Axios.put(`/ads/upload/image${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+}
+export async function updateAd(id) {
+  const { data } = await Axios.put(`/ads/upload/image${id}`);
   return data;
 }

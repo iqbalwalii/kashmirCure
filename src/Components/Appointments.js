@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getAppointments } from "../services/AppointmentService";
 const Appointments = (props) => {
+  const { appointments } = props;
   useEffect(() => {
     getAppointments().then((res) => {
       props.dispatch({
@@ -11,7 +12,6 @@ const Appointments = (props) => {
       });
     });
   }, []);
-  const { appointments } = props;
   return (
     <>
       <div className="appointments_main">

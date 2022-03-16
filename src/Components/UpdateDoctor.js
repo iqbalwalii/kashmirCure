@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { doctorSchema } from "../utils/Schemas/doctorUpdate";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 const UpdateDoctor = (props) => {
   const { doctor } = props;
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+
   return (
     <Container>
       <Row>

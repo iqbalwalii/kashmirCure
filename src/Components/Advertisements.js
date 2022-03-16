@@ -1,49 +1,166 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getAds } from "../services/Ads";
-import { Table } from "react-bootstrap";
+import { getAds, createAd, postAd } from "../services/Ads";
+import { Table, Row, Col, Button, Form } from "react-bootstrap";
+import { XSquareFill } from "react-bootstrap-icons";
+import { useForm } from "react-hook-form";
 const Advertisements = (props) => {
-  const { ads } = props;
-  console.log("props", ads);
+  const { ads, ad } = props;
+  const [popup, setPopup] = useState(false);
+  const [image, setImage] = useState(false);
+  const { register, handleSubmit } = useForm();
   useEffect(() => {
     getAds().then((res) => {
-      console.log("res", res);
       props.dispatch({
         type: "GET_ADS",
         payload: res.data.ads,
       });
     });
   }, []);
+  const onSubmit = (data) => {
+    console.log(data);
+    createAd(data)
+      .then((res) => {
+        console.log(res);
+        props.dispatch({
+          type: "SET_AD",
+          payload: res.data.ad,
+        });
+        setImage(true);
+      })
+      .catch((err) => console.log(err));
+  };
+  const onRegister = (data) => {
+    console.log(data);
+  };
   return (
     <div className="appointments">
-      <h4>Ads</h4>
-      <Table striped hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {ads?.map((ad, index) => {
-            return (
+      {popup === false ? (
+        <div>
+          <Row>
+            <Col>
+              <h4>Ads</h4>
+            </Col>
+            <Col xs={2}>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  setPopup(!popup);
+                }}
+              >
+                Create
+              </Button>
+            </Col>
+          </Row>
+          <Table striped hover>
+            <thead>
               <tr>
-                <td>{index + 1}</td>
-                <td>{ad.title}</td>
-                <td>{ad.createdAt.slice(0, 10)}</td>
-                <td>{ad.description}</td>
+                <th>#</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th></th>
               </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+            </thead>
+            <tbody>
+              {ads?.map((ad, index) => {
+                return (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{ad.title}</td>
+                    <td>{ad.createdAt.slice(0, 10)}</td>
+                    <td>{ad.description}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
+      ) : (
+        <div>
+          <Row>
+            <Col>
+              <h4>Ads</h4>
+            </Col>
+            <Col xs={2}>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  setPopup(!popup);
+                }}
+              >
+                <XSquareFill />
+              </Button>
+            </Col>
+          </Row>
+          {image === false ? (
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Form.Group className="mb-2" controlId="formBasicTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Title"
+                  {...register("title")}
+                />
+              </Form.Group>
+              <Form.Group className="mb-2" controlId="formBasicDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Description"
+                  {...register("description")}
+                />
+              </Form.Group>
+              <Form.Group className="mb-2" controlId="formBasicFile">
+                <Form.Label>Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Link"
+                  {...register("link")}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-2"
+                controlId="formBasicFile"
+                style={{ display: "none" }}
+              >
+                <Form.Label>Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Link"
+                  value="image"
+                  {...register("image")}
+                />
+              </Form.Group>
+              <div className="d-grid mt-3">
+                <Button type="submit" variant="dark">
+                  Next
+                </Button>
+              </div>
+            </Form>
+          ) : (
+            <Form onSubmit={handleSubmit(() => onRegister())}>
+              <Form.Group className="mb-2" controlId="formBasicImage">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  placeholder="Image"
+                  {...register("image")}
+                />
+              </Form.Group>
+              <div className="d-grid">
+                <Button type="submit" variant="dark">
+                  Add
+                </Button>
+              </div>
+            </Form>
+          )}
+        </div>
+      )}
     </div>
   );
 };
 const mapStateToProps = (state) => {
-  return { ...state, ads: state.ads };
+  return { ...state, ads: state.ads, ad: state.ad };
 };
 export default connect(mapStateToProps)(Advertisements);

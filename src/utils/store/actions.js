@@ -5,5 +5,6 @@ const ACTIONS = {
   getDoctor: "GET_DOCTOR",
   getAppointments: "GET_APPOINTMENTS",
   getAds: "GET_ADS",
+  setAd: "SET_AD",
 };
 export default ACTIONS;

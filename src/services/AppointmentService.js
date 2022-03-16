@@ -6,7 +6,9 @@ export async function getAppointments() {
 }
 
 export async function deleteAppointment(id) {
+  console.log(id);
   const { data } = await Axios.delete(`/appointments/${id}`);
+  console.log(data);
   return data;
 }
 
