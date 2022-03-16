@@ -96,10 +96,11 @@ const Doctor = (props) => {
             <tr>
               <td>Documents</td>
               <td>
-                {doctor?.documents?.map((document) => {
+                {doctor?.documents?.map((document, index) => {
                   return (
                     <Link
                       href={`${process.env.NEXT_PUBLIC_API_URL}/files/${document}`}
+                      key={index}
                     >
                       <a target="_blank">
                         <Image
