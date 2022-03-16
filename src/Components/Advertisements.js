@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { getAds } from "../services/Ads";
 import { Table } from "react-bootstrap";
 const Advertisements = (props) => {
-  const { ads } = props?.ads;
+  const { ads } = props;
+  console.log("props", ads);
   useEffect(() => {
     getAds().then((res) => {
-      console.log(res);
+      console.log("res", res);
       props.dispatch({
         type: "GET_ADS",
-        payload: res.data,
+        payload: res.data.ads,
       });
     });
   }, []);
