@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
-import { getDoctor, deleteDoctor } from "../../services/DoctorService";
+import { getDoctor, setDoctor } from "../../services/DoctorService";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import Switch from "react-switch";
 // import UpdateDoctor from "../../Components/UpdateDoctor";
 const Doctor = (props) => {
   console.log(props);
@@ -15,11 +16,10 @@ const Doctor = (props) => {
       console.log(res.doctor);
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
     });
-  }, [router.query.id]);
-  const onDeleteHandler = () => {
-    deleteDoctor(props.doctor._id).then((res) => {
-      console.log(res);
-      router.push("/");
+  }, [router.query.id, doctor]);
+  const onChangeHandler = () => {
+    setDoctor(doctor?._id, !doctor?.is_verified).then((res) => {
+      props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
     });
   };
   return (
@@ -45,7 +45,7 @@ const Doctor = (props) => {
         </Col> */}
       </Row>
       <Row>
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>Key</th>
@@ -76,11 +76,21 @@ const Doctor = (props) => {
             <tr>
               <td>Status</td>
               <td>
-                {doctor?.status === 0 ? (
-                  <Button variant="danger">Not Active</Button>
-                ) : (
-                  <Button variant="success">Active</Button>
-                )}
+                <Switch
+                  checked={doctor?.is_verified}
+                  onChange={onChangeHandler}
+                  onColor="#86d3ff"
+                  onHandleColor="#2693e6"
+                  handleDiameter={30}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                  activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                  height={20}
+                  width={48}
+                  className="react-switch"
+                  id="material-switch"
+                />
               </td>
             </tr>
             <tr>

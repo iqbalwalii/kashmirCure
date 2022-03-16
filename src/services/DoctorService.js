@@ -12,8 +12,10 @@ export async function getDoctor(id) {
   return doctor;
 }
 
-export async function setStatus(id, status) {
-  const { data } = await Axios.put(`/doctor/${id}`, status);
+export async function setDoctor(id, status) {
+  const { data } = await Axios.patch(`/doctors/${id}`, {
+    is_verified: status,
+  });
   return data;
 }
 
