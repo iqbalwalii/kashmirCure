@@ -28,7 +28,7 @@ const Advertisements = (props) => {
           </tr>
         </thead>
         <tbody>
-          {ads.map((ad, index) => {
+          {ads?.map((ad, index) => {
             return (
               <tr>
                 <td>{index + 1}</td>
