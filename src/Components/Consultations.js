@@ -1,17 +1,9 @@
 import { useEffect } from "react";
 import { Table } from "react-bootstrap";
-import { getAppointments } from "../services/AppointmentService";
 import { connect } from "react-redux";
 const Consultations = (props) => {
   const { appointments } = props;
-  useEffect(() => {
-    getAppointments().then((res) => {
-      props.dispatch({
-        type: "GET_APPOINTMENTS",
-        payload: res.data.appointments,
-      });
-    });
-  }, []);
+
   return (
     <>
       <div className="appointments">

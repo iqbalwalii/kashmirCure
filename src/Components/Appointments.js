@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
+import { getAppointments } from "../services/AppointmentService";
 const Appointments = (props) => {
+  useEffect(() => {
+    getAppointments().then((res) => {
+      props.dispatch({
+        type: "GET_APPOINTMENTS",
+        payload: res.data.appointments,
+      });
+    });
+  }, []);
   const { appointments } = props;
   return (
     <>
