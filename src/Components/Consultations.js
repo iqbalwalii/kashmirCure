@@ -4,16 +4,16 @@ import { connect } from "react-redux";
 import { deleteAppointment } from "../services/AppointmentService";
 const Consultations = (props) => {
   const { appointments } = props;
-  const onDeleteHandler = (id) => {
-    deleteAppointment(id).then((res) => {
-      getAppointments().then((res) => {
-        props.dispatch({
-          type: "GET_APPOINTMENTS",
-          payload: res.data.appointments,
-        });
-      });
-    });
-  };
+  // const onDeleteHandler = (id) => {
+  //   deleteAppointment(id).then((res) => {
+  //     getAppointments().then((res) => {
+  //       props.dispatch({
+  //         type: "GET_APPOINTMENTS",
+  //         payload: res.data.appointments,
+  //       });
+  //     });
+  //   });
+  // };
   return (
     <>
       <div className="appointments">
@@ -26,7 +26,7 @@ const Consultations = (props) => {
               <th>Date</th>
               <th>Age</th>
               <th>Status</th>
-              <th>Action</th>
+              {/* <th>Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -38,14 +38,14 @@ const Consultations = (props) => {
                   <td>{patient?.start_time.slice(0, 10)}</td>
                   <td>{patient?.age}</td>
                   <td>{patient?.appointment_status}</td>
-                  <td>
+                  {/* <td>
                     <Button
                       variant="danger"
                       onClick={() => onDeleteHandler(patient?._id)}
                     >
                       <Trash />
                     </Button>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}
