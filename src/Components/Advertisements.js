@@ -4,11 +4,14 @@ import { getAds, createAd, postAd } from "../services/Ads";
 import { Table, Row, Col, Button, Form } from "react-bootstrap";
 import { XSquareFill } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 const Advertisements = (props) => {
   const { ads, ad } = props;
+  const router = useRouter();
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
   const { register, handleSubmit } = useForm();
+  console.log(ad?._id);
   useEffect(() => {
     getAds().then((res) => {
       props.dispatch({
@@ -31,7 +34,10 @@ const Advertisements = (props) => {
       .catch((err) => console.log(err));
   };
   const onRegister = (data) => {
-    console.log(data);
+    console.log(ad?._id, data.image[0]);
+    postAd(ad?._id, data.image[0]).then((res) => {
+      Router.push("/");
+    });
   };
   return (
     <div className="appointments">
@@ -139,7 +145,7 @@ const Advertisements = (props) => {
               </div>
             </Form>
           ) : (
-            <Form onSubmit={handleSubmit(() => onRegister())}>
+            <Form onSubmit={handleSubmit(onRegister)}>
               <Form.Group className="mb-2" controlId="formBasicImage">
                 <Form.Label>Image</Form.Label>
                 <Form.Control

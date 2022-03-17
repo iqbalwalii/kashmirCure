@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import {
   PeopleFill,
-  PhoneFill,
   BriefcaseFill,
   JournalMedical,
   PlusCircleFill,
 } from "react-bootstrap-icons";
-// import { Dash } from "react-bootstrap-icons";
+import { getDoctors } from "../services/DoctorService";
+import { getPatients } from "../services/PatientService";
 import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
-import PriceChart from "./PriceChart";
-import PieChart from "./PieChart";
-const Dashboard = () => {
+import { connect } from "react-redux";
+const Dashboard = (props) => {
+  const { doctors, patients, appointments, blogs } = props;
+  useEffect(() => {
+    getDoctors().then((res) => {
+      props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
+    });
+    getPatients().then((res) => {
+      props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
+    });
+  }, []);
+  console.log(props);
   return (
     <Container>
       {/* Counters Start */}
@@ -27,7 +36,7 @@ const Dashboard = () => {
             </div>
             <div className={Dash.details}>
               <h6>Total Patients</h6>
-              <h5 className={Dash.counterNumber}>1,000</h5>
+              <h5 className={Dash.counterNumber}>{patients?.length}</h5>
             </div>
           </div>
           {/* number two */}
@@ -37,7 +46,7 @@ const Dashboard = () => {
             </div>
             <div className={Dash.details}>
               <h6>Total Doctors</h6>
-              <h5 className={Dash.counterNumber}>1,000</h5>
+              <h5 className={Dash.counterNumber}>{doctors?.length}</h5>
             </div>
           </div>
           {/* number three */}
@@ -47,7 +56,7 @@ const Dashboard = () => {
             </div>
             <div className={Dash.details}>
               <h6>Total Appointments</h6>
-              <h5 className={Dash.counterNumber}>1,000</h5>
+              <h5 className={Dash.counterNumber}>{appointments?.length}</h5>
             </div>
           </div>
           {/* number four    */}
@@ -60,19 +69,6 @@ const Dashboard = () => {
               <h5 className={Dash.counterNumber}>1,000</h5>
             </div>
           </div>
-          {/* number five */}
-          {/* <div className={Dash.counter}>
-						<div
-							className={Dash.counterIcon}
-							style={{ background: '#2984FF' }}
-						>
-							<PhoneFill size={28} />
-						</div>
-						<div className={Dash.details}>
-							<h6>Total Installs</h6>
-							<h5 className={Dash.counterNumber}>1,000</h5>
-						</div>
-					</div> */}
         </Col>
       </Row>
       {/* Counters End*/}
@@ -106,5 +102,13 @@ const Dashboard = () => {
     </Container>
   );
 };
-
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+    doctors: state.doctors,
+    patients: state.patients,
+    appointments: state.appointments,
+    blogs: state.blogs,
+  };
+};
+export default connect(mapStateToProps)(Dashboard);

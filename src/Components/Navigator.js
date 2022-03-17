@@ -22,7 +22,7 @@ const Navigator = (props) => {
 
   return (
     <div className={Sidebar.main}>
-      <h3>Kashmir Cure</h3>
+      <h3>Kiadah</h3>
       <ul>
         <li onClick={() => onTabHandler("dashboard")}>
           {props.tab === "dashboard" ? (

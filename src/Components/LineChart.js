@@ -30,7 +30,7 @@ export const options = {
     },
     title: {
       display: false,
-      text: "Kashmir Cure",
+      text: "Kiadah",
     },
   },
 };

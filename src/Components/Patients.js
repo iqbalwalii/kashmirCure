@@ -4,11 +4,6 @@ import { getPatients, deletePatient } from "../services/PatientService";
 import { connect } from "react-redux";
 import { Trash } from "react-bootstrap-icons";
 const Patients = (props) => {
-  useEffect(() => {
-    getPatients().then((res) => {
-      props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
-    });
-  }, []);
   const onDeleteHandler = (id) => {
     deletePatient(id).then(() => {
       getPatients().then((res) => {

@@ -14,10 +14,10 @@ export async function deleteAd(id) {
   const { data } = await Axios.delete(`/ads/${id}`);
   return data;
 }
-export async function PostAd(id, file) {
+export async function postAd(id, file) {
   var formData = new FormData();
   formData.append("adImage", file);
-  const { data } = await Axios.put(`/ads/upload/image${id}`, formData, {
+  const { data } = await Axios.put(`/ads/upload/image/${id}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

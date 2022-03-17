@@ -1,17 +1,8 @@
-import React, { useEffect } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import Link from "next/link";
-import { getDoctors } from "../services/DoctorService";
-import { useRouter } from "next/router";
 const Doctors = (props) => {
   const { doctors } = props;
-  useEffect(() => {
-    getDoctors().then((res) => {
-      props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
-    });
-  }, []);
-  const router = useRouter();
   return (
     <>
       <div className="appointments">

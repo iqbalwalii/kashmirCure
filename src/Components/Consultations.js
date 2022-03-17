@@ -1,11 +1,7 @@
-import { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { connect } from "react-redux";
-import {
-  deleteAppointment,
-  getAppointment,
-} from "../services/AppointmentService";
+import { deleteAppointment } from "../services/AppointmentService";
 const Consultations = (props) => {
   const { appointments } = props;
   const onDeleteHandler = (id) => {
