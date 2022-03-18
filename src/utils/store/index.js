@@ -55,14 +55,18 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.setUser: {
       return {
         ...state,
-        user: payload,
-        loggedIn: true,
+        user: { ...payload, loggedIn: true },
       };
     }
     case ACTIONS.setAd: {
       return {
         ...state,
         ad: payload,
+      };
+    }
+    case ACTIONS.logOut: {
+      return {
+        user: { loggedIn: false },
       };
     }
     // Default Case

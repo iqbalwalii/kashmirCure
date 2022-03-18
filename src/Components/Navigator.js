@@ -10,13 +10,20 @@ import {
   StarFill,
   GraphUpArrow,
 } from "react-bootstrap-icons";
-import { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
 const Navigator = (props) => {
+  const router = useRouter();
   const onTabHandler = (value) => {
     props.dispatch({
       type: "SET_ACTIVE_TAB",
       payload: value,
+    });
+  };
+  const onClickHandler = () => {
+    router.push("/");
+    props.dispatch({
+      type: "LOG_OUT",
     });
   };
 
@@ -115,7 +122,7 @@ const Navigator = (props) => {
         <li>
           <Journal /> &nbsp; <span> Blog</span>
         </li>
-        <li>
+        <li onClick={onClickHandler}>
           <ArrowBarRight /> &nbsp; <span> Logout</span>
         </li>
       </ul>
@@ -123,6 +130,6 @@ const Navigator = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { tab: state.tab };
+  return { tab: state.tab, user: state.user };
 };
 export default connect(mapStateToProps)(Navigator);

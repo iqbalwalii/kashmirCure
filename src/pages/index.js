@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { login } from "../services/loginService";
 import { useRouter } from "next/router";
-import Login from "../Components/login";
 const index = (props) => {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
@@ -12,7 +11,7 @@ const index = (props) => {
       console.log(res);
       props.dispatch({
         type: "SET_USER",
-        payload: res.data.user,
+        payload: res.data,
       });
       router.push("/dashboard");
     });

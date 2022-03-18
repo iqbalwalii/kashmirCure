@@ -9,30 +9,33 @@ import Device from "../Components/Device";
 import Consultations from "../Components/Consultations";
 import Ads from "../Components/Advertisements";
 function Home(props) {
-  console.log(props);
+  const { tab, user } = props;
+  console.log(user);
   return (
     <>
       <Device />
-      <Row className="main">
-        <Col xs={12} sm={2}>
-          <Side />
-        </Col>
-        <Col xs={12} sm={10}>
-          {props.tab === "dashboard" ? (
-            <Dashboard />
-          ) : props.tab === "app" ? (
-            <Consultations />
-          ) : props.tab === "doctor" ? (
-            <Doctors />
-          ) : props.tab === "patient" ? (
-            <Patients />
-          ) : props.tab === "ads" ? (
-            <Ads />
-          ) : (
-            <Reviews />
-          )}
-        </Col>
-      </Row>
+      {user?.loggedIn === true && (
+        <Row className="main">
+          <Col xs={12} sm={2}>
+            <Side />
+          </Col>
+          <Col xs={12} sm={10}>
+            {tab === "dashboard" ? (
+              <Dashboard />
+            ) : tab === "app" ? (
+              <Consultations />
+            ) : tab === "doctor" ? (
+              <Doctors />
+            ) : tab === "patient" ? (
+              <Patients />
+            ) : tab === "ads" ? (
+              <Ads />
+            ) : (
+              <Reviews />
+            )}
+          </Col>
+        </Row>
+      )}
     </>
   );
 }
