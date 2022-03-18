@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { login } from "../services/loginService";
 import { useRouter } from "next/router";
-const index = (props) => {
+const Index = (props) => {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -52,4 +52,4 @@ const index = (props) => {
 const mapStateToProps = (state) => {
   return { ...state, user: state.user };
 };
-export default connect(mapStateToProps)(index);
+export default connect(mapStateToProps)(Index);
