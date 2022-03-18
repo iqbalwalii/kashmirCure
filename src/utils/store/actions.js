@@ -7,5 +7,6 @@ const ACTIONS = {
   getAds: "GET_ADS",
   setAd: "SET_AD",
   setDoctor: "SET_DOCTOR",
+  setUser: "SET_USER",
 };
 export default ACTIONS;

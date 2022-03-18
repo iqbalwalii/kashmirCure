@@ -52,6 +52,19 @@ const reducer = (state = initialState, action) => {
         ad: payload,
       };
     }
+    case ACTIONS.setUser: {
+      return {
+        ...state,
+        user: payload,
+        loggedIn: true,
+      };
+    }
+    case ACTIONS.setAd: {
+      return {
+        ...state,
+        ad: payload,
+      };
+    }
     // Default Case
     default:
       return state;

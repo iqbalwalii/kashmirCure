@@ -76,6 +76,9 @@ a {
   align-items: center;
   justify-content: center;
 }
+.login {
+  margin-top: 20% !important;
+}
 @media screen and (max-width: 900px) {
   html {
     font-size: 0.9rem;

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getAds, createAd, postAd } from "../services/Ads";
+import { getAds, createAd, postAd } from "../services/AdService";
 import { Table, Row, Col, Button, Form } from "react-bootstrap";
 import { XSquareFill } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const Advertisements = (props) => {
   const { ads, ad } = props;
   const router = useRouter();
@@ -71,12 +72,14 @@ const Advertisements = (props) => {
             <tbody>
               {ads?.map((ad, index) => {
                 return (
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{ad.title}</td>
-                    <td>{ad.createdAt.slice(0, 10)}</td>
-                    <td>{ad.description}</td>
-                  </tr>
+                  <Link href={`/ads/${ad._id}`}>
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{ad.title}</td>
+                      <td>{ad.createdAt.slice(0, 10)}</td>
+                      <td>{ad.description}</td>
+                    </tr>
+                  </Link>
                 );
               })}
             </tbody>
