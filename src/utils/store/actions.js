@@ -9,5 +9,6 @@ const ACTIONS = {
   setDoctor: "SET_DOCTOR",
   setUser: "SET_USER",
   logOut: "LOG_OUT",
+  getBlogs: "GET_BLOGS",
 };
 export default ACTIONS;

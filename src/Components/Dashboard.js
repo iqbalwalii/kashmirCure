@@ -8,22 +8,49 @@ import {
 } from "react-bootstrap-icons";
 import { getDoctors } from "../services/DoctorService";
 import { getPatients } from "../services/PatientService";
+import { getAppointments } from "../services/AppointmentService";
+import { getAds } from "../services/AdService";
+import { getBlogs } from "../services/BlogService";
+import { connect } from "react-redux";
 import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
-import { connect } from "react-redux";
+
 const Dashboard = (props) => {
-  const { doctors, patients, appointments, blogs } = props;
-  useEffect(() => {
-    getDoctors().then((res) => {
-      props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
-    });
-    getPatients().then((res) => {
-      props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
-    });
-  }, []);
   console.log(props);
+  const { doctors, patients, appointments, user, blogs } = props;
+
+  useEffect(() => {
+    // const user = JSON.parse(Cookie.get("user"));
+    console.log("user", user);
+    if (user?.token) {
+      getDoctors().then((res) => {
+        props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
+      });
+      getPatients().then((res) => {
+        props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
+      });
+      getAppointments().then((res) => {
+        props.dispatch({
+          type: "GET_APPOINTMENTS",
+          payload: res.data.appointments,
+        });
+      });
+      getAds().then((res) => {
+        props.dispatch({
+          type: "GET_ADS",
+          payload: res.data.ads,
+        });
+      });
+      getBlogs().then((res) => {
+        props.dispatch({
+          type: "GET_BLOGS",
+          payload: res.data.posts,
+        });
+      });
+    }
+  }, []);
   return (
     <Container>
       {/* Counters Start */}
@@ -66,7 +93,7 @@ const Dashboard = (props) => {
             </div>
             <div className={Dash.details}>
               <h6>Total Blogs</h6>
-              <h5 className={Dash.counterNumber}>1,000</h5>
+              <h5 className={Dash.counterNumber}>{blogs?.length}</h5>
             </div>
           </div>
         </Col>
@@ -102,6 +129,7 @@ const Dashboard = (props) => {
     </Container>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     ...state,
@@ -109,6 +137,7 @@ const mapStateToProps = (state) => {
     patients: state.patients,
     appointments: state.appointments,
     blogs: state.blogs,
+    user: state.user,
   };
 };
 export default connect(mapStateToProps)(Dashboard);

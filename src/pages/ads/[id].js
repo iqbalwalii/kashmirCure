@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { useRouter } from "next/router";
 import Link from "next/link";
 const Ad = (props) => {
   console.log("Hello World");

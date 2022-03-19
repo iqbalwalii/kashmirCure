@@ -4,14 +4,6 @@ import { connect } from "react-redux";
 import { getAppointments } from "../services/AppointmentService";
 const Appointments = (props) => {
   const { appointments } = props;
-  useEffect(() => {
-    getAppointments().then((res) => {
-      props.dispatch({
-        type: "GET_APPOINTMENTS",
-        payload: res.data.appointments,
-      });
-    });
-  }, []);
   return (
     <>
       <div className="appointments_main">
@@ -32,7 +24,7 @@ const Appointments = (props) => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{patient?.name}</td>
-                  <td>{patient?.start_time.slice(0, 10)}</td>
+                  <td>{patient?.start_time?.slice(0, 10)}</td>
                   <td>{patient?.age}</td>
                   <td>{patient?.appointment_status}</td>
                 </tr>

@@ -1,10 +1,14 @@
 import { createStore } from "redux";
 import ACTIONS from "./actions";
+import Cookies from "js-cookie";
 const initialState = {
   tab: "dashboard",
   doctors: [],
   patients: [],
   doctor: {},
+  appointments: [],
+  blogs: [],
+  user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : {},
 };
 const reducer = (state = initialState, action) => {
   const { payload, type } = action;
@@ -53,6 +57,7 @@ const reducer = (state = initialState, action) => {
       };
     }
     case ACTIONS.setUser: {
+      Cookies.set("user", JSON.stringify(payload));
       return {
         ...state,
         user: { ...payload, loggedIn: true },
@@ -65,8 +70,12 @@ const reducer = (state = initialState, action) => {
       };
     }
     case ACTIONS.logOut: {
+      return {};
+    }
+    case ACTIONS.getBlogs: {
       return {
-        user: { loggedIn: false },
+        ...state,
+        blogs: payload,
       };
     }
     // Default Case

@@ -13,14 +13,6 @@ const Advertisements = (props) => {
   const [image, setImage] = useState(false);
   const { register, handleSubmit } = useForm();
   console.log(ad?._id);
-  useEffect(() => {
-    getAds().then((res) => {
-      props.dispatch({
-        type: "GET_ADS",
-        payload: res.data.ads,
-      });
-    });
-  }, []);
   const onSubmit = (data) => {
     console.log(data);
     createAd(data)
@@ -76,7 +68,7 @@ const Advertisements = (props) => {
                     <tr>
                       <td>{index + 1}</td>
                       <td>{ad.title}</td>
-                      <td>{ad.createdAt.slice(0, 10)}</td>
+                      <td>{ad.createdAt?.slice(0, 10)}</td>
                       <td>{ad.description}</td>
                     </tr>
                   </Link>

@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 const Navigator = (props) => {
   const router = useRouter();
   const onTabHandler = (value) => {
@@ -21,10 +22,11 @@ const Navigator = (props) => {
     });
   };
   const onClickHandler = () => {
-    router.push("/");
     props.dispatch({
       type: "LOG_OUT",
     });
+    Cookies.remove("user");
+    router.push("/");
   };
 
   return (
@@ -119,9 +121,20 @@ const Navigator = (props) => {
       </ul>
       <hr />
       <ul className={Sidebar.bottomNav}>
-        <li>
-          <Journal /> &nbsp; <span> Blog</span>
+        <li onClick={() => onTabHandler("blog")}>
+          {props.tab === "blog" ? (
+            <div style={{ color: "#0579ff" }}>
+              <Journal /> &nbsp;
+              <span>Blog</span>
+            </div>
+          ) : (
+            <div>
+              <Journal /> &nbsp;
+              <span>Blog</span>
+            </div>
+          )}
         </li>
+
         <li onClick={onClickHandler}>
           <ArrowBarRight /> &nbsp; <span> Logout</span>
         </li>

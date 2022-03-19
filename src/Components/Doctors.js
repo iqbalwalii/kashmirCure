@@ -18,7 +18,7 @@ const Doctors = (props) => {
             </tr>
           </thead>
           <tbody>
-            {doctors.map((doctor, index) => {
+            {doctors?.map((doctor, index) => {
               return (
                 <Link href={`/doctor/${doctor._id}`}>
                   <tr key={doctor._id}>

@@ -7,14 +7,14 @@ import Patients from "../Components/Patients";
 import Reviews from "../Components/Reviews";
 import Device from "../Components/Device";
 import Consultations from "../Components/Consultations";
+import Blog from "../Components/Blog";
 import Ads from "../Components/Advertisements";
 function Home(props) {
   const { tab, user } = props;
-  console.log(user);
   return (
     <>
       <Device />
-      {user?.loggedIn === true && (
+      {user?.token && (
         <Row className="main">
           <Col xs={12} sm={2}>
             <Side />
@@ -30,6 +30,8 @@ function Home(props) {
               <Patients />
             ) : tab === "ads" ? (
               <Ads />
+            ) : tab === "blog" ? (
+              <Blog />
             ) : (
               <Reviews />
             )}
@@ -39,6 +41,7 @@ function Home(props) {
     </>
   );
 }
+
 const mapStateToProps = (state) => {
   return {
     ...state,

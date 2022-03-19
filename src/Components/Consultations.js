@@ -35,7 +35,7 @@ const Consultations = (props) => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{patient?.name}</td>
-                  <td>{patient?.start_time.slice(0, 10)}</td>
+                  <td>{patient?.start_time?.slice(0, 10)}</td>
                   <td>{patient?.age}</td>
                   <td>{patient?.appointment_status}</td>
                   {/* <td>
