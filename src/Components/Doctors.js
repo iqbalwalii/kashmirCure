@@ -15,6 +15,7 @@ const Doctors = (props) => {
               <th>Gender</th>
               <th>Speciality</th>
               <th>Status</th>
+              <th>Approval</th>
             </tr>
           </thead>
           <tbody>
@@ -28,7 +29,14 @@ const Doctors = (props) => {
                     <td>
                       {doctor?.specializations?.map((e) => e?.name + ", ")}
                     </td>
-                    <td>{doctor.stus === 0 ? "Not Approved" : "Approved"}</td>
+                    <td>
+                      {doctor?.isActive === false ? "Inactive" : "Active"}
+                    </td>
+                    <td>
+                      {doctor.is_verified === false
+                        ? "Not Approved"
+                        : "Approved"}
+                    </td>
                   </tr>
                 </Link>
               );

@@ -11,14 +11,20 @@ const Doctor = (props) => {
   console.log(props);
   const { doctor } = props;
   const router = useRouter();
+  const id = router.query.id;
   useEffect(() => {
-    getDoctor(router.query.id).then((res) => {
+    getDoctor(id).then((res) => {
       console.log(res.doctor);
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
     });
-  }, []);
+  }, [doctor]);
   const onChangeHandler = () => {
-    setDoctor(doctor?._id, !doctor?.is_verified).then((res) => {
+    setDoctor(doctor?._id, !doctor?.is_verified, "is_verified").then((res) => {
+      props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
+    });
+  };
+  const onStatusHandler = () => {
+    setDoctor(doctor?._id, !doctor?.isActive, "isActive").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
     });
   };
@@ -76,23 +82,18 @@ const Doctor = (props) => {
               <td>{doctor?.createdAt?.slice(0, 10)}</td>
             </tr>
             <tr>
-              <td>Status</td>
+              <td>Approval</td>
               <td>
                 <Switch
                   checked={doctor?.is_verified}
                   onChange={onChangeHandler}
-                  onColor="#86d3ff"
-                  onHandleColor="#2693e6"
-                  handleDiameter={30}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                  activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                  height={20}
-                  width={48}
-                  className="react-switch"
-                  id="material-switch"
                 />
+              </td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>
+                <Switch checked={doctor?.isActive} onChange={onStatusHandler} />
               </td>
             </tr>
             <tr>
