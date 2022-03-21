@@ -9,6 +9,13 @@ import {
   ArrowBarRight,
   StarFill,
   GraphUpArrow,
+  BellFill,
+  Bell,
+  Star,
+  People,
+  Person,
+  Briefcase,
+  Grid,
 } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -39,8 +46,6 @@ const Navigator = (props) => {
               style={{
                 color: "#0579ff",
                 fontWeight: "600",
-                backgroundColor: "#0579ff20",
-                width: "100%",
               }}
             >
               <GridFill /> &nbsp;
@@ -48,7 +53,7 @@ const Navigator = (props) => {
             </div>
           ) : (
             <div>
-              <GridFill /> &nbsp;
+              <Grid /> &nbsp;
               <span>Dashboard</span>
             </div>
           )}
@@ -61,7 +66,7 @@ const Navigator = (props) => {
             </div>
           ) : (
             <div>
-              <BriefcaseFill /> &nbsp;
+              <Briefcase /> &nbsp;
               <span style={{ fontSize: ".9rem" }}>Appointments</span>
             </div>
           )}
@@ -74,7 +79,7 @@ const Navigator = (props) => {
             </div>
           ) : (
             <div>
-              <PersonFill /> &nbsp;
+              <Person /> &nbsp;
               <span>Doctors</span>
             </div>
           )}
@@ -87,7 +92,7 @@ const Navigator = (props) => {
             </div>
           ) : (
             <div>
-              <PeopleFill /> &nbsp;
+              <People /> &nbsp;
               <span>Patients</span>
             </div>
           )}
@@ -100,7 +105,7 @@ const Navigator = (props) => {
             </div>
           ) : (
             <div>
-              <StarFill /> &nbsp;
+              <Star /> &nbsp;
               <span>Reviews</span>
             </div>
           )}
@@ -115,6 +120,19 @@ const Navigator = (props) => {
             <div>
               <GraphUpArrow /> &nbsp;
               <span>Ads</span>
+            </div>
+          )}
+        </li>
+        <li onClick={() => onTabHandler("notifications")}>
+          {props.tab === "notifications" ? (
+            <div style={{ color: "#0579ff" }}>
+              <BellFill /> &nbsp;
+              <span>Notifications</span>
+            </div>
+          ) : (
+            <div>
+              <Bell /> &nbsp;
+              <span>Notifications</span>
             </div>
           )}
         </li>

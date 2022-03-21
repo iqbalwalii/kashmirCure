@@ -78,6 +78,18 @@ const reducer = (state = initialState, action) => {
         blogs: payload,
       };
     }
+    case ACTIONS.getPatientAlert: {
+      return {
+        ...state,
+        patientAlert: payload,
+      };
+    }
+    case ACTIONS.getDoctorAlert: {
+      return {
+        ...state,
+        doctorAlerts: payload,
+      };
+    }
     // Default Case
     default:
       return state;

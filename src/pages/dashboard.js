@@ -9,6 +9,7 @@ import Device from "../Components/Device";
 import Consultations from "../Components/Consultations";
 import Blog from "../Components/Blog";
 import Ads from "../Components/Advertisements";
+import Notifications from "../Components/Notifications";
 function Home(props) {
   const { tab, user } = props;
   return (
@@ -32,6 +33,8 @@ function Home(props) {
               <Ads />
             ) : tab === "blog" ? (
               <Blog />
+            ) : tab === "notifications" ? (
+              <Notifications />
             ) : (
               <Reviews />
             )}

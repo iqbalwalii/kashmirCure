@@ -10,5 +10,8 @@ const ACTIONS = {
   setUser: "SET_USER",
   logOut: "LOG_OUT",
   getBlogs: "GET_BLOGS",
+  getPatientAlert: "GET_PATIENT_ALERTS",
+  getDoctorAlert: "GET_DOCTOR_ALERTS",
+  setAlert: "SET_ALERT",
 };
 export default ACTIONS;

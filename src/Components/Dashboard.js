@@ -11,6 +11,7 @@ import { getPatients } from "../services/PatientService";
 import { getAppointments } from "../services/AppointmentService";
 import { getAds } from "../services/AdService";
 import { getBlogs } from "../services/BlogService";
+
 import { connect } from "react-redux";
 import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
