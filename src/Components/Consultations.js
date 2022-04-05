@@ -2,6 +2,7 @@ import { Table, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { deleteAppointment } from "../services/AppointmentService";
+import Link from "next/link";
 const Consultations = (props) => {
   const { appointments } = props;
   // const onDeleteHandler = (id) => {
@@ -32,21 +33,23 @@ const Consultations = (props) => {
           <tbody>
             {appointments?.map((patient, index) => {
               return (
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{patient?.name}</td>
-                  <td>{patient?.start_time?.slice(0, 10)}</td>
-                  <td>{patient?.age}</td>
-                  <td>{patient?.appointment_status}</td>
-                  {/* <td>
-                    <Button
-                      variant="danger"
-                      onClick={() => onDeleteHandler(patient?._id)}
-                    >
-                      <Trash />
-                    </Button>
-                  </td> */}
-                </tr>
+                <Link href={`appointment/${patient._id}`}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{patient?.name}</td>
+                    <td>{patient?.start_time?.slice(0, 10)}</td>
+                    <td>{patient?.age}</td>
+                    <td>{patient?.appointment_status}</td>
+                    {/* <td>
+                      <Button
+                        variant="danger"
+                        onClick={() => onDeleteHandler(patient?._id)}
+                      >
+                        <Trash />
+                      </Button>
+                    </td> */}
+                  </tr>
+                </Link>
               );
             })}
           </tbody>
