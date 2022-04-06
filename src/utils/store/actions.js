@@ -13,5 +13,7 @@ const ACTIONS = {
   getPatientAlert: "GET_PATIENT_ALERTS",
   getDoctorAlert: "GET_DOCTOR_ALERTS",
   setAlert: "SET_ALERT",
+  getReviews: "GET_REVIEWS",
+  getReview: "GET_REVIEW",
 };
 export default ACTIONS;

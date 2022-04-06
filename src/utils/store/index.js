@@ -91,6 +91,18 @@ const reducer = (state = initialState, action) => {
       };
     }
     // Default Case
+    case ACTIONS.getReviews: {
+      return {
+        ...state,
+        reviews: payload,
+      };
+    }
+    case ACTIONS.getReview: {
+      return {
+        ...state,
+        review: payload,
+      };
+    }
     default:
       return state;
   }

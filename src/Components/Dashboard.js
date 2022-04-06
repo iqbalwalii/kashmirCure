@@ -11,7 +11,7 @@ import { getPatients } from "../services/PatientService";
 import { getAppointments } from "../services/AppointmentService";
 import { getAds } from "../services/AdService";
 import { getBlogs } from "../services/BlogService";
-
+import { getReviews } from "../services/ReviewService";
 import { connect } from "react-redux";
 import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
@@ -48,6 +48,13 @@ const Dashboard = (props) => {
         props.dispatch({
           type: "GET_BLOGS",
           payload: res.data.posts,
+        });
+      });
+      getReviews().then((res) => {
+        console.log(res, "reviewss");
+        props.dispatch({
+          type: "GET_REVIEWS",
+          payload: res.data.reviews,
         });
       });
     }
