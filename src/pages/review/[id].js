@@ -81,10 +81,6 @@ const Appointment = (props) => {
                 />
               </td>
             </tr>
-            <tr>
-              <td>Starting Date</td>
-              <td>createdAt</td>
-            </tr>
           </tbody>
         </Table>
       </Row>
