@@ -21,7 +21,7 @@ const Appointments = (props) => {
           <tbody>
             {appointments?.slice(0, 5)?.map((patient, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{patient?.name}</td>
                   <td>{patient?.start_time?.slice(0, 10)}</td>

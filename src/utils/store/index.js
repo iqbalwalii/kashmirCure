@@ -44,6 +44,11 @@ const reducer = (state = initialState, action) => {
         appointments: payload,
       };
     }
+    case ACTIONS.getAppointment: {
+      return {
+        appointment: payload,
+      };
+    }
     case ACTIONS.getAds: {
       return {
         ...state,

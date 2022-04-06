@@ -24,13 +24,3 @@ export async function deleteDoctor(id) {
   const { data } = await Axios.delete(`/doctors/${id}`);
   return data;
 }
-
-export async function getDocument(key) {
-  const { data } = await Axios.get(`files/`, key, {
-    headers: {
-      Accept: "*/*",
-    },
-  });
-  console.log(data);
-  return data;
-}

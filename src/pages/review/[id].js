@@ -30,7 +30,7 @@ const Appointment = (props) => {
       <Row>
         <Col xs={12} md={11}>
           <h1>
-            <Link href="/">
+            <Link href="/dashboard">
               <a style={{ color: "blue", textDecoration: "none" }}>Kiadah</a>
             </Link>
           </h1>

@@ -51,7 +51,6 @@ const Dashboard = (props) => {
         });
       });
       getReviews().then((res) => {
-        console.log(res, "reviewss");
         props.dispatch({
           type: "GET_REVIEWS",
           payload: res.data.reviews,

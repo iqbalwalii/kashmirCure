@@ -64,7 +64,7 @@ const Advertisements = (props) => {
             <tbody>
               {ads?.map((ad, index) => {
                 return (
-                  <Link href={`/ads/${ad._id}`}>
+                  <Link href={`/ads/${ad._id}`} key={index}>
                     <tr>
                       <td>{index + 1}</td>
                       <td>{ad.title}</td>

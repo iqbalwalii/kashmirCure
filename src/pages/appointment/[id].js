@@ -1,17 +1,43 @@
-import React from "react";
+import { useEffect } from "react";
 import { Container, Row, Col, Table } from "react-bootstrap";
 import Link from "next/link";
 import { connect } from "react-redux";
-const Appointment = () => {
+import { useRouter } from "next/router";
+import { getAppointment } from "../../services/AppointmentService";
+import { getDocument } from "../../services/DoctorService";
+const Appointment = (props) => {
+  const router = useRouter();
+  const id = router.query.id;
+  const { appointment } = props;
+  const data = appointment?.doctor;
+  console.log(appointment);
+  useEffect(() => {
+    getAppointment(id).then((res) => {
+      console.log(res);
+      props.dispatch({
+        type: "GET_APPOINTMENT",
+        payload: res.data,
+      });
+    });
+  }, []);
   return (
     <Container className="mt-5">
       <Row>
-        <Col xs={12} md={6}>
+        <Col xs={12} md={11}>
           <h1>
-            <Link href="/">
+            <Link href="/dashboard">
               <a style={{ color: "blue", textDecoration: "none" }}>Kiadah</a>
             </Link>
           </h1>
+        </Col>
+        <Col md={1}>
+          <img
+            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}
+            width="80px"
+            height="80px"
+            alt="doctor"
+            style={{ borderRadius: "50%" }}
+          />
         </Col>
       </Row>
       <Row>
@@ -24,24 +50,28 @@ const Appointment = () => {
           </thead>
           <tbody>
             <tr>
-              <td>Name</td>
-              <td>name</td>
+              <td>Doctor Name</td>
+              <td>{data?.doctor_name}</td>
             </tr>
             <tr>
-              <td>Gender</td>
-              <td>gender</td>
+              <td>Patient Name</td>
+              <td>{data?.patient_name}</td>
             </tr>
             <tr>
-              <td>Phone</td>
-              <td>phone</td>
+              <td>Status</td>
+              <td>{data?.appointment_status}</td>
             </tr>
             <tr>
-              <td>Category</td>
-              <td>category</td>
+              <td>Charges</td>
+              <td>{data?.charges}</td>
             </tr>
             <tr>
-              <td>Starting Date</td>
-              <td>createdAt</td>
+              <td>Started treatment</td>
+              <td>{data?.has_started ? "Yes" : "No"}</td>
+            </tr>
+            <tr>
+              <td>Followed Up</td>
+              <td>{data?.is_followup ? "Yes" : "No"}</td>
             </tr>
           </tbody>
         </Table>
@@ -51,8 +81,7 @@ const Appointment = () => {
 };
 const mapStateToProps = (state) => {
   return {
-    ...state,
-    Appointment: state.appointment,
+    appointment: state.appointment,
   };
 };
 export default connect(mapStateToProps)(Appointment);

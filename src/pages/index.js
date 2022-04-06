@@ -7,9 +7,10 @@ import Device from "../Components/Device";
 import { useEffect } from "react";
 const Index = (props) => {
   console.log("first", props);
+  const { user } = props;
   const router = useRouter();
   useEffect(() => {
-    if (props.user.token) {
+    if (user?.token) {
       router.push("/dashboard");
     }
   }, []);
@@ -25,7 +26,7 @@ const Index = (props) => {
   };
   return (
     <Container>
-      {Object.keys(props.user).length === 0 ? (
+      {user?.loggedIn !== true ? (
         <>
           <Device />
           <Row className="login">

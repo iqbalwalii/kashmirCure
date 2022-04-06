@@ -33,7 +33,7 @@ const Consultations = (props) => {
           <tbody>
             {appointments?.map((patient, index) => {
               return (
-                <Link href={`appointment/${patient._id}`}>
+                <Link href={`appointment/${patient._id}`} key={index}>
                   <tr>
                     <td>{index + 1}</td>
                     <td>{patient?.name}</td>
