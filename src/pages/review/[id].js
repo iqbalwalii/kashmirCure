@@ -10,13 +10,15 @@ const Appointment = (props) => {
   const id = router.query.id;
   const { review } = props;
   useEffect(() => {
-    getReview(id).then((res) => {
-      props.dispatch({
-        type: "GET_REVIEW",
-        payload: res.data.review,
+    if (router.isReady) {
+      getReview(id).then((res) => {
+        props.dispatch({
+          type: "GET_REVIEW",
+          payload: res.data.review,
+        });
       });
-    });
-  }, []);
+    }
+  }, [router]);
   const statusUpdateHandler = (status) => {
     updateReview(id, !status).then((res) => {
       props.dispatch({

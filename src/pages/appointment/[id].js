@@ -12,14 +12,16 @@ const Appointment = (props) => {
   const data = appointment?.doctor;
   console.log(appointment);
   useEffect(() => {
-    getAppointment(id).then((res) => {
-      console.log(res);
-      props.dispatch({
-        type: "GET_APPOINTMENT",
-        payload: res.data,
+    if (router.isReady) {
+      getAppointment(id).then((res) => {
+        console.log(res);
+        props.dispatch({
+          type: "GET_APPOINTMENT",
+          payload: res.data,
+        });
       });
-    });
-  }, []);
+    }
+  }, [router]);
   return (
     <Container className="mt-5">
       <Row>

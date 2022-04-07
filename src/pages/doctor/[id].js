@@ -13,11 +13,13 @@ const Doctor = (props) => {
   const router = useRouter();
   const id = router.query.id;
   useEffect(() => {
-    getDoctor(id).then((res) => {
-      console.log(res.doctor);
-      props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
-    });
-  }, [doctor]);
+    if (router.isReady) {
+      getDoctor(id).then((res) => {
+        console.log(res.doctor);
+        props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
+      });
+    }
+  }, [router]);
   const onChangeHandler = () => {
     setDoctor(doctor?._id, !doctor?.is_verified, "is_verified").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
