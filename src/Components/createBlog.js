@@ -75,7 +75,7 @@ class App extends React.Component {
             <Button
               variant="primary"
               className="mt-1"
-              onClick={() => this.setState({ inputs: [""], title: "" })}
+              onClick={() => this.setState({ description: [""] })}
             >
               Clear
             </Button>
