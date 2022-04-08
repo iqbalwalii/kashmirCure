@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { createPost } from "../services/BlogService";
+import { useRouter } from "next/router";
 class App extends React.Component {
   state = {
     title: "",
@@ -27,7 +28,12 @@ class App extends React.Component {
   onSubmitHandler = (e) => {
     e.preventDefault();
     this.state.description.pop();
-    createPost(this.state).then((res) => {});
+    createPost(this.state).then((res) => {
+      this.props.dispatch({
+        type: "SET_ACTIVE_TAB",
+        payload: "dashboard",
+      });
+    });
   };
 
   render() {
@@ -85,6 +91,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    tab: state.tab,
   };
 };
 export default connect(mapStateToProps)(App);
