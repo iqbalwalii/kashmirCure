@@ -2,6 +2,7 @@ import { Container, Row, Col, Button, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useState } from "react";
 import CreateBlog from "./createBlog";
+import Link from "next/link";
 const Blog = (props) => {
   const [popup, setPopup] = useState(false);
   const { blogs } = props;
@@ -34,12 +35,14 @@ const Blog = (props) => {
               <tbody>
                 {blogs?.map((blog, index) => {
                   return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{blog?.title}</td>
-                      <td>{blog?.updatedAt?.slice(0, 10)}</td>
-                      <td>{blog?.author?.name}</td>
-                    </tr>
+                    <Link href={`blog/${blog._id}`}>
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{blog?.title}</td>
+                        <td>{blog?.updatedAt?.slice(0, 10)}</td>
+                        <td>{blog?.author?.name}</td>
+                      </tr>
+                    </Link>
                   );
                 })}
               </tbody>

@@ -5,7 +5,7 @@ export async function getBlogs() {
   return data;
 }
 export async function getBlog(id) {
-  const { data } = await Axios.get(`/posts`);
+  const { data } = await Axios.get(`/posts/${id}`);
   return data;
 }
 export async function updateBlog(id) {
