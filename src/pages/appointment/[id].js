@@ -10,18 +10,16 @@ const Appointment = (props) => {
   const id = router.query.id;
   const { appointment } = props;
   const data = appointment?.doctor;
-  console.log(appointment);
   useEffect(() => {
     if (router.isReady) {
       getAppointment(id).then((res) => {
-        console.log(res);
         props.dispatch({
           type: "GET_APPOINTMENT",
           payload: res.data,
         });
       });
     }
-  }, [router]);
+  }, [router, id, props]);
   return (
     <Container className="mt-5">
       <Row>

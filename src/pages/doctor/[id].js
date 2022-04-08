@@ -3,23 +3,21 @@ import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
 import { getDoctor, setDoctor } from "../../services/DoctorService";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import Switch from "react-switch";
 // import UpdateDoctor from "../../Components/UpdateDoctor";
 const Doctor = (props) => {
-  console.log(props);
   const { doctor } = props;
   const router = useRouter();
   const id = router.query.id;
   useEffect(() => {
     if (router.isReady) {
       getDoctor(id).then((res) => {
-        console.log(res.doctor);
         props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
       });
     }
-  }, [router]);
+  }, [router, id, props]);
   const onChangeHandler = () => {
     setDoctor(doctor?._id, !doctor?.is_verified, "is_verified").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
@@ -108,7 +106,7 @@ const Doctor = (props) => {
                       key={index}
                     >
                       <a target="_blank">
-                        <img
+                        <Image
                           src={`${process.env.NEXT_PUBLIC_API_URL}/files/${document}`}
                           width="100px"
                           height="100px"

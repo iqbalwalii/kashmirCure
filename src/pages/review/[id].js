@@ -18,7 +18,7 @@ const Appointment = (props) => {
         });
       });
     }
-  }, [router]);
+  }, [router, id, props]);
   const statusUpdateHandler = (status) => {
     updateReview(id, !status).then((res) => {
       props.dispatch({

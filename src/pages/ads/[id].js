@@ -3,7 +3,6 @@ import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import Link from "next/link";
 const Ad = (props) => {
-  console.log("Hello World");
   return (
     <Container className="mt-5">
       <Row>

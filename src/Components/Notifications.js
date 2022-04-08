@@ -15,24 +15,9 @@ const Notifications = (props) => {
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
     setAlert(data).then((res) => {
-      console.log(res);
       setPopup(false);
     });
   };
-  useEffect(() => {
-    getPatientAlerts().then((res) => {
-      props.dispatch({
-        type: "GET_PATIENT_ALERTS",
-        payload: res.data.notifications,
-      });
-    });
-    getDoctorAlerts().then((res) => {
-      props.dispatch({
-        type: "GET_DOCTOR_ALERTS",
-        payload: res.data.notifications,
-      });
-    });
-  }, [doctorAlerts, patientAlerts]);
   return (
     <>
       <div className="appointments">
@@ -138,7 +123,6 @@ const Notifications = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     doctorAlerts: state.doctorAlerts,
     patientAlerts: state.patientAlert,

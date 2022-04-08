@@ -12,22 +12,16 @@ const Advertisements = (props) => {
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
   const { register, handleSubmit } = useForm();
-  console.log(ad?._id);
   const onSubmit = (data) => {
-    console.log(data);
-    createAd(data)
-      .then((res) => {
-        console.log(res);
-        props.dispatch({
-          type: "SET_AD",
-          payload: res.data.ad,
-        });
-        setImage(true);
-      })
-      .catch((err) => console.log(err));
+    createAd(data).then((res) => {
+      props.dispatch({
+        type: "SET_AD",
+        payload: res.data.ad,
+      });
+      setImage(true);
+    });
   };
   const onRegister = (data) => {
-    console.log(ad?._id, data.image[0]);
     postAd(ad?._id, data.image[0]).then((res) => {
       Router.push("/");
     });

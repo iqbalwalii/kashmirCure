@@ -6,14 +6,13 @@ import { useRouter } from "next/router";
 import Device from "../Components/Device";
 import { useEffect } from "react";
 const Index = (props) => {
-  console.log("first", props);
   const { user } = props;
   const router = useRouter();
   useEffect(() => {
     if (user?.token) {
       router.push("/dashboard");
     }
-  }, []);
+  }, [router, user?.token]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     login(data).then((res) => {

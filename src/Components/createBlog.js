@@ -27,13 +27,10 @@ class App extends React.Component {
   onSubmitHandler = (e) => {
     e.preventDefault();
     this.state.description.pop();
-    createPost(this.state).then((res) => {
-      console.log(res);
-    });
+    createPost(this.state).then((res) => {});
   };
 
   render() {
-    console.log(this.props);
     const { description } = this.state;
 
     return (

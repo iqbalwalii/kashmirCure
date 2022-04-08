@@ -4,7 +4,6 @@ import { CheckCircle, Eye, StarFill, XCircle } from "react-bootstrap-icons";
 import Link from "next/link";
 import { connect } from "react-redux";
 const Reviews = (props) => {
-  console.log(props);
   const { reviews } = props;
   return (
     <Container>

@@ -13,7 +13,6 @@ export async function getDoctor(id) {
 }
 
 export async function setDoctor(id, status, key) {
-  // console.log(key)
   let obj = {};
   obj[key] = status;
   const { data } = await Axios.patch(`/doctors/${id}`, obj);

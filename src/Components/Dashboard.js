@@ -12,6 +12,10 @@ import { getAppointments } from "../services/AppointmentService";
 import { getAds } from "../services/AdService";
 import { getBlogs } from "../services/BlogService";
 import { getReviews } from "../services/ReviewService";
+import {
+  getDoctorAlerts,
+  getPatientAlerts,
+} from "../services/NotificationService";
 import { connect } from "react-redux";
 import Dash from "../styles/Dashboard.module.css";
 import Appointment from "./Appointments";
@@ -19,12 +23,10 @@ import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 
 const Dashboard = (props) => {
-  console.log(props);
   const { doctors, patients, appointments, user, blogs } = props;
 
   useEffect(() => {
     // const user = JSON.parse(Cookie.get("user"));
-    console.log("user", user);
     if (user?.token) {
       getDoctors().then((res) => {
         props.dispatch({ type: "GET_DOCTORS", payload: res.doctors });
@@ -54,6 +56,18 @@ const Dashboard = (props) => {
         props.dispatch({
           type: "GET_REVIEWS",
           payload: res.data.reviews,
+        });
+      });
+      getPatientAlerts().then((res) => {
+        props.dispatch({
+          type: "GET_PATIENT_ALERTS",
+          payload: res.data.notifications,
+        });
+      });
+      getDoctorAlerts().then((res) => {
+        props.dispatch({
+          type: "GET_DOCTOR_ALERTS",
+          payload: res.data.notifications,
         });
       });
     }

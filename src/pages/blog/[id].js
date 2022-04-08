@@ -7,19 +7,17 @@ import { getBlog } from "../../services/BlogService";
 const Appointment = (props) => {
   const router = useRouter();
   const id = router.query.id;
-  const { doctor, author } = props.blog;
-  console.log(props);
+  const { doctor } = props?.blog;
   useEffect(() => {
     if (router.isReady) {
       getBlog(id).then((res) => {
-        console.log(res);
         props.dispatch({
           type: "SET_BLOG",
           payload: res.data,
         });
       });
     }
-  }, [router]);
+  }, [router, id, props]);
   return (
     <Container className="mt-5">
       <Row>
