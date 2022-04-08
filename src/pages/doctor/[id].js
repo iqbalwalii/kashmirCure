@@ -17,7 +17,7 @@ const Doctor = (props) => {
         props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
       });
     }
-  }, [router, id, props]);
+  }, [router, id]);
   const onChangeHandler = () => {
     setDoctor(doctor?._id, !doctor?.is_verified, "is_verified").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });

@@ -19,7 +19,7 @@ const Appointment = (props) => {
         });
       });
     }
-  }, [router, id, props]);
+  }, [router, id]);
   return (
     <Container className="mt-5">
       <Row>

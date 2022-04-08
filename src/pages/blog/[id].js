@@ -17,7 +17,7 @@ const Appointment = (props) => {
         });
       });
     }
-  }, [router, id, props]);
+  }, [router, id]);
   const onClickHandler = () => {
     deleteBlog(id)
       .then(() => {
