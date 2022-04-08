@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { getBlog } from "../../services/BlogService";
+import { getBlog, deleteBlog } from "../../services/BlogService";
 const Appointment = (props) => {
   const router = useRouter();
   const id = router.query.id;
@@ -18,6 +18,21 @@ const Appointment = (props) => {
       });
     }
   }, [router, id, props]);
+  const onClickHandler = () => {
+    deleteBlog(id)
+      .then(() => {
+        props.dispatch({
+          type: "SET_ACTIVE_TAB",
+          payload: "dashboard",
+        });
+      })
+      .catch((err) => {
+        props.dispatch({
+          type: "SET_ACTIVE_TAB",
+          payload: "dashboard",
+        });
+      });
+  };
   return (
     <Container className="mt-5">
       <Row>
@@ -27,6 +42,11 @@ const Appointment = (props) => {
               <a style={{ color: "blue", textDecoration: "none" }}>Kiadah</a>
             </Link>
           </h1>
+        </Col>
+        <Col xs={12} md={1}>
+          <Button variant="danger" onClick={onClickHandler}>
+            Delete
+          </Button>
         </Col>
       </Row>
       <Row>

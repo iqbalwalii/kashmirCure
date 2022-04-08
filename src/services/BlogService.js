@@ -13,7 +13,7 @@ export async function updateBlog(id) {
   return data;
 }
 export async function deleteBlog(id) {
-  const { data } = await Axios.delete(`/posts`);
+  const { data } = await Axios.delete(`/posts/${id}`);
   return data;
 }
 export async function createPost(input) {
