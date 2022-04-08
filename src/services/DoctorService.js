@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 
 export async function getDoctors() {
-  const { data } = await Axios.get("/doctors");
+  const { data } = await Axios.get("/doctors?is_verified=false");
   const doctors = data.data;
   return doctors;
 }
