@@ -1,19 +1,19 @@
 import { Table } from "react-bootstrap";
-import { connect } from "react-redux";
-import { getActiveDoctors } from "../services/DoctorService";
-import Link from "next/link";
 import { useEffect } from "react";
+import { connect } from "react-redux";
+import { getInActiveDoctors } from "../services/DoctorService";
+import Link from "next/link";
 const Doctors = (props) => {
   const { doctors } = props;
   useEffect(() => {
-    getActiveDoctors().then((res) => {
-      props.dispatch({ type: "GET_ACTIVE_DOCTORS", payload: res.doctors });
+    getInActiveDoctors().then((res) => {
+      props.dispatch({ type: "GET_INACTIVE_DOCTORS", payload: res.doctors });
     });
   }, [doctors]);
   return (
     <>
       <div className="appointments">
-        <h4>Approved Active Doctors</h4>
+        <h4>InActive/Active Unapproved Doctors</h4>
         <Table striped hover>
           <thead>
             <tr>
@@ -55,6 +55,6 @@ const Doctors = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { ...state, doctors: state.activeDoctors };
+  return { ...state, doctors: state.inActivedoctors };
 };
 export default connect(mapStateToProps)(Doctors);

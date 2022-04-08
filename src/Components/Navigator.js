@@ -75,12 +75,25 @@ const Navigator = (props) => {
           {props.tab === "doctor" ? (
             <div style={{ color: "#0579ff" }}>
               <PersonFill /> &nbsp;
-              <span>Doctors</span>
+              <span>Doctors-A</span>
             </div>
           ) : (
             <div>
               <Person /> &nbsp;
-              <span>Doctors</span>
+              <span>Doctors-A</span>
+            </div>
+          )}
+        </li>
+        <li onClick={() => onTabHandler("doctor-in")}>
+          {props.tab === "doctor-in" ? (
+            <div style={{ color: "#0579ff" }}>
+              <PersonFill /> &nbsp;
+              <span>Doctors-I</span>
+            </div>
+          ) : (
+            <div>
+              <Person /> &nbsp;
+              <span>Doctors-I</span>
             </div>
           )}
         </li>

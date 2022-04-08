@@ -20,10 +20,16 @@ const reducer = (state = initialState, action) => {
         tab: payload,
       };
     }
-    case ACTIONS.getDoctors: {
+    case ACTIONS.getActiveDoctors: {
       return {
         ...state,
-        doctors: payload,
+        activeDoctors: payload,
+      };
+    }
+    case ACTIONS.getInActiveDoctors: {
+      return {
+        ...state,
+        inActivedoctors: payload,
       };
     }
     case ACTIONS.getPatients: {

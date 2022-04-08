@@ -3,6 +3,7 @@ import Side from "../Components/Navigator";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import Doctors from "../Components/Doctors";
+import DoctorsIn from "../Components/Doctorsinactive";
 import Patients from "../Components/Patients";
 import Reviews from "../Components/Reviews";
 import Device from "../Components/Device";
@@ -27,6 +28,8 @@ function Home(props) {
               <Consultations />
             ) : tab === "doctor" ? (
               <Doctors />
+            ) : tab === "doctor-in" ? (
+              <DoctorsIn />
             ) : tab === "patient" ? (
               <Patients />
             ) : tab === "ads" ? (
