@@ -28,8 +28,6 @@ function Home(props) {
 							<Consultations />
 						) : tab === "doctor" ? (
 							<Doctors />
-						) : tab === "doctor-in" ? (
-							<DoctorsIn />
 						) : tab === "patient" ? (
 							<Patients />
 						) : tab === "ads" ? (
