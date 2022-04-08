@@ -19,19 +19,15 @@ const Appointment = (props) => {
     }
   }, [router, id]);
   const onClickHandler = () => {
-    deleteBlog(id)
-      .then(() => {
+    deleteBlog(id).then((res) => {
+      console.log(res);
+      if (res.status === 204) {
         props.dispatch({
           type: "SET_ACTIVE_TAB",
           payload: "dashboard",
         });
-      })
-      .catch((err) => {
-        props.dispatch({
-          type: "SET_ACTIVE_TAB",
-          payload: "dashboard",
-        });
-      });
+      }
+    });
   };
   return (
     <Container className="mt-5">
@@ -85,6 +81,7 @@ const Appointment = (props) => {
 const mapStateToProps = (state) => {
   return {
     blog: state.blog,
+    tab: state.tab,
   };
 };
 export default connect(mapStateToProps)(Appointment);
