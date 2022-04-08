@@ -4,7 +4,7 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getAppointment } from "../../services/AppointmentService";
-import { getDocument } from "../../services/DoctorService";
+import Image from "next/image";
 const Appointment = (props) => {
   const router = useRouter();
   const id = router.query.id;
@@ -31,7 +31,7 @@ const Appointment = (props) => {
           </h1>
         </Col>
         <Col md={1}>
-          <img
+          <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}
             width="80px"
             height="80px"
