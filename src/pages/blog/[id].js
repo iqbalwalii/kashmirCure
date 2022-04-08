@@ -7,7 +7,7 @@ import { getBlog } from "../../services/BlogService";
 const Appointment = (props) => {
   const router = useRouter();
   const id = router.query.id;
-  const { doctor } = props?.blog;
+  const { blog } = props;
   useEffect(() => {
     if (router.isReady) {
       getBlog(id).then((res) => {
@@ -40,9 +40,9 @@ const Appointment = (props) => {
           <tbody>
             <tr>
               <td>Title</td>
-              <td>{doctor.title}</td>
+              <td>{blog?.doctor.title}</td>
             </tr>
-            {doctor.description.map((desc, index) => {
+            {blog?.doctor.description.map((desc, index) => {
               return (
                 <tr key={index}>
                   <td>
@@ -54,7 +54,7 @@ const Appointment = (props) => {
             })}
             <tr>
               <td>Author</td>
-              <td>{doctor?.author?.name}</td>
+              <td>{blog?.doctor?.author?.name}</td>
             </tr>
           </tbody>
         </Table>
