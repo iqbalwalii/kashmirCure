@@ -16,7 +16,7 @@ export async function deleteBlog(id) {
   const { data } = await Axios.delete(`/posts`);
   return data;
 }
-// export async function createPost(data) {
-//   const { data } = await Axios.post(`/posts`, data);
-//   return data;
-// }
+export async function createPost(input) {
+  const { data } = await Axios.post(`/posts`, input);
+  return data;
+}

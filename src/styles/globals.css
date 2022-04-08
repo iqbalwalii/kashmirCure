@@ -79,6 +79,13 @@ a {
 .login {
   margin-top: 20% !important;
 }
+.textarea {
+  width: 100%;
+  display: block;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
 @media screen and (max-width: 900px) {
   html {
     font-size: 0.9rem;
