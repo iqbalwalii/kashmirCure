@@ -45,21 +45,24 @@ class App extends React.Component {
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
             <Form.Control
+              placeholder="Title of the blog"
               onChange={(e) => this.setState({ title: e.target.value })}
             />
           </Form.Group>
-          <Form.Group controlId="link">
-            <Form.Label>Image Link</Form.Label>
+          <Form.Group controlId="link" className="mt-2">
+            <Form.Label>Image</Form.Label>
             <Form.Control
+              type="file"
               onChange={(e) => this.setState({ bannerImage: e.target.value })}
             />
           </Form.Group>
-          <Form.Group controlId="description">
+          <Form.Group controlId="description" className="mt-2">
             <Form.Label>Description</Form.Label>
             {description.map((input, i) => {
               return (
                 <textarea
                   className="textarea"
+                  placeholder="Enter the description "
                   key={i}
                   id={i}
                   value={input}
