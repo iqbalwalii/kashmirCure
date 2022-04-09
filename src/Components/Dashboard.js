@@ -6,13 +6,9 @@ import {
   JournalMedical,
   PlusCircleFill,
 } from "react-bootstrap-icons";
-import {
-  getActiveDoctors,
-  getInActiveDoctors,
-} from "../services/DoctorService";
+import { getDoctors } from "../services/DoctorService";
 import { getPatients } from "../services/PatientService";
 import { getAppointments } from "../services/AppointmentService";
-import { getAds } from "../services/AdService";
 import { getBlogs } from "../services/BlogService";
 import { getReviews } from "../services/ReviewService";
 import {
@@ -26,24 +22,15 @@ import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 
 const Dashboard = (props) => {
-  const {
-    activeDoctors,
-    inactiveDoctors,
-    patients,
-    appointments,
-    user,
-    blogs,
-  } = props;
+  const { patients, appointments, user, blogs, doctors } = props;
 
   useEffect(() => {
     // const user = JSON.parse(Cookie.get("user"));
     if (user?.token) {
-      getActiveDoctors().then((res) => {
-        props.dispatch({ type: "GET_ACTIVE_DOCTORS", payload: res.doctors });
+      getDoctors().then((res) => {
+        props.dispatch({ type: "GET_DOCTORS", payload: res });
       });
-      getInActiveDoctors().then((res) => {
-        props.dispatch({ type: "GET_INACTIVE_DOCTORS", payload: res.doctors });
-      });
+
       getPatients().then((res) => {
         props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
       });
@@ -51,12 +38,6 @@ const Dashboard = (props) => {
         props.dispatch({
           type: "GET_APPOINTMENTS",
           payload: res.data.appointments,
-        });
-      });
-      getAds().then((res) => {
-        props.dispatch({
-          type: "GET_ADS",
-          payload: res.data.ads,
         });
       });
       getBlogs().then((res) => {
@@ -107,7 +88,7 @@ const Dashboard = (props) => {
             </div>
             <div className={Dash.details}>
               <h6>Total Doctors</h6>
-              <h5 className={Dash.counterNumber}>23</h5>
+              <h5 className={Dash.counterNumber}>{doctors?.length}</h5>
             </div>
           </div>
           {/* number three */}
@@ -165,11 +146,8 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    ...state,
-    activeDoctors: state.activedoctors,
-    inactiveDoctors: state.inactiveDoctors,
+    doctors: state.doctors,
     patients: state.patients,
     appointments: state.appointments,
     blogs: state.blogs,

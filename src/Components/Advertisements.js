@@ -5,6 +5,7 @@ import { Table, Row, Col, Button, Form } from "react-bootstrap";
 import { XSquareFill } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+
 import Link from "next/link";
 const Advertisements = (props) => {
   const { ads, ad } = props;
@@ -12,6 +13,14 @@ const Advertisements = (props) => {
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
   const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    getAds().then((res) => {
+      props.dispatch({
+        type: "GET_ADS",
+        payload: res.data.ads,
+      });
+    });
+  }, []);
   const onSubmit = (data) => {
     createAd(data).then((res) => {
       props.dispatch({

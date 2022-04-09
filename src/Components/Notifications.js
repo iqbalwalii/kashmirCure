@@ -40,16 +40,22 @@ const Notifications = (props) => {
                   <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Message</th>
                   </tr>
                 </thead>
                 <tbody>
                   {doctorAlerts?.map((Alert, index) => {
                     return (
-                      // <Link href={`/doctor/${Alert._id}`}>
+                      // <Link href={`/notification/${Alert._id}`}>
+
                       <tr key={Alert._id}>
                         <td>{index + 1}</td>
                         <td>{Alert.title}</td>
+                        <td style={{ fontSize: ".9rem" }}>
+                          {Alert.description}
+                        </td>
                       </tr>
+
                       // </Link>
                     );
                   })}
@@ -63,6 +69,7 @@ const Notifications = (props) => {
                   <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Message</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -72,6 +79,9 @@ const Notifications = (props) => {
                       <tr key={Alert._id}>
                         <td>{index + 1}</td>
                         <td>{Alert.title}</td>
+                        <td style={{ fontSize: ".9rem" }}>
+                          {Alert.description}
+                        </td>
                       </tr>
                       // </Link>
                     );

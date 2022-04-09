@@ -1,7 +1,6 @@
 const ACTIONS = {
   setActiveTab: "SET_ACTIVE_TAB",
-  getActiveDoctors: "GET_ACTIVE_DOCTORS",
-  getInActiveDoctors: "GET_INACTIVE_DOCTORS",
+  getDoctors: "GET_DOCTORS",
   getDoctor: "GET_DOCTOR",
   getPatients: "GET_PATIENTS",
   getAppointments: "GET_APPOINTMENTS",

@@ -6,7 +6,7 @@ body {
   /* background-color: #ddfcfd44 !important; */
   background-color: #fbfdff !important;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 a {

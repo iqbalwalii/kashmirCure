@@ -1,27 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { deleteAd, getAd } from "../../services/AdService";
+import { deleteAd } from "../../services/AdService";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import Link from "next/link";
 const Ad = (props) => {
   const router = useRouter();
   const id = router.query.id;
   const onDeleteHandler = () => {
     deleteAd(id).then((res) => {
-      router.push("/dashboard");
-      props.dispatch({ type: "SET_TAB", payload: "ads" });
+      props.dispatch({
+        type: "GET_ADS",
+        payload: res.ad,
+      });
     });
   };
-  const { ad } = props;
-  useEffect(() => {
-    if (router.isReady) {
-      getAd(id).then((res) => {
-        props.dispatch({ type: "SET_AD", payload: res.data.Ad });
-      });
-    }
-  }, [router, id]);
   return (
     <Container className="mt-5">
       <Row>
@@ -48,19 +41,26 @@ const Ad = (props) => {
           </thead>
           <tbody>
             <tr>
-              <td>Title</td>
-              <td>{ad?.title}</td>
+              <td>Name</td>
+              <td>name</td>
             </tr>
-            {/* <tr>
-              <td>Status</td>
-              <td>{ad?.isActive === false ? "Inactive" : "Active"}</td>
-            </tr> */}
             <tr>
-              <td>Description</td>
-              <td>{ad?.description}</td>
+              <td>Gender</td>
+              <td>gender</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>phone</td>
+            </tr>
+            <tr>
+              <td>Category</td>
+              <td>category</td>
+            </tr>
+            <tr>
+              <td>Starting Date</td>
+              <td>createdAt</td>
             </tr>
           </tbody>
-          <Image src={`/${ad?.image}`} width={1000} height={300} />
         </Table>
       </Row>
     </Container>
@@ -69,8 +69,8 @@ const Ad = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    ...state,
     ad: state.ad,
-    tab: state.tab,
   };
 };
 export default connect(mapStateToProps)(Ad);
