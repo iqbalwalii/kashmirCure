@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Table, Button } from "react-bootstrap";
 import { getPatients, deletePatient } from "../services/PatientService";
 import { connect } from "react-redux";
@@ -11,6 +11,8 @@ const Patients = (props) => {
   //     });
   //   });
   // };
+  const { patients } = props;
+  const [list, setList] = useState(12);
   return (
     <>
       <div className="appointments">
@@ -29,7 +31,7 @@ const Patients = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props?.patients?.map((patient, index) => {
+            {patients?.slice(0, list)?.map((patient, index) => {
               return (
                 // <Link href="/doctor/[id]" as={`/doctor/${patient._id}`}>
                 <tr key={patient?._id}>
@@ -54,6 +56,20 @@ const Patients = (props) => {
             })}
           </tbody>
         </Table>
+        {patients?.length > list && (
+          <Row>
+            <Col md={{ span: 2, offset: 5 }}>
+              <Button
+                onClick={() => {
+                  setList(list + 5);
+                }}
+                variant="dark"
+              >
+                Load More
+              </Button>
+            </Col>
+          </Row>
+        )}
       </div>
     </>
   );

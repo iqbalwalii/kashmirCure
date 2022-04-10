@@ -1,10 +1,12 @@
-import { Table } from "react-bootstrap";
+import { Table, Button, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getDoctors } from "../services/DoctorService";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Doctors = (props) => {
   const { doctors } = props;
+  console.log(doctors.length);
+  const [list, setList] = useState(12);
   useEffect(() => {
     getDoctors().then((res) => {
       props.dispatch({
@@ -12,7 +14,7 @@ const Doctors = (props) => {
         payload: res,
       });
     });
-  }, []);
+  }, [doctors]);
   return (
     <>
       <div className="appointments">
@@ -29,30 +31,46 @@ const Doctors = (props) => {
             </tr>
           </thead>
           <tbody>
-            {doctors?.map((doctor, index) => {
+            {doctors?.slice(0, list).map((doctor, index) => {
               return (
-                <Link href={`/doctor/${doctor._id}`} key={doctor._id}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{doctor.name}</td>
-                    <td>{doctor.gender}</td>
-                    <td>
-                      {doctor?.specializations?.map((e) => e?.name + ", ")}
-                    </td>
-                    <td>
-                      {doctor?.isActive === false ? "Inactive" : "Active"}
-                    </td>
-                    <td>
-                      {doctor.is_verified === false
-                        ? "Not Approved"
-                        : "Approved"}
-                    </td>
-                  </tr>
-                </Link>
+                <>
+                  <Link href={`/doctor/${doctor._id}`} key={doctor._id}>
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{doctor.name}</td>
+                      <td>{doctor.gender}</td>
+                      <td>
+                        {doctor?.specializations?.map((e) => e?.name + ", ")}
+                      </td>
+                      <td>
+                        {doctor?.isActive === false ? "Inactive" : "Active"}
+                      </td>
+                      <td>
+                        {doctor.is_verified === false
+                          ? "Not Approved"
+                          : "Approved"}
+                      </td>
+                    </tr>
+                  </Link>
+                </>
               );
             })}
           </tbody>
         </Table>
+        {doctors?.length > list && (
+          <Row>
+            <Col md={{ span: 2, offset: 5 }}>
+              <Button
+                onClick={() => {
+                  setList(list + 5);
+                }}
+                variant="dark"
+              >
+                Load More
+              </Button>
+            </Col>
+          </Row>
+        )}
       </div>
     </>
   );

@@ -1,15 +1,12 @@
 import { Table, Row, Col, Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  getDoctorAlerts,
-  getPatientAlerts,
-  setAlert,
-} from "../services/NotificationService";
+import { setAlert } from "../services/NotificationService";
 
 const Notifications = (props) => {
+  const [doctorList, setDoctorList] = useState(12);
+  const [patientList, setPatientList] = useState(12);
   const { doctorAlerts, patientAlerts } = props;
   const [popup, setPopup] = useState(false);
   const { handleSubmit, register } = useForm();
@@ -44,7 +41,7 @@ const Notifications = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {doctorAlerts?.map((Alert, index) => {
+                  {doctorAlerts?.slice(0, doctorList)?.map((Alert, index) => {
                     return (
                       // <Link href={`/notification/${Alert._id}`}>
 
@@ -61,6 +58,20 @@ const Notifications = (props) => {
                   })}
                 </tbody>
               </Table>
+              {doctorAlerts?.length > doctorList && (
+                <Row>
+                  <Col md={{ span: 4, offset: 4 }}>
+                    <Button
+                      onClick={() => {
+                        setDoctorList(doctorList + 5);
+                      }}
+                      variant="dark"
+                    >
+                      Load More
+                    </Button>
+                  </Col>
+                </Row>
+              )}
             </Col>
             <Col>
               <h3>Patient</h3>
@@ -73,7 +84,7 @@ const Notifications = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {patientAlerts?.map((Alert, index) => {
+                  {patientAlerts?.slice(0, patientList)?.map((Alert, index) => {
                     return (
                       // <Link href={`/doctor/${Alert._id}`}>
                       <tr key={Alert._id}>
@@ -88,6 +99,20 @@ const Notifications = (props) => {
                   })}
                 </tbody>
               </Table>
+              {patientAlerts?.length > patientList && (
+                <Row>
+                  <Col md={{ span: 4, offset: 4 }}>
+                    <Button
+                      onClick={() => {
+                        setPatientList(patientList + 5);
+                      }}
+                      variant="dark"
+                    >
+                      Load More
+                    </Button>
+                  </Col>
+                </Row>
+              )}
             </Col>
           </Row>
         ) : (

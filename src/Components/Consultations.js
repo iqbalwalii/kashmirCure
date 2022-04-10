@@ -1,8 +1,7 @@
 import { Table, Button } from "react-bootstrap";
-import { Trash } from "react-bootstrap-icons";
 import { connect } from "react-redux";
-import { deleteAppointment } from "../services/AppointmentService";
 import Link from "next/link";
+import { useState } from "react";
 const Consultations = (props) => {
   const { appointments } = props;
   // const onDeleteHandler = (id) => {
@@ -15,6 +14,7 @@ const Consultations = (props) => {
   //     });
   //   });
   // };
+  const [list, setList] = useState(12);
   return (
     <>
       <div className="appointments">
@@ -31,7 +31,7 @@ const Consultations = (props) => {
             </tr>
           </thead>
           <tbody>
-            {appointments?.map((patient, index) => {
+            {appointments?.slice(0, list)?.map((patient, index) => {
               return (
                 <Link href={`appointment/${patient._id}`} key={index}>
                   <tr>
@@ -54,6 +54,20 @@ const Consultations = (props) => {
             })}
           </tbody>
         </Table>
+        {appointments?.length > list && (
+          <Row>
+            <Col md={{ span: 2, offset: 5 }}>
+              <Button
+                onClick={() => {
+                  setList(list + 5);
+                }}
+                variant="dark"
+              >
+                Load More
+              </Button>
+            </Col>
+          </Row>
+        )}
       </div>
     </>
   );

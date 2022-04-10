@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getAppointments } from "../services/AppointmentService";
 const Appointments = (props) => {
   const { appointments } = props;
+
   return (
     <>
       <div className="appointments_main">

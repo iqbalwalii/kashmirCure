@@ -11,21 +11,24 @@ const Doctor = (props) => {
   const { doctor } = props;
   const router = useRouter();
   const id = router.query.id;
+  const [change, setChange] = useState(false);
   useEffect(() => {
     if (router.isReady) {
       getDoctor(id).then((res) => {
         props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
       });
     }
-  }, [router, id]);
+  }, [change]);
   const onChangeHandler = () => {
     setDoctor(doctor?._id, !doctor?.is_verified, "is_verified").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
+      setChange(!change);
     });
   };
   const onStatusHandler = () => {
     setDoctor(doctor?._id, !doctor?.isActive, "isActive").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
+      setChange(!change);
     });
   };
   return (
