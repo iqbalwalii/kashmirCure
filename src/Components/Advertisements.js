@@ -20,7 +20,7 @@ const Advertisements = (props) => {
         payload: res.data.ads,
       });
     });
-  }, []);
+  }, [ads]);
   const onSubmit = (data) => {
     createAd(data).then((res) => {
       props.dispatch({

@@ -3,6 +3,7 @@ import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
 import { getDoctor, setDoctor } from "../../services/DoctorService";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import Side from "../../Components/Navigator";
 import Image from "next/image";
 import Link from "next/link";
 import Switch from "react-switch";
@@ -32,99 +33,85 @@ const Doctor = (props) => {
     });
   };
   return (
-    <Container className="mt-5">
+    <>
       <Row>
-        <Col xs={12} md={6}>
-          <h1>
-            <Link href="/">
-              <a style={{ color: "blue", textDecoration: "none" }}>Kiadah</a>
-            </Link>
-          </h1>
+        <Col xs={2}>
+          <Side />
         </Col>
-        {/* <Col xs={12} md={{ span: 2, offset: 4 }}>
-          <Button
-            variant="info"
-            onClick={() => {
-              setPopup(!popup);
-            }}
-          >
-            Update
-          </Button>
-          <Button variant="danger" onClick={onDeleteHandler}>
-            Delete
-          </Button>
-        </Col> */}
+        <Col xs={9} className="mt-3">
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>{doctor?.name}</td>
+              </tr>
+              <tr>
+                <td>Gender</td>
+                <td>{doctor?.gender}</td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td>{doctor?.phone}</td>
+              </tr>
+              <tr>
+                <td>Category</td>
+                <td>{doctor?.category}</td>
+              </tr>
+              <tr>
+                <td>Starting Date</td>
+                <td>{doctor?.createdAt?.slice(0, 10)}</td>
+              </tr>
+              <tr>
+                <td>Approval</td>
+                <td>
+                  <Switch
+                    checked={doctor?.is_verified}
+                    onChange={onChangeHandler}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td>
+                  <Switch
+                    checked={doctor?.isActive}
+                    onChange={onStatusHandler}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Documents</td>
+                <td>
+                  {doctor?.documents?.map((document, index) => {
+                    return (
+                      <Link
+                        href={`${process.env.NEXT_PUBLIC_API_URL}/files/${document}`}
+                        key={index}
+                      >
+                        <a target="_blank">
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${document}`}
+                            width="100px"
+                            height="100px"
+                            alt="doc"
+                          />
+                        </a>
+                      </Link>
+                    );
+                  })}
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
       </Row>
-      <Row>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Key</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td>{doctor?.name}</td>
-            </tr>
-            <tr>
-              <td>Gender</td>
-              <td>{doctor?.gender}</td>
-            </tr>
-            <tr>
-              <td>Phone</td>
-              <td>{doctor?.phone}</td>
-            </tr>
-            <tr>
-              <td>Category</td>
-              <td>{doctor?.category}</td>
-            </tr>
-            <tr>
-              <td>Starting Date</td>
-              <td>{doctor?.createdAt?.slice(0, 10)}</td>
-            </tr>
-            <tr>
-              <td>Approval</td>
-              <td>
-                <Switch
-                  checked={doctor?.is_verified}
-                  onChange={onChangeHandler}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Status</td>
-              <td>
-                <Switch checked={doctor?.isActive} onChange={onStatusHandler} />
-              </td>
-            </tr>
-            <tr>
-              <td>Documents</td>
-              <td>
-                {doctor?.documents?.map((document, index) => {
-                  return (
-                    <Link
-                      href={`${process.env.NEXT_PUBLIC_API_URL}/files/${document}`}
-                      key={index}
-                    >
-                      <a target="_blank">
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_API_URL}/files/${document}`}
-                          width="100px"
-                          height="100px"
-                          alt="doc"
-                        />
-                      </a>
-                    </Link>
-                  );
-                })}
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </Row>
-    </Container>
+    </>
   );
 };
 

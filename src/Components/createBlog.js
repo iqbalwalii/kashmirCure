@@ -52,7 +52,7 @@ class App extends React.Component {
           <Form.Group controlId="link" className="mt-2">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              type="file"
+              type="text"
               onChange={(e) => this.setState({ bannerImage: e.target.value })}
             />
           </Form.Group>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
-import Link from "next/link";
+import Side from "../../Components/Navigator";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getBlog, deleteBlog } from "../../services/BlogService";
@@ -29,52 +29,51 @@ const Appointment = (props) => {
     });
   };
   return (
-    <Container className="mt-5">
+    <>
       <Row>
-        <Col xs={12} md={11}>
-          <h1>
-            <Link href="/dashboard">
-              <a style={{ color: "blue", textDecoration: "none" }}>Kiadah</a>
-            </Link>
-          </h1>
+        <Col xs={2}>
+          <Side />
         </Col>
-        <Col xs={12} md={1}>
-          <Button variant="danger" onClick={onClickHandler}>
-            Delete
-          </Button>
+        <Col xs={9} className="mt-3">
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Title</td>
+                <td>{blog?.doctor.title}</td>
+              </tr>
+              {blog?.doctor.description.map((desc, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      Description <i>para{index + 1}</i>
+                    </td>
+                    <td>{desc}</td>
+                  </tr>
+                );
+              })}
+              <tr>
+                <td>Author</td>
+                <td>{blog?.doctor?.author?.name}</td>
+              </tr>
+              <tr>
+                <td>Action</td>
+                <td>
+                  <Button variant="danger" onClick={onClickHandler}>
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </Col>
       </Row>
-      <Row>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Key</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Title</td>
-              <td>{blog?.doctor.title}</td>
-            </tr>
-            {blog?.doctor.description.map((desc, index) => {
-              return (
-                <tr key={index}>
-                  <td>
-                    Description <i>para{index + 1}</i>
-                  </td>
-                  <td>{desc}</td>
-                </tr>
-              );
-            })}
-            <tr>
-              <td>Author</td>
-              <td>{blog?.doctor?.author?.name}</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Row>
-    </Container>
+    </>
   );
 };
 const mapStateToProps = (state) => {
