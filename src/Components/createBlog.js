@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import Axios from "axios";
-import { withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 class App extends React.Component {
   state = {
     title: "",
@@ -25,7 +25,6 @@ class App extends React.Component {
       description: newInputs,
     }));
   };
-  router = withRouter();
   onSubmitHandler = (e) => {
     e.preventDefault();
     const FORMDATA = new FormData();
@@ -51,7 +50,13 @@ class App extends React.Component {
             )
               .then((res) => res)
               .then((result) => {
-                router.push("/dashboard");
+                Router.push({
+                  pathname: "/dashboard",
+                });
+                this.props.dispatch({
+                  type: "SET_BLOG_BUTTON",
+                  payload: false,
+                });
               })
               .catch((err) => console.log("image upload err", err));
           }
@@ -105,14 +110,14 @@ class App extends React.Component {
               );
             })}
           </Form.Group>
-          <div className="d-grid">
+          <div className="d-grid mt-5">
             <Button variant="dark" onClick={this.onSubmitHandler}>
               continue
             </Button>
 
             <Button
               variant="primary"
-              className="mt-1"
+              className="mt-2"
               onClick={() => this.setState({ description: [""] })}
             >
               Clear
@@ -127,6 +132,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     tab: state.tab,
+    button: state.button,
   };
 };
 export default connect(mapStateToProps)(App);

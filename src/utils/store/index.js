@@ -91,6 +91,12 @@ const reducer = (state = initialState, action) => {
         blog: payload,
       };
     }
+    case ACTIONS.setBlogButton: {
+      return {
+        ...state,
+        button: payload,
+      };
+    }
     case ACTIONS.getPatientAlert: {
       return {
         ...state,

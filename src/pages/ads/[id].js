@@ -34,7 +34,7 @@ const Ad = (props) => {
            
           </Col> */}
         </Row>
-        <Card style={{ width: "80%" }}>
+        <Card style={{ width: "40%" }}>
           <Card.Img
             variant="top"
             src={`${process.env.NEXT_PUBLIC_API_URL}/files/${ad?.image}`}

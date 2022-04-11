@@ -56,14 +56,14 @@ const Appointment = (props) => {
                 <td>Started treatment</td>
                 <td>{data?.has_started ? "Yes" : "No"}</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td>Followed Up</td>
                 <td>{data?.is_followup ? "Yes" : "No"}</td>
-              </tr>
+              </tr> */}
             </tbody>
           </Table>
         </Row>
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "9rem" }}>
           <Card.Img
             variant="top"
             src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}

@@ -12,6 +12,7 @@ const ACTIONS = {
   logOut: "LOG_OUT",
   getBlogs: "GET_BLOGS",
   setBlog: "SET_BLOG",
+  setBlogButton: "SET_BLOG_BUTTON",
   getPatientAlert: "GET_PATIENT_ALERTS",
   getDoctorAlert: "GET_DOCTOR_ALERTS",
   setAlert: "SET_ALERT",

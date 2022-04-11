@@ -7,7 +7,8 @@ import { Pagination } from "react-bootstrap";
 import { getBlogs } from "../services/BlogService";
 const Blog = (props) => {
   const [popup, setPopup] = useState(false);
-  const { blogs, dashboard } = props;
+  const { blogs, dashboard, button } = props;
+  console.log(props);
   let active = 1;
   let items = [];
   const pages = Math.ceil(dashboard?.total_posts / 10);
@@ -38,7 +39,7 @@ const Blog = (props) => {
         payload: res.data.posts,
       });
     });
-  }, [blogs]);
+  }, []);
   return (
     <Container>
       <div className="appointments">
@@ -47,13 +48,21 @@ const Blog = (props) => {
             <h4>Blog</h4>
           </Col>
           <Col xs={2}>
-            <Button variant="dark" onClick={() => setPopup(!popup)}>
+            <Button
+              variant="dark"
+              onClick={() =>
+                props.dispatch({
+                  type: "SET_BLOG_BUTTON",
+                  payload: !button,
+                })
+              }
+            >
               Create
             </Button>
           </Col>
         </Row>
         <Row>
-          {popup ? (
+          {button ? (
             <CreateBlog />
           ) : (
             <Table striped hover>
@@ -97,6 +106,7 @@ const mapStateToProps = (state) => {
     blogs: state.blogs,
     user: state.user,
     dashboard: state.dashboard,
+    button: state.button,
   };
 };
 export default connect(mapStateToProps)(Blog);

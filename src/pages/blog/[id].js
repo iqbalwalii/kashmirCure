@@ -1,13 +1,15 @@
 import { useEffect } from "react";
-import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import { Row, Col, Table, Button } from "react-bootstrap";
 import Side from "../../Components/Navigator";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getBlog, deleteBlog } from "../../services/BlogService";
+import Image from "next/image";
 const Appointment = (props) => {
   const router = useRouter();
   const id = router.query.id;
   const { blog } = props;
+  console.log(blog);
   useEffect(() => {
     if (router.isReady) {
       getBlog(id).then((res) => {
@@ -71,6 +73,12 @@ const Appointment = (props) => {
               </tr>
             </tbody>
           </Table>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${blog?.doctor.bannerImage}`}
+            width="460px"
+            height="320px"
+            alt="blog image"
+          />
         </Col>
       </Row>
     </>
