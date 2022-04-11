@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { Container, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col, Button, Table } from "react-bootstrap";
 import { CheckCircle, Eye, StarFill, XCircle } from "react-bootstrap-icons";
 import Link from "next/link";
 import { connect } from "react-redux";
 const Reviews = (props) => {
   const { reviews } = props;
+  const [list, setList] = useState(12);
   return (
     <Container>
       <div className="appointments">
@@ -20,7 +21,7 @@ const Reviews = (props) => {
             </tr>
           </thead>
           <tbody>
-            {reviews?.map((review, index) => {
+            {reviews?.slice(0, list)?.map((review, index) => {
               return (
                 <Link href={`review/${review._id}`} key={index}>
                   <tr>
@@ -37,6 +38,20 @@ const Reviews = (props) => {
             })}
           </tbody>
         </Table>
+        {reviews?.length > list && (
+          <Row>
+            <Col md={{ span: 2, offset: 5 }}>
+              <Button
+                onClick={() => {
+                  setList(list + 5);
+                }}
+                variant="dark"
+              >
+                Load More
+              </Button>
+            </Col>
+          </Row>
+        )}
       </div>
     </Container>
   );

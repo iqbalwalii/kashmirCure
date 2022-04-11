@@ -12,6 +12,7 @@ const Advertisements = (props) => {
   const router = useRouter();
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
+  const [list, setList] = useState(23);
   const { register, handleSubmit } = useForm();
   useEffect(() => {
     getAds().then((res) => {
@@ -79,6 +80,20 @@ const Advertisements = (props) => {
               })}
             </tbody>
           </Table>
+          {ads?.length > list && (
+            <Row>
+              <Col md={{ span: 2, offset: 5 }}>
+                <Button
+                  onClick={() => {
+                    setList(list + 5);
+                  }}
+                  variant="dark"
+                >
+                  Load More
+                </Button>
+              </Col>
+            </Row>
+          )}
         </div>
       ) : (
         <div>
