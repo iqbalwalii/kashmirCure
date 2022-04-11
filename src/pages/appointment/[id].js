@@ -4,7 +4,7 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getAppointment } from "../../services/AppointmentService";
-import Side from "../../components/Navigator";
+import Side from "../../Components/Navigator";
 import Image from "next/image";
 const Appointment = (props) => {
   const router = useRouter();
