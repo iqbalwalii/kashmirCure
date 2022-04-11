@@ -82,7 +82,7 @@ const Appointment = (props) => {
                     }
                     onClick={() => statusUpdateHandler(review?.is_approved)}
                   >
-                    {review?.is_approved === true ? "Reject" : "Accept"}
+                    {review?.is_approved === true ? "Approved" : "Pending"}
                   </Button>
                 </td>
               </tr>

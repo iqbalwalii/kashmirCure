@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Container } from "react-bootstrap";
-// import faker from "faker";
+import dashboard from "../pages/dashboard";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,20 +22,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-export const options = {
-  responsive: +true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: false,
-      text: "Kiadah",
-    },
-  },
-};
-
 const labels = [
   "Jan",
   "Feb",
@@ -49,9 +36,21 @@ const labels = [
   "Nov",
   "Dec",
 ];
+
+export const options = {
+  responsive: +true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: false,
+      text: "Kiadah",
+    },
+  },
+};
 const nums = [0, 10, 20, 50, 60, 70, 80, 30, 40, 90, 100, 120];
 const nums2 = [0, 10, 10, 20, 90, 120, 40, 30, 120, 90, 100, 120];
-
 export const data = {
   labels,
   datasets: [
@@ -69,11 +68,19 @@ export const data = {
     },
   ],
 };
+const LineChart = (props) => {
+  const dashboard = props.dashboard;
 
-export default function LineChart() {
+  console.log(dashboard);
   return (
     <>
       <Line options={options} data={data} />
     </>
   );
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+export default connect(mapStateToProps)(LineChart);

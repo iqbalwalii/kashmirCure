@@ -3,9 +3,35 @@ import { connect } from "react-redux";
 import { useState } from "react";
 import CreateBlog from "./createBlog";
 import Link from "next/link";
+import { Pagination } from "react-bootstrap";
+import { getBlogs } from "../services/BlogService";
 const Blog = (props) => {
   const [popup, setPopup] = useState(false);
-  const { blogs } = props;
+  const { blogs, dashboard } = props;
+  let active = 1;
+  let items = [];
+  const pages = Math.ceil(dashboard?.total_posts / 10);
+  const handleRequest = (num) => {
+    getBlogs(num).then((res) => {
+      active = num;
+      props.dispatch({
+        type: "GET_BLOGS",
+        payload: res.data.posts,
+      });
+    });
+  };
+  for (let number = 1; number <= pages; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => handleRequest(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
+
   return (
     <Container>
       <div className="appointments">
@@ -48,6 +74,11 @@ const Blog = (props) => {
               </tbody>
             </Table>
           )}
+          <Row>
+            <Col md={{ span: 2, offset: 5 }}>
+              <Pagination size="sm">{items}</Pagination>
+            </Col>
+          </Row>
         </Row>
       </div>
     </Container>
@@ -58,6 +89,7 @@ const mapStateToProps = (state) => {
     ...state,
     blogs: state.blogs,
     user: state.user,
+    dashboard: state.dashboard,
   };
 };
 export default connect(mapStateToProps)(Blog);

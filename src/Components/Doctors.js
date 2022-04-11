@@ -3,10 +3,33 @@ import { connect } from "react-redux";
 import { getDoctors } from "../services/DoctorService";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Pagination } from "react-bootstrap";
 const Doctors = (props) => {
-  const { doctors } = props;
-  console.log(doctors.length);
-  const [list, setList] = useState(12);
+  const { doctors, dashboard } = props;
+  console.log(dashboard?.total_doctors);
+  let active = 1;
+  let items = [];
+  const pages = Math.ceil(dashboard?.total_doctors / 10);
+  const handleRequest = (num) => {
+    getDoctors(num).then((res) => {
+      let num = active;
+      props.dispatch({
+        type: "GET_DOCTORS",
+        payload: res,
+      });
+    });
+  };
+  for (let number = 1; number <= pages; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => handleRequest(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
   useEffect(() => {
     getDoctors().then((res) => {
       props.dispatch({
@@ -15,6 +38,7 @@ const Doctors = (props) => {
       });
     });
   }, [doctors]);
+
   return (
     <>
       <div className="appointments">
@@ -31,7 +55,7 @@ const Doctors = (props) => {
             </tr>
           </thead>
           <tbody>
-            {doctors?.slice(0, list).map((doctor, index) => {
+            {doctors?.map((doctor, index) => {
               return (
                 <>
                   <Link href={`/doctor/${doctor._id}`} key={doctor._id}>
@@ -57,25 +81,16 @@ const Doctors = (props) => {
             })}
           </tbody>
         </Table>
-        {doctors?.length > list && (
-          <Row>
-            <Col md={{ span: 2, offset: 5 }}>
-              <Button
-                onClick={() => {
-                  setList(list + 5);
-                }}
-                variant="dark"
-              >
-                Load More
-              </Button>
-            </Col>
-          </Row>
-        )}
+        <Row>
+          <Col md={{ span: 2, offset: 5 }}>
+            <Pagination size="sm">{items}</Pagination>
+          </Col>
+        </Row>
       </div>
     </>
   );
 };
 const mapStateToProps = (state) => {
-  return { ...state, doctors: state.doctors };
+  return { ...state, doctors: state.doctors, dashboard: state.dashboard };
 };
 export default connect(mapStateToProps)(Doctors);

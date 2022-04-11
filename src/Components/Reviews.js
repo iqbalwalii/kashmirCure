@@ -1,11 +1,34 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
-import { CheckCircle, Eye, StarFill, XCircle } from "react-bootstrap-icons";
-import Link from "next/link";
+import { Pagination } from "react-bootstrap";
 import { connect } from "react-redux";
+import { getReviews } from "../services/ReviewService";
+import Link from "next/link";
 const Reviews = (props) => {
-  const { reviews } = props;
-  const [list, setList] = useState(12);
+  const { reviews, dashboard } = props;
+  let active = 1;
+  let items = [];
+  const pages = Math.ceil(dashboard?.total_reviews / 10);
+  const handleRequest = (num) => {
+    getReviews(num).then((res) => {
+      active = num;
+      props.dispatch({
+        type: "GET_REVIEWS",
+        payload: res.data.reviews,
+      });
+    });
+  };
+  for (let number = 1; number <= pages; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => handleRequest(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <Container>
       <div className="appointments">
@@ -21,7 +44,7 @@ const Reviews = (props) => {
             </tr>
           </thead>
           <tbody>
-            {reviews?.slice(0, list)?.map((review, index) => {
+            {reviews?.map((review, index) => {
               return (
                 <Link href={`review/${review._id}`} key={index}>
                   <tr>
@@ -38,25 +61,16 @@ const Reviews = (props) => {
             })}
           </tbody>
         </Table>
-        {reviews?.length > list && (
-          <Row>
-            <Col md={{ span: 2, offset: 5 }}>
-              <Button
-                onClick={() => {
-                  setList(list + 5);
-                }}
-                variant="dark"
-              >
-                Load More
-              </Button>
-            </Col>
-          </Row>
-        )}
+        <Row>
+          <Col md={{ span: 2, offset: 5 }}>
+            <Pagination size="sm">{items}</Pagination>
+          </Col>
+        </Row>
       </div>
     </Container>
   );
 };
 const mapStateToProps = (state) => {
-  return { reviews: state.reviews };
+  return { reviews: state.reviews, dashboard: state.dashboard };
 };
 export default connect(mapStateToProps)(Reviews);

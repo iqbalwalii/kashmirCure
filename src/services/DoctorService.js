@@ -1,9 +1,9 @@
 import Axios from "../utils/axios";
 
-export async function getDoctors() {
-  const res = await Axios.get("/doctors?is_verified=false");
+export async function getDoctors(page) {
+  const res = await Axios.get(`/doctors?page=${page}&is_verified=true`);
   let doctors = res.data.data.doctors;
-  const { data } = await Axios.get("/doctors?is_verified=true");
+  const { data } = await Axios.get(`/doctors?page=${page}&is_verified=false`);
   doctors = [...doctors, ...data.data.doctors];
   return doctors;
 }

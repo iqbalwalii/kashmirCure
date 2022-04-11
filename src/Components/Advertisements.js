@@ -5,15 +5,13 @@ import { Table, Row, Col, Button, Form } from "react-bootstrap";
 import { XSquareFill } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import Pagination from "./Pagination";
+import { Pagination } from "react-bootstrap";
 
 import Link from "next/link";
 const Advertisements = (props) => {
-  const { ads, ad } = props;
-  const router = useRouter();
+  const { ads, ad, dashboard } = props;
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
-  const [list, setList] = useState(23);
   const { register, handleSubmit } = useForm();
   useEffect(() => {
     getAds().then((res) => {
@@ -37,6 +35,29 @@ const Advertisements = (props) => {
       Router.push("/");
     });
   };
+  let active = 1;
+  let items = [];
+  const pages = Math.ceil(dashboard?.total_ads / 10);
+  const handleRequest = (num) => {
+    getReviews(num).then((res) => {
+      active = num;
+      props.dispatch({
+        type: "GET_REVIEWS",
+        payload: res.data.reviews,
+      });
+    });
+  };
+  for (let number = 1; number <= pages; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => handleRequest(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <div className="appointments">
       {popup === false ? (
@@ -81,21 +102,12 @@ const Advertisements = (props) => {
               })}
             </tbody>
           </Table>
-          <Pagination />
-          {ads?.length > list && (
-            <Row>
-              <Col md={{ span: 2, offset: 5 }}>
-                <Button
-                  onClick={() => {
-                    setList(list + 5);
-                  }}
-                  variant="dark"
-                >
-                  Load More
-                </Button>
-              </Col>
-            </Row>
-          )}
+          {/* <Pagination /> */}
+          <Row>
+            <Col md={{ span: 2, offset: 5 }}>
+              <Pagination size="sm">{items}</Pagination>
+            </Col>
+          </Row>
         </div>
       ) : (
         <div>
@@ -182,6 +194,6 @@ const Advertisements = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { ...state, ads: state.ads, ad: state.ad };
+  return { ...state, ads: state.ads, ad: state.ad, dashboard: state.dashboard };
 };
 export default connect(mapStateToProps)(Advertisements);

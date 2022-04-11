@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 
-export async function getPatients() {
-  const { data } = await Axios.get("/patients");
+export async function getPatients(page) {
+  const { data } = await Axios.get(`/patients?page=${page}`);
   const patients = data.data;
   return patients;
 }

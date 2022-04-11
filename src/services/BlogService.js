@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 
-export async function getBlogs() {
-  const { data } = await Axios.get(`/posts`);
+export async function getBlogs(page) {
+  const { data } = await Axios.get(`/posts?page=${page}`);
   return data;
 }
 export async function getBlog(id) {

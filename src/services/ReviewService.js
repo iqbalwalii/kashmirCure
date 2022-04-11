@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 
-export async function getReviews() {
-  const { data } = await Axios.get(`/reviews`);
+export async function getReviews(page) {
+  const { data } = await Axios.get(`/reviews?page=${page}`);
   return data;
 }
 export async function getReview(id) {

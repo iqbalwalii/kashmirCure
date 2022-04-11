@@ -1,10 +1,33 @@
 import { Table, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import Link from "next/link";
-import { useState } from "react";
-import Paginate from "./Pagination";
+import { Pagination } from "react-bootstrap";
+import { getAppointments } from "../services/AppointmentService";
 const Consultations = (props) => {
   const { appointments, dashboard } = props;
+  let active = 1;
+  let items = [];
+  const pages = Math.ceil(dashboard?.total_appointments / 10);
+  const handleRequest = (num) => {
+    getAppointments(num).then((res) => {
+      let active = num;
+      props.dispatch({
+        type: "GET_APPOINTMENTS",
+        payload: res.data.appointments,
+      });
+    });
+  };
+  for (let number = 1; number <= pages; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => handleRequest(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <>
       <div className="appointments">
@@ -47,7 +70,7 @@ const Consultations = (props) => {
 
         <Row>
           <Col md={{ span: 2, offset: 5 }}>
-            <Paginate pages={dashboard?.total_appointments / 10} />
+            <Pagination size="sm">{items}</Pagination>
           </Col>
         </Row>
       </div>

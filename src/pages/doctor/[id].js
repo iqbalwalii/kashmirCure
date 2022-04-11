@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Tab, Col, Table, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Tab,
+  Col,
+  Table,
+  Button,
+  Dropdown,
+  Form,
+} from "react-bootstrap";
 import { getDoctor, setDoctor } from "../../services/DoctorService";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -27,6 +36,12 @@ const Doctor = (props) => {
     });
   };
   const onStatusHandler = () => {
+    setDoctor(doctor?._id, !doctor?.isActive, "isActive").then((res) => {
+      props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
+      setChange(!change);
+    });
+  };
+  const onCategoryHandler = () => {
     setDoctor(doctor?._id, !doctor?.isActive, "isActive").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
       setChange(!change);
@@ -61,7 +76,21 @@ const Doctor = (props) => {
               </tr>
               <tr>
                 <td>Category</td>
-                <td>{doctor?.category}</td>
+                <td>
+                  <Form>
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                      <Form.Control as="select" onChange={onCategoryHandler}>
+                        <option disabled selected>
+                          {doctor?.category}
+                        </option>
+                        <option>none</option>
+                        <option>gold</option>
+                        <option>silver</option>
+                        <option>diamond</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Form>
+                </td>
               </tr>
               <tr>
                 <td>Starting Date</td>

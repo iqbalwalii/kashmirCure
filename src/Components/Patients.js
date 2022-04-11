@@ -1,17 +1,36 @@
 import React, { useState } from "react";
-import { Container, Table, Button } from "react-bootstrap";
+import { Container, Table, Row, Col } from "react-bootstrap";
 import { getPatients, deletePatient } from "../services/PatientService";
 import { connect } from "react-redux";
 // import { Trash } from "react-bootstrap-icons";
+import { Pagination } from "react-bootstrap";
 const Patients = (props) => {
-  // const onDeleteHandler = (id) => {
-  //   deletePatient(id).then(() => {
-  //     getPatients().then((res) => {
-  //       props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
-  //     });
-  //   });
-  // };
-  const { patients } = props;
+  const { patients, dashboard } = props;
+  console.log(dashboard?.total_patients);
+  let active = 1;
+  let items = [];
+  const pages = Math.ceil(dashboard?.total_patients / 10);
+  const handleRequest = (num) => {
+    getPatients(num).then((res) => {
+      let num = active;
+      props.dispatch({
+        type: "GET_PATIENTS",
+        payload: res.patients,
+      });
+    });
+  };
+  for (let number = 1; number <= pages; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => handleRequest(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
+
   const [list, setList] = useState(12);
   return (
     <>
@@ -56,20 +75,11 @@ const Patients = (props) => {
             })}
           </tbody>
         </Table>
-        {patients?.length > list && (
-          <Row>
-            <Col md={{ span: 2, offset: 5 }}>
-              <Button
-                onClick={() => {
-                  setList(list + 5);
-                }}
-                variant="dark"
-              >
-                Load More
-              </Button>
-            </Col>
-          </Row>
-        )}
+        <Row>
+          <Col md={{ span: 2, offset: 5 }}>
+            <Pagination size="sm">{items}</Pagination>
+          </Col>
+        </Row>
       </div>
     </>
   );
@@ -77,6 +87,7 @@ const Patients = (props) => {
 const mapStateToProps = (state) => {
   return {
     patients: state.patients,
+    dashboard: state.dashboard,
   };
 };
 export default connect(mapStateToProps)(Patients);
