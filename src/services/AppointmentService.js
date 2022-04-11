@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 
-export async function getAppointments() {
-  const { data } = await Axios.get("/appointments");
+export async function getAppointments(page) {
+  const { data } = await Axios.get(`/appointments?page=${page}`);
   return data;
 }
 

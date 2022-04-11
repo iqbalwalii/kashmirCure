@@ -13,3 +13,8 @@ export async function setAlert(payload) {
   const { data } = await Axios.post(`notifications`, payload);
   return data;
 }
+
+export async function getDashboard() {
+  const { data } = await Axios.get(`dashboard`);
+  return data;
+}

@@ -17,5 +17,6 @@ const ACTIONS = {
   setAlert: "SET_ALERT",
   getReviews: "GET_REVIEWS",
   getReview: "GET_REVIEW",
+  setDashboard: "SET_DASHBOARD",
 };
 export default ACTIONS;

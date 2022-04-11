@@ -14,6 +14,7 @@ import { getReviews } from "../services/ReviewService";
 import {
   getDoctorAlerts,
   getPatientAlerts,
+  getDashboard,
 } from "../services/NotificationService";
 import { connect } from "react-redux";
 import Dash from "../styles/Dashboard.module.css";
@@ -22,15 +23,17 @@ import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 
 const Dashboard = (props) => {
-  const { patients, appointments, user, blogs, doctors } = props;
-
+  const { patients, appointments, user, blogs, doctors, dashboard } = props;
+  console.log(dashboard);
   useEffect(() => {
     // const user = JSON.parse(Cookie.get("user"));
     if (user?.token) {
       getDoctors().then((res) => {
         props.dispatch({ type: "GET_DOCTORS", payload: res });
       });
-
+      getDashboard().then((res) => {
+        props.dispatch({ type: "SET_DASHBOARD", payload: res });
+      });
       getPatients().then((res) => {
         props.dispatch({ type: "GET_PATIENTS", payload: res.patients });
       });
@@ -78,7 +81,9 @@ const Dashboard = (props) => {
             </div>
             <div className={Dash.details}>
               <h6>Total Patients</h6>
-              <h5 className={Dash.counterNumber}>{patients?.length}</h5>
+              <h5 className={Dash.counterNumber}>
+                {dashboard?.total_patients}
+              </h5>
             </div>
           </div>
           {/* number two */}
@@ -88,7 +93,7 @@ const Dashboard = (props) => {
             </div>
             <div className={Dash.details}>
               <h6>Total Doctors</h6>
-              <h5 className={Dash.counterNumber}>{doctors?.length}</h5>
+              <h5 className={Dash.counterNumber}>{dashboard?.total_doctors}</h5>
             </div>
           </div>
           {/* number three */}
@@ -98,7 +103,9 @@ const Dashboard = (props) => {
             </div>
             <div className={Dash.details}>
               <h6>Total Appointments</h6>
-              <h5 className={Dash.counterNumber}>{appointments?.length}</h5>
+              <h5 className={Dash.counterNumber}>
+                {dashboard?.total_appointments}
+              </h5>
             </div>
           </div>
           {/* number four    */}
@@ -108,7 +115,7 @@ const Dashboard = (props) => {
             </div>
             <div className={Dash.details}>
               <h6>Total Blogs</h6>
-              <h5 className={Dash.counterNumber}>{blogs?.length}</h5>
+              <h5 className={Dash.counterNumber}>{dashboard?.total_posts}</h5>
             </div>
           </div>
         </Col>
@@ -152,6 +159,7 @@ const mapStateToProps = (state) => {
     appointments: state.appointments,
     blogs: state.blogs,
     user: state.user,
+    dashboard: state.dashboard,
   };
 };
 export default connect(mapStateToProps)(Dashboard);

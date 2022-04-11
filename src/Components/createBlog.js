@@ -1,13 +1,10 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import { createPost } from "../services/BlogService";
-import { useRouter } from "next/router";
 class App extends React.Component {
   state = {
     title: "",
     description: [""],
-    bannerImage: "",
     author_id: this.props?.user?.user?._id,
   };
   handleChange = (e) => {
@@ -27,13 +24,14 @@ class App extends React.Component {
   };
   onSubmitHandler = (e) => {
     e.preventDefault();
-    this.state.description.pop();
-    createPost(this.state).then((res) => {
-      this.props.dispatch({
-        type: "SET_ACTIVE_TAB",
-        payload: "dashboard",
-      });
-    });
+    console.log(this.state);
+    // this.state.description.pop();
+    // createPost(this.state).then((res) => {
+    //   this.props.dispatch({
+    //     type: "SET_ACTIVE_TAB",
+    //     payload: "dashboard",
+    //   });
+    // });
   };
 
   render() {
@@ -52,7 +50,7 @@ class App extends React.Component {
           <Form.Group controlId="link" className="mt-2">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              type="text"
+              type="file"
               onChange={(e) => this.setState({ bannerImage: e.target.value })}
             />
           </Form.Group>

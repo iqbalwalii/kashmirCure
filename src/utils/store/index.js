@@ -20,6 +20,12 @@ const reducer = (state = initialState, action) => {
         tab: payload,
       };
     }
+    case ACTIONS.setDashboard: {
+      return {
+        ...state,
+        dashboard: payload,
+      };
+    }
     case ACTIONS.getDoctors: {
       return {
         ...state,
@@ -46,6 +52,7 @@ const reducer = (state = initialState, action) => {
     }
     case ACTIONS.getAppointment: {
       return {
+        ...state,
         appointment: payload,
       };
     }

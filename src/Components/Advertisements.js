@@ -5,6 +5,7 @@ import { Table, Row, Col, Button, Form } from "react-bootstrap";
 import { XSquareFill } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Pagination from "./Pagination";
 
 import Link from "next/link";
 const Advertisements = (props) => {
@@ -80,6 +81,7 @@ const Advertisements = (props) => {
               })}
             </tbody>
           </Table>
+          <Pagination />
           {ads?.length > list && (
             <Row>
               <Col md={{ span: 2, offset: 5 }}>

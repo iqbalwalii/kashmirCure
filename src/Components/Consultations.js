@@ -1,20 +1,10 @@
-import { Table, Button } from "react-bootstrap";
+import { Table, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import Link from "next/link";
 import { useState } from "react";
+import Paginate from "./Pagination";
 const Consultations = (props) => {
-  const { appointments } = props;
-  // const onDeleteHandler = (id) => {
-  //   deleteAppointment(id).then((res) => {
-  //     getAppointments().then((res) => {
-  //       props.dispatch({
-  //         type: "GET_APPOINTMENTS",
-  //         payload: res.data.appointments,
-  //       });
-  //     });
-  //   });
-  // };
-  const [list, setList] = useState(12);
+  const { appointments, dashboard } = props;
   return (
     <>
       <div className="appointments">
@@ -31,7 +21,7 @@ const Consultations = (props) => {
             </tr>
           </thead>
           <tbody>
-            {appointments?.slice(0, list)?.map((patient, index) => {
+            {appointments?.map((patient, index) => {
               return (
                 <Link href={`appointment/${patient._id}`} key={index}>
                   <tr>
@@ -54,20 +44,12 @@ const Consultations = (props) => {
             })}
           </tbody>
         </Table>
-        {appointments?.length > list && (
-          <Row>
-            <Col md={{ span: 2, offset: 5 }}>
-              <Button
-                onClick={() => {
-                  setList(list + 5);
-                }}
-                variant="dark"
-              >
-                Load More
-              </Button>
-            </Col>
-          </Row>
-        )}
+
+        <Row>
+          <Col md={{ span: 2, offset: 5 }}>
+            <Paginate pages={dashboard?.total_appointments / 10} />
+          </Col>
+        </Row>
       </div>
     </>
   );
@@ -75,6 +57,7 @@ const Consultations = (props) => {
 const mapStateToProps = (state) => {
   return {
     appointments: state.appointments,
+    dashboard: state.dashboard,
   };
 };
 export default connect(mapStateToProps)(Consultations);
