@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
 import { connect } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateBlog from "./createBlog";
 import Link from "next/link";
 import { Pagination } from "react-bootstrap";
@@ -31,7 +31,14 @@ const Blog = (props) => {
       </Pagination.Item>
     );
   }
-
+  useEffect(() => {
+    getBlogs().then((res) => {
+      props.dispatch({
+        type: "GET_BLOGS",
+        payload: res.data.posts,
+      });
+    });
+  }, [blogs]);
   return (
     <Container>
       <div className="appointments">

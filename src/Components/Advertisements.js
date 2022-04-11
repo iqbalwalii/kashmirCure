@@ -13,6 +13,7 @@ const Advertisements = (props) => {
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
   const { register, handleSubmit } = useForm();
+  const router = useRouter();
   useEffect(() => {
     getAds().then((res) => {
       props.dispatch({
@@ -20,7 +21,7 @@ const Advertisements = (props) => {
         payload: res.data.ads,
       });
     });
-  }, [ads]);
+  }, [image]);
   const onSubmit = (data) => {
     createAd(data).then((res) => {
       props.dispatch({
@@ -32,7 +33,7 @@ const Advertisements = (props) => {
   };
   const onRegister = (data) => {
     postAd(ad?._id, data.image[0]).then((res) => {
-      Router.push("/");
+      router.push("/");
     });
   };
   let active = 1;

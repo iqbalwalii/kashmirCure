@@ -12,7 +12,7 @@ const Doctors = (props) => {
   const pages = Math.ceil(dashboard?.total_doctors / 10);
   const handleRequest = (num) => {
     getDoctors(num).then((res) => {
-      let num = active;
+      active = num;
       props.dispatch({
         type: "GET_DOCTORS",
         payload: res,

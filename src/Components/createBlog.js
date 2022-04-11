@@ -2,13 +2,14 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import Axios from "axios";
-import { Router } from "react-bootstrap-icons";
+import { withRouter } from "next/router";
 class App extends React.Component {
   state = {
     title: "",
     description: [""],
     author_id: this.props?.user?.user?._id,
   };
+
   handleChange = (e) => {
     e.persist();
 
@@ -24,12 +25,13 @@ class App extends React.Component {
       description: newInputs,
     }));
   };
+  router = withRouter();
   onSubmitHandler = (e) => {
     e.preventDefault();
     const FORMDATA = new FormData();
     FORMDATA.append("adImage", this.state.bannerImage);
     try {
-      Axios.post(`${process.env.NEXT_APP_API_URL}/posts`, {
+      Axios.post(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
         author_id: this.state.author_id,
         title: this.state.title,
         description: this.state.description.filter(Boolean),
@@ -39,7 +41,7 @@ class App extends React.Component {
           const { data } = result;
           if (data.status === "success") {
             Axios.put(
-              `${process.env.NEXT_APP_API_URL}/blog/upload/image/${data.data.post._id}`,
+              `${process.env.NEXT_PUBLIC_API_URL}/blog/upload/image/${data.data.post._id}`,
               FORMDATA,
               {
                 headers: {
@@ -49,7 +51,7 @@ class App extends React.Component {
             )
               .then((res) => res)
               .then((result) => {
-                Router.push("/dashboard");
+                router.push("/dashboard");
               })
               .catch((err) => console.log("image upload err", err));
           }
