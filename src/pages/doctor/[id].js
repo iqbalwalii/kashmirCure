@@ -41,8 +41,8 @@ const Doctor = (props) => {
       setChange(!change);
     });
   };
-  const onCategoryHandler = () => {
-    setDoctor(doctor?._id, !doctor?.isActive, "isActive").then((res) => {
+  const onCategoryHandler = (e) => {
+    setDoctor(doctor?._id, e.target.value, "category").then((res) => {
       props.dispatch({ type: "GET_DOCTOR", payload: res.doctor });
       setChange(!change);
     });
@@ -83,7 +83,6 @@ const Doctor = (props) => {
                         <option disabled selected>
                           {doctor?.category}
                         </option>
-                        <option>none</option>
                         <option>gold</option>
                         <option>silver</option>
                         <option>diamond</option>

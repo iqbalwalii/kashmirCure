@@ -53,9 +53,7 @@ const Appointment = (props) => {
               </tr>
               <tr>
                 <td>Approval</td>
-                <td>
-                  {review?.is_approved === true ? "Approved" : "Rejected"}
-                </td>
+                <td>{review?.is_approved === true ? "Approved" : "Pending"}</td>
               </tr>
               <tr>
                 <td>Description</td>
@@ -73,19 +71,20 @@ const Appointment = (props) => {
                   />
                 </td>
               </tr>
-              <tr>
-                <td>Action</td>
-                <td>
-                  <Button
-                    variant={
-                      review?.is_approved === true ? "danger" : "success"
-                    }
-                    onClick={() => statusUpdateHandler(review?.is_approved)}
-                  >
-                    {review?.is_approved === true ? "Approved" : "Pending"}
-                  </Button>
-                </td>
-              </tr>
+              {review?.is_approved === false && (
+                <tr>
+                  <td>Action</td>
+                  <td>
+                    <Button
+                      variant="success"
+                      onClick={() => statusUpdateHandler(review?.is_approved)}
+                    >
+                      Approve
+                    </Button>
+                    ""
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </Col>

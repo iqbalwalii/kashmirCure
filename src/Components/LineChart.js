@@ -11,8 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { Container } from "react-bootstrap";
-import dashboard from "../pages/dashboard";
 ChartJS.register(
   CategoryScale,
   LinearScale,
