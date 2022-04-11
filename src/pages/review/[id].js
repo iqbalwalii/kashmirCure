@@ -81,7 +81,6 @@ const Appointment = (props) => {
                     >
                       Approve
                     </Button>
-                    ""
                   </td>
                 </tr>
               )}
