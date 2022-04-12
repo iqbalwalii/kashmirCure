@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { Card, Row, Col, Table } from "react-bootstrap";
-import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getAppointment } from "../../services/AppointmentService";
 import Side from "../../Components/Navigator";
-import Image from "next/image";
+import Link from "next/link";
 const Appointment = (props) => {
   const router = useRouter();
   const id = router.query.id;
   const { appointment } = props;
   const data = appointment?.doctor;
+  console.log(data);
   useEffect(() => {
     if (router.isReady) {
       getAppointment(id).then((res) => {
@@ -63,16 +63,17 @@ const Appointment = (props) => {
             </tbody>
           </Table>
         </Row>
-        <Card style={{ width: "9rem" }}>
-          <Card.Img
-            variant="top"
-            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}
-          />
-          <Card.Body>
-            <Card.Title>Doctor</Card.Title>
-            <Card.Text>Dr. {data?.doctor_name}</Card.Text>
-          </Card.Body>
-        </Card>
+        <Link href={`/doctor/${data?.doctor_id}`}>
+          <Card style={{ width: "9rem", cursor: "pointer" }}>
+            <Card.Img
+              variant="top"
+              src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}
+            />
+            <Card.Body>
+              <Card.Text>Dr. {data?.doctor_name}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Link>
       </Col>
     </Row>
   );

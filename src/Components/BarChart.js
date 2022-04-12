@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,48 +20,56 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: +true,
-  plugins: {
-    legend: {
-      position: "top",
+const BarChart = (props) => {
+  const { dashboard } = props;
+  console.log(dashboard);
+  const options = {
+    responsive: +true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: false,
+        text: "Patients",
+      },
     },
-    title: {
-      display: false,
-      text: "Patients",
-    },
-  },
-};
+  };
 
-const labels = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const nums = [
-  10000, 6000, 7000, 8000, 9000, 10000, 12000, 8000, 9000, 10000, 12000, 8000,
-];
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Revenue",
-      data: labels.map((label, index) => nums[index]),
-      // backgroundColor: '#408AFD',
-      backgroundColor: "#35A2EB",
-    },
-  ],
-};
+  const labels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const nums = new Array(12).fill(0);
+  dashboard?.monthly_appointment_revenue.map((app) => {
+    nums[app._id - 1] = app.total;
+  });
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Revenue",
+        data: labels.map((label, index) => nums[index]),
+        backgroundColor: "#35A2EB",
+      },
+    ],
+  };
 
-export default function BarChart() {
   return <Bar options={options} data={data} />;
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    dashboard: state.dashboard,
+  };
+};
+export default connect(mapStateToProps)(BarChart);
