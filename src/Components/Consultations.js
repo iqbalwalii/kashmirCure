@@ -1,16 +1,18 @@
 import { Table, Row, Col } from "react-bootstrap";
+import { useState } from "react";
 import { connect } from "react-redux";
 import Link from "next/link";
 import { Pagination } from "react-bootstrap";
 import { getAppointments } from "../services/AppointmentService";
 const Consultations = (props) => {
   const { appointments, dashboard } = props;
-  let active = 1;
+  let [active, setActive] = useState(1);
   let items = [];
   const pages = Math.ceil(dashboard?.total_appointments / 10);
   const handleRequest = (num) => {
+    console.log(num);
     getAppointments(num).then((res) => {
-      let active = num;
+      setActive(num);
       props.dispatch({
         type: "GET_APPOINTMENTS",
         payload: res.data.appointments,
