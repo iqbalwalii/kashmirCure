@@ -47,20 +47,20 @@ const Doctors = (props) => {
 				>
 					<h4>Doctors</h4>
 					<div className="d-flex px-4 center">
-						<h6>filters: </h6>
+						<h6 className="text-primary">filters: </h6>
 						<p
 							onClick={(e) => {
 								handleRequest(1, e.target.innerText);
 							}}
-							className="px-2"
+							className="px-2 text-white bg-dark mx-2"
 						>
-							gold
+							none
 						</p>
 						<p
 							onClick={(e) => {
 								handleRequest(1, e.target.innerText);
 							}}
-							className="px-2"
+							className="px-2 text-white bg-dark mx-2"
 						>
 							silver
 						</p>
@@ -68,7 +68,16 @@ const Doctors = (props) => {
 							onClick={(e) => {
 								handleRequest(1, e.target.innerText);
 							}}
-							className="px-2"
+							className="px-2 text-white bg-dark mx-2"
+						>
+							gold
+						</p>
+
+						<p
+							onClick={(e) => {
+								handleRequest(1, e.target.innerText);
+							}}
+							className="px-2 text-white bg-dark mx-2"
 						>
 							diamond
 						</p>
