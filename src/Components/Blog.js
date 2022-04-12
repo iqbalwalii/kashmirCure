@@ -9,12 +9,12 @@ const Blog = (props) => {
   const [popup, setPopup] = useState(false);
   const { blogs, dashboard, button } = props;
   console.log(props);
-  let active = 1;
+  let [active, setActive] = useState(1);
   let items = [];
   const pages = Math.ceil(dashboard?.total_posts / 10);
   const handleRequest = (num) => {
     getBlogs(num).then((res) => {
-      active = num;
+      setActive(num);
       props.dispatch({
         type: "GET_BLOGS",
         payload: res.data.posts,

@@ -6,12 +6,12 @@ import { getReviews } from "../services/ReviewService";
 import Link from "next/link";
 const Reviews = (props) => {
   const { reviews, dashboard } = props;
-  let active = 1;
+  let [active, setActive] = useState(1);
   let items = [];
   const pages = Math.ceil(dashboard?.total_reviews / 10);
   const handleRequest = (num) => {
     getReviews(num).then((res) => {
-      active = num;
+      setActive(num);
       props.dispatch({
         type: "GET_REVIEWS",
         payload: res.data.reviews,

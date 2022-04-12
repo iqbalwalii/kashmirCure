@@ -7,12 +7,12 @@ import { Pagination } from "react-bootstrap";
 const Patients = (props) => {
   const { patients, dashboard } = props;
   console.log(dashboard?.total_patients);
-  let active = 1;
+  let [active, setActive] = useState(1);
   let items = [];
   const pages = Math.ceil(dashboard?.total_patients / 10);
   const handleRequest = (num) => {
     getPatients(num).then((res) => {
-      let num = active;
+      setActive(num);
       props.dispatch({
         type: "GET_PATIENTS",
         payload: res.patients,
