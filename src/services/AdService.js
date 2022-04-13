@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 //get all ads
-export async function getAds() {
-  const { data } = await Axios.get("/ads");
+export async function getAds(page) {
+  const { data } = await Axios.get(`/ads?page=${page}`);
   return data;
 }
 //create an ad

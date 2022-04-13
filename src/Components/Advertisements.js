@@ -12,16 +12,22 @@ const Advertisements = (props) => {
   const { ads, ad, dashboard } = props;
   const [popup, setPopup] = useState(false);
   const [image, setImage] = useState(false);
+  const [status, setStatus] = useState(false);
   const { register, handleSubmit } = useForm();
   const router = useRouter();
+  let [active, setActive] = useState(1);
+  let items = [];
   useEffect(() => {
-    getAds().then((res) => {
+    getAds(active).then((res) => {
       props.dispatch({
         type: "GET_ADS",
         payload: res.data.ads,
       });
     });
-  }, [image]);
+  }, [status]);
+  // useEffect(() => {
+  //   handleRequest(active);
+  // }, []);
   const onSubmit = (data) => {
     createAd(data).then((res) => {
       props.dispatch({
@@ -36,17 +42,17 @@ const Advertisements = (props) => {
       router.push("/");
     });
   };
-  let [active, setActive] = useState(1);
-  let items = [];
+
   const pages = Math.ceil(dashboard?.total_ads / 10);
   const handleRequest = (num) => {
-    getReviews(num).then((res) => {
+    getAds(num).then((res) => {
       setActive(num);
       props.dispatch({
-        type: "GET_REVIEWS",
+        type: "GET_ADS",
         payload: res.data.reviews,
       });
     });
+    setStatus(true);
   };
   for (let number = 1; number <= pages; number++) {
     items.push(

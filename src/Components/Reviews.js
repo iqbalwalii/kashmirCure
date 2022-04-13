@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
 import { Pagination } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -29,6 +29,9 @@ const Reviews = (props) => {
       </Pagination.Item>
     );
   }
+  useEffect(() => {
+    handleRequest(active);
+  }, []);
   return (
     <Container>
       <div className="appointments">

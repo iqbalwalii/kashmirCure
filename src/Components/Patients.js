@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table, Row, Col } from "react-bootstrap";
 import { getPatients, deletePatient } from "../services/PatientService";
 import { connect } from "react-redux";
@@ -29,7 +29,9 @@ const Patients = (props) => {
       </Pagination.Item>
     );
   }
-
+  useEffect(() => {
+    handleRequest(active);
+  }, []);
   const [list, setList] = useState(12);
   return (
     <>

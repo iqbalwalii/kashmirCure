@@ -40,6 +40,9 @@ const Blog = (props) => {
       });
     });
   }, []);
+  useEffect(() => {
+    handleRequest(active);
+  }, []);
   return (
     <Container>
       <div className="appointments">

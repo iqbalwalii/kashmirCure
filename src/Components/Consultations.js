@@ -1,5 +1,5 @@
 import { Table, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Link from "next/link";
 import { Pagination } from "react-bootstrap";
@@ -30,6 +30,9 @@ const Consultations = (props) => {
       </Pagination.Item>
     );
   }
+  useEffect(() => {
+    handleRequest(active);
+  }, []);
   return (
     <>
       <div className="appointments">

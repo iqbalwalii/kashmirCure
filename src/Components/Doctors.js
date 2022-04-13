@@ -31,7 +31,9 @@ const Doctors = (props) => {
     );
   }
   useEffect(() => {
-    console.log(active);
+    handleRequest(active);
+  }, []);
+  useEffect(() => {
     getDoctors(active).then((res) => {
       props.dispatch({
         type: "GET_ACTIVE_DOCTORS",
@@ -51,7 +53,7 @@ const Doctors = (props) => {
               onClick={(e) => {
                 handleRequest(1, e.target.innerText);
               }}
-              className="px-2 text-white bg-dark mx-2"
+              className="px-2 text-white bg-dark mx-2 rounded"
             >
               none
             </p>
@@ -59,7 +61,7 @@ const Doctors = (props) => {
               onClick={(e) => {
                 handleRequest(1, e.target.innerText);
               }}
-              className="px-2 text-white bg-dark mx-2"
+              className="px-2 text-white bg-dark mx-2 rounded"
             >
               silver
             </p>
@@ -67,7 +69,7 @@ const Doctors = (props) => {
               onClick={(e) => {
                 handleRequest(1, e.target.innerText);
               }}
-              className="px-2 text-white bg-dark mx-2"
+              className="px-2 text-white bg-dark mx-2 rounded"
             >
               gold
             </p>
@@ -76,7 +78,7 @@ const Doctors = (props) => {
               onClick={(e) => {
                 handleRequest(1, e.target.innerText);
               }}
-              className="px-2 text-white bg-dark mx-2"
+              className="px-2 text-white bg-dark mx-2 rounded"
             >
               diamond
             </p>
