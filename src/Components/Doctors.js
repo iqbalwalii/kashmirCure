@@ -31,13 +31,14 @@ const Doctors = (props) => {
     );
   }
   useEffect(() => {
-    getDoctors().then((res) => {
+    console.log(active);
+    getDoctors(active).then((res) => {
       props.dispatch({
         type: "GET_ACTIVE_DOCTORS",
         payload: res,
       });
     });
-  }, [doctors]);
+  }, [doctors, active]);
 
   return (
     <>

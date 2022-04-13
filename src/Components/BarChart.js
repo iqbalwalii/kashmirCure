@@ -52,7 +52,7 @@ const BarChart = (props) => {
   ];
   const nums = new Array(12).fill(0);
   dashboard?.monthly_appointment_revenue.map((app) => {
-    nums[app._id - 1] = app.total;
+    nums[app._id - 1] = app.revenue;
   });
   const data = {
     labels,

@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { Pagination } from "react-bootstrap";
 const Patients = (props) => {
   const { patients, dashboard } = props;
-  console.log(dashboard?.total_patients);
   let [active, setActive] = useState(1);
   let items = [];
   const pages = Math.ceil(dashboard?.total_patients / 10);
