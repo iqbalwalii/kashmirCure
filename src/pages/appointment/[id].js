@@ -48,21 +48,30 @@ const Appointment = (props) => {
 								<td>Status</td>
 								<td>
 									{data?.appointment_status} <br />
-									{data.appointment_status === "Cancel" ? (
+									{data?.appointment_status === "Cancel" ? (
 										<div>
 											<span>
-												reason:&nbsp;{" "}
+												reason:&nbsp;
 												{
-													data.cancel_details
+													data?.cancel_details
 														?.cancel_reason
 												}
 											</span>
 											<br />
 											<span>
-												date:&nbsp;{" "}
-												{data.cancel_details?.cancel_date
+												date:&nbsp;
+												{data?.cancel_details?.cancel_date
 													.toString()
 													?.slice(0, 10)}
+											</span>
+											<br />
+											<span>
+												By:&nbsp;
+												{data?.cancel_details
+													?.cancel_by ==
+												data?.doctor_id.toString()
+													? "Doctor"
+													: "Patient"}
 											</span>
 										</div>
 									) : null}
@@ -71,6 +80,16 @@ const Appointment = (props) => {
 							<tr>
 								<td>Charges</td>
 								<td>{data?.charges}</td>
+							</tr>
+							<tr>
+								<td>Payment status</td>
+								<td>
+									{
+										data?.payment_status[
+											data?.payment_status.length - 1
+										]?.state
+									}
+								</td>
 							</tr>
 							<tr>
 								<td>Started treatment</td>
