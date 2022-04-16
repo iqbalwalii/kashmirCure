@@ -20,44 +20,17 @@ const Appointments = (props) => {
 						</tr>
 					</thead>
 					<tbody>
-						{appointments
-							?.slice(0, 5)
-							?.map((appointment, index) => {
-								return (
-									<tr key={index}>
-										<td>{index + 1}</td>
-										<td>{appointment?.name}</td>
-										<td>
-											{appointment?.start_time?.slice(
-												0,
-												10
-											)}
-										</td>
-										<td>{appointment?.age}</td>
-										<td>
-											{appointment?.appointment_status}
-											{appointment.appointment_status ===
-											"Cancel" ? (
-												<div>
-													<span>
-														{
-															appointment
-																.cancel_details
-																?.cancel_reason
-														}
-													</span>
-													<br />
-													<span>
-														appointment
-														.cancel_details
-														?.cancel_date
-													</span>
-												</div>
-											) : null}
-										</td>
-									</tr>
-								);
-							})}
+						{appointments?.slice(0, 5)?.map((patient, index) => {
+							return (
+								<tr key={index}>
+									<td>{index + 1}</td>
+									<td>{patient?.name}</td>
+									<td>{patient?.start_time?.slice(0, 10)}</td>
+									<td>{patient?.age}</td>
+									<td>{patient?.appointment_status}</td>
+								</tr>
+							);
+						})}
 					</tbody>
 				</Table>
 			</div>
