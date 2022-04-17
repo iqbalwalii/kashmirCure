@@ -11,6 +11,7 @@ import Consultations from "../Components/Consultations";
 import Blog from "../Components/Blog";
 import Ads from "../Components/Advertisements";
 import Notifications from "../Components/Notifications";
+import Contact from "../Components/Contact";
 function Home(props) {
   const { tab, user } = props;
   console.log(user);
@@ -37,6 +38,8 @@ function Home(props) {
               <Blog />
             ) : tab === "notifications" ? (
               <Notifications />
+            ) : tab === "contact" ? (
+              <Contact />
             ) : (
               <Reviews />
             )}

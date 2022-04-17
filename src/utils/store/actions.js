@@ -19,5 +19,7 @@ const ACTIONS = {
   getReviews: "GET_REVIEWS",
   getReview: "GET_REVIEW",
   setDashboard: "SET_DASHBOARD",
+  getContacts: "GET_CONTACTS",
+  getContact: "GET_CONTACT",
 };
 export default ACTIONS;

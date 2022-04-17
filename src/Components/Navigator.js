@@ -16,6 +16,8 @@ import {
   Person,
   Briefcase,
   Grid,
+  Phone,
+  PhoneFill,
 } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -150,9 +152,19 @@ const Navigator = (props) => {
             </div>
           )}
         </li>
-      </ul>
-      <hr />
-      <ul className={Sidebar.bottomNav}>
+        <li onClick={() => onTabHandler("contact")}>
+          {props.tab === "contact" ? (
+            <div style={{ color: "#0579ff" }}>
+              <PhoneFill /> &nbsp;
+              <span>Contact</span>
+            </div>
+          ) : (
+            <div>
+              <Phone /> &nbsp;
+              <span>Contact</span>
+            </div>
+          )}
+        </li>
         <li onClick={() => onTabHandler("blog")}>
           {props.tab === "blog" ? (
             <div style={{ color: "#0579ff" }}>

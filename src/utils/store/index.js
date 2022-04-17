@@ -122,6 +122,18 @@ const reducer = (state = initialState, action) => {
         review: payload,
       };
     }
+    case ACTIONS.getContacts: {
+      return {
+        ...state,
+        contacts: payload,
+      };
+    }
+    case ACTIONS.getContact: {
+      return {
+        ...state,
+        contact: payload,
+      };
+    }
     default:
       return state;
   }
