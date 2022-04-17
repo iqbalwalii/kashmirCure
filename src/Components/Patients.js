@@ -46,7 +46,7 @@ const Patients = (props) => {
               <th>Phone</th>
               <th>City</th>
               <th>State</th>
-              <th>Status</th>
+              {/* <th>Status</th> */}
               {/* <th>Action</th> */}
             </tr>
           </thead>
@@ -61,7 +61,7 @@ const Patients = (props) => {
                   <td>{patient?.phone}</td>
                   <td>{patient?.address?.city}</td>
                   <td>{patient?.address?.state}</td>
-                  <td>{patient?.staus === 0 ? "Not Treated" : "Treated"}</td>
+                  {/* <td>{patient?.staus === 0 ? "Not Treated" : "Treated"}</td> */}
                   {/* <td>
                     <Button
                       variant="danger"
