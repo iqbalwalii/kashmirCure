@@ -79,7 +79,22 @@ const Appointment = (props) => {
 							</tr>
 							<tr>
 								<td>Charges</td>
-								<td>{data?.charges}</td>
+								<td>Rs &nbsp;{data?.charges}</td>
+							</tr>
+							<tr>
+								<td>Discount</td>
+								<td>
+									Rs &nbsp;
+									{`${data?.discount}  (${data?.coupon})`}
+								</td>
+							</tr>
+							{/* <tr>
+								<td>Applied Coupon</td>
+								<td>{data?.coupon || "none"}</td>
+							</tr> */}
+							<tr>
+								<td>Paid Amount</td>
+								<td>Rs &nbsp;{data?.razorpay_order?.amount}</td>
 							</tr>
 							<tr>
 								<td>Payment status</td>
@@ -102,17 +117,41 @@ const Appointment = (props) => {
 						</tbody>
 					</Table>
 				</Row>
-				<Link href={`/doctor/${data?.doctor_id}`}>
-					<Card style={{ width: "9rem", cursor: "pointer" }}>
-						<Card.Img
-							variant="top"
-							src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}
-						/>
-						<Card.Body>
-							<Card.Text>Dr. {data?.doctor_name}</Card.Text>
-						</Card.Body>
-					</Card>
-				</Link>
+				<Row>
+					<Col className="d-flex justify-content-center">
+						<Link href={`/doctor/${data?.doctor_id}`}>
+							<Card
+								className="mx-3"
+								style={{ width: "9rem", cursor: "pointer" }}
+							>
+								<Card.Img
+									variant="top"
+									src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.doctor_picture}`}
+								/>
+								<Card.Body>
+									<Card.Text>
+										Dr. {data?.doctor_name}
+									</Card.Text>
+								</Card.Body>
+							</Card>
+						</Link>
+
+						<Link href={`/patients/${data?.patient_id}`}>
+							<Card
+								className="mx-3"
+								style={{ width: "9rem", cursor: "pointer" }}
+							>
+								<Card.Img
+									variant="top"
+									src={`${process.env.NEXT_PUBLIC_API_URL}/files/${data?.patient_picture}`}
+								/>
+								<Card.Body>
+									<Card.Text>{data?.patient_name}</Card.Text>
+								</Card.Body>
+							</Card>
+						</Link>
+					</Col>
+				</Row>
 			</Col>
 		</Row>
 	);
