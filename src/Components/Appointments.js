@@ -15,6 +15,7 @@ const Appointments = (props) => {
 							<th>#</th>
 							<th>Name</th>
 							<th>Date</th>
+							<th>Time</th>
 							<th>Age</th>
 							<th>Status</th>
 						</tr>
@@ -25,6 +26,7 @@ const Appointments = (props) => {
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>{patient?.name}</td>
+									<td>{patient?.start_date?.slice(0, 10)}</td>
 									<td>{patient?.start_time?.slice(0, 10)}</td>
 									<td>{patient?.age}</td>
 									<td>{patient?.appointment_status}</td>
