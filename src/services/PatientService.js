@@ -5,6 +5,11 @@ export async function getPatients(page) {
   const patients = data.data;
   return patients;
 }
+export async function getPatient(id) {
+  const { data } = await Axios.get(`/patients/${id}`);
+  const patient = data.data;
+  return patient;
+}
 
 export async function deletePatient(id) {
   const { data } = await Axios.delete(`/patients/${id}`);
