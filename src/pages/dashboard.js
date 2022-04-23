@@ -12,6 +12,8 @@ import Blog from "../Components/Blog";
 import Ads from "../Components/Advertisements";
 import Notifications from "../Components/Notifications";
 import Contact from "../Components/Contact";
+import Coupons from "../Components/Coupons";
+
 function Home(props) {
   const { tab, user } = props;
   console.log(user);
@@ -40,6 +42,8 @@ function Home(props) {
               <Notifications />
             ) : tab === "contact" ? (
               <Contact />
+            ) : tab === "coupons" ? (
+              <Coupons />
             ) : (
               <Reviews />
             )}

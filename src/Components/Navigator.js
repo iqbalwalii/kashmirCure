@@ -18,6 +18,8 @@ import {
   Grid,
   Phone,
   PhoneFill,
+  Heart,
+  HeartFill,
 } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -175,6 +177,19 @@ const Navigator = (props) => {
             <div>
               <Journal /> &nbsp;
               <span>Blog</span>
+            </div>
+          )}
+        </li>
+        <li onClick={() => onTabHandler("coupons")}>
+          {props.tab === "coupons" ? (
+            <div style={{ color: "#0579ff" }}>
+              <HeartFill /> &nbsp;
+              <span>Coupons</span>
+            </div>
+          ) : (
+            <div>
+              <Heart /> &nbsp;
+              <span>Coupons</span>
             </div>
           )}
         </li>

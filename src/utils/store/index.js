@@ -140,6 +140,12 @@ const reducer = (state = initialState, action) => {
         contact: payload,
       };
     }
+    case ACTIONS.getCoupons: {
+      return {
+        ...state,
+        coupons: payload,
+      };
+    }
     default:
       return state;
   }

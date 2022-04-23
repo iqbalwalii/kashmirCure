@@ -22,5 +22,7 @@ const ACTIONS = {
   setDashboard: "SET_DASHBOARD",
   getContacts: "GET_CONTACTS",
   getContact: "GET_CONTACT",
+  getCoupons: "GET_COUPONS",
+  getCoupon: "GET_COUPON",
 };
 export default ACTIONS;
