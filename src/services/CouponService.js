@@ -21,7 +21,7 @@ export async function deleteCoupon(id) {
   return coupon;
 }
 export async function updateCoupon(id, input) {
-  const { data } = await Axios.put(`/coupons/${id}`, input);
+  const { data } = await Axios.patch(`/coupons/${id}`, input);
   const coupon = data.data;
   return coupon;
 }

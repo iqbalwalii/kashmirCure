@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Pagination } from "react-bootstrap";
 import { getBlogs } from "../services/BlogService";
 const Blog = (props) => {
-  const [popup, setPopup] = useState(false);
   const { blogs, dashboard, button } = props;
   console.log(props);
   let [active, setActive] = useState(1);

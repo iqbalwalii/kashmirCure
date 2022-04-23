@@ -24,5 +24,6 @@ const ACTIONS = {
   getContact: "GET_CONTACT",
   getCoupons: "GET_COUPONS",
   getCoupon: "GET_COUPON",
+  getCouponBtn: "SET_COUPON_BTN",
 };
 export default ACTIONS;

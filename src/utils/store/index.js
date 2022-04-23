@@ -8,6 +8,7 @@ const initialState = {
   doctor: {},
   appointments: [],
   blogs: [],
+  couponBtn: false,
   user: Cookies.get("user") ? JSON.parse(Cookies.get("user")) : {},
 };
 const reducer = (state = initialState, action) => {
@@ -144,6 +145,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         coupons: payload,
+      };
+    }
+    case ACTIONS.getCoupon: {
+      return {
+        ...state,
+        coupon: payload,
+      };
+    }
+    case ACTIONS.getCouponBtn: {
+      console.log(payload);
+      return {
+        ...state,
+        couponBtn: payload,
       };
     }
     default:
