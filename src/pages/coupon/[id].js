@@ -90,7 +90,7 @@ const Coupon = (props) => {
                   <td>{coupon?.percentage}</td>
                 </tr>
                 <tr>
-                  <td>Phone</td>
+                  <td>Status</td>
                   <td>{coupon?.isActive ? "Active" : "InActive"}</td>
                 </tr>
               </tbody>
@@ -101,7 +101,7 @@ const Coupon = (props) => {
                 <Form.Label>Code</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Code"
+                  placeholder={coupon?.name}
                   {...register("name")}
                 />
               </Form.Group>
@@ -111,7 +111,7 @@ const Coupon = (props) => {
                   type="number"
                   min={0}
                   max={100}
-                  placeholder="Percentage upto 100"
+                  placeholder={coupon?.percentage}
                   {...register("percentage")}
                 />
               </Form.Group>

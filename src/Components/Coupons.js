@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { Table, Row, Col, Button, Form } from "react-bootstrap";
+import { Table, Row, Col, Button, Form, InputGroup } from "react-bootstrap";
 import { getCoupons, createCoupon } from "../services/CouponService";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const Coupons = (props) => {
+  const router = useRouter();
   useEffect(() => {
     getCoupons().then((res) => {
       props.dispatch({
@@ -12,12 +14,21 @@ const Coupons = (props) => {
         payload: res.coupons,
       });
     });
-  }, []);
+  }, [button]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     data.isActive = true;
     createCoupon(data).then((res) => {
-      console.log(res);
+      props.dispatch({
+        type: "SET_COUPON_BTN",
+        payload: false,
+      });
+      props.dispatch({
+        type: "SET_ACTIVE_TAB",
+        payload: "dashboard",
+      });
+
+      router.push("/dashboard");
     });
   };
 
@@ -80,8 +91,10 @@ const Coupons = (props) => {
               {...register("name")}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicNumber">
-            <Form.Label>Percentage</Form.Label>
+          <InputGroup className="mt-3">
+            <InputGroup.Text id="inputGroup-sizing-default">
+              &#37;
+            </InputGroup.Text>
             <Form.Control
               type="number"
               min={0}
@@ -89,7 +102,7 @@ const Coupons = (props) => {
               placeholder="Percentage upto 100"
               {...register("percentage")}
             />
-          </Form.Group>
+          </InputGroup>
           <div className="d-grid mt-4">
             <Button type="submit" variant="dark">
               Create
