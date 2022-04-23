@@ -136,7 +136,7 @@ const Appointment = (props) => {
 							</Card>
 						</Link>
 
-						<Link href={`/patients/${data?.patient_id}`}>
+						<Link href={`/patient/${data?.patient_id}`}>
 							<Card
 								className="mx-3"
 								style={{ width: "9rem", cursor: "pointer" }}
