@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Table, Row, Col } from "react-bootstrap";
 import { getPatients, deletePatient } from "../services/PatientService";
 import { connect } from "react-redux";
+import Link from "next/link";
 // import { Trash } from "react-bootstrap-icons";
 import { Pagination } from "react-bootstrap";
 const Patients = (props) => {
@@ -53,16 +54,16 @@ const Patients = (props) => {
           <tbody>
             {patients?.slice(0, list)?.map((patient, index) => {
               return (
-                // <Link href="/doctor/[id]" as={`/doctor/${patient._id}`}>
-                <tr key={patient?._id}>
-                  <td>{index + 1}</td>
-                  <td>{patient?.name}</td>
-                  <td>{patient?.gender}</td>
-                  <td>{patient?.phone}</td>
-                  <td>{patient?.address?.city}</td>
-                  <td>{patient?.address?.state}</td>
-                  {/* <td>{patient?.staus === 0 ? "Not Treated" : "Treated"}</td> */}
-                  {/* <td>
+                <Link href={`/patient/${patient._id}`}>
+                  <tr key={patient?._id}>
+                    <td>{index + 1}</td>
+                    <td>{patient?.name}</td>
+                    <td>{patient?.gender}</td>
+                    <td>{patient?.phone}</td>
+                    <td>{patient?.address?.city}</td>
+                    <td>{patient?.address?.state}</td>
+                    {/* <td>{patient?.staus === 0 ? "Not Treated" : "Treated"}</td> */}
+                    {/* <td>
                     <Button
                       variant="danger"
                       onClick={() => onDeleteHandler(patient?._id)}
@@ -70,8 +71,8 @@ const Patients = (props) => {
                       <Trash />
                     </Button>
                   </td> */}
-                </tr>
-                // </Link>
+                  </tr>
+                </Link>
               );
             })}
           </tbody>

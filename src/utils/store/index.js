@@ -38,6 +38,12 @@ const reducer = (state = initialState, action) => {
         patients: payload,
       };
     }
+    case ACTIONS.getPatient: {
+      return {
+        ...state,
+        patient: payload,
+      };
+    }
     case ACTIONS.getDoctor: {
       return {
         ...state,

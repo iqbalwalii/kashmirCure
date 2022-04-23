@@ -3,6 +3,7 @@ const ACTIONS = {
   getDoctors: "GET_DOCTORS",
   getDoctor: "GET_DOCTOR",
   getPatients: "GET_PATIENTS",
+  getPatient: "GET_PATIENT",
   getAppointments: "GET_APPOINTMENTS",
   getAppointment: "GET_APPOINTMENT",
   getAds: "GET_ADS",

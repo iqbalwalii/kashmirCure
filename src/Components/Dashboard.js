@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import {
   PeopleFill,
   BriefcaseFill,
@@ -123,6 +123,15 @@ const Dashboard = (props) => {
       {/* Counters End*/}
       <Row>
         <Col className="appointments mt-3 p-1" sm={6}>
+          <Form className="d-flex justify-content-around">
+            <Form.Group>
+              <Form.Control type="date" />
+            </Form.Group>
+            _
+            <Form.Group>
+              <Form.Control type="date" />
+            </Form.Group>
+          </Form>
           <LineChart />
         </Col>
         {/* <Col sm={1}></Col> */}
