@@ -94,7 +94,10 @@ const Appointment = (props) => {
 							</tr> */}
 							<tr>
 								<td>Paid Amount</td>
-								<td>Rs &nbsp;{data?.razorpay_order?.amount}</td>
+								<td>
+									Rs &nbsp;
+									{data?.razorpay_order?.amount / 100}
+								</td>
 							</tr>
 							<tr>
 								<td>Payment status</td>
