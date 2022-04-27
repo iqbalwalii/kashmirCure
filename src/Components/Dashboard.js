@@ -146,6 +146,7 @@ const Dashboard = (props) => {
                 {...register("start_date")}
                 style={{ height: "40px" }}
                 className="mx-2 "
+                required
               />
             </Form.Group>
             <Form.Group controlId="enddate" className="d-flex">
@@ -156,6 +157,7 @@ const Dashboard = (props) => {
                 {...register("end_date")}
                 style={{ height: "40px" }}
                 className="mx-2 "
+                required
               />
             </Form.Group>
             <Form.Group controlId="submit">
