@@ -67,7 +67,13 @@ a {
   /* padding: 0.1rem; */
   margin: 1rem;
 }
-
+.datePicker {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 1rem !`important;
+}
 .device {
   display: none;
 }

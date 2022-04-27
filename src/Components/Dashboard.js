@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import {
   PeopleFill,
   BriefcaseFill,
@@ -15,6 +16,7 @@ import {
   getDoctorAlerts,
   getPatientAlerts,
   getDashboard,
+  setDashboard,
 } from "../services/NotificationService";
 import { connect } from "react-redux";
 import Dash from "../styles/Dashboard.module.css";
@@ -23,6 +25,7 @@ import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 
 const Dashboard = (props) => {
+  const { register, handleSubmit } = useForm();
   const { patients, appointments, user, blogs, doctors, dashboard } = props;
   console.log(dashboard);
   useEffect(() => {
@@ -32,6 +35,7 @@ const Dashboard = (props) => {
         props.dispatch({ type: "GET_DOCTORS", payload: res });
       });
       getDashboard().then((res) => {
+        console.log(res);
         props.dispatch({ type: "SET_DASHBOARD", payload: res });
       });
       getPatients().then((res) => {
@@ -69,6 +73,16 @@ const Dashboard = (props) => {
       });
     }
   }, []);
+  const onSubmit = (data) => {
+    console.log(data);
+    setDashboard(data).then((res) => {
+      console.log(res.data);
+      props.dispatch({
+        type: "SET_DASHBOARD",
+        payload: res.data,
+      });
+    });
+  };
   return (
     <Container>
       {/* Counters Start */}
@@ -121,6 +135,37 @@ const Dashboard = (props) => {
         </Col>
       </Row>
       {/* Counters End*/}
+      <Row>
+        <Col xs={12} className="datePicker">
+          <Form onSubmit={handleSubmit(onSubmit)} className="d-flex  ">
+            <Form.Group controlId="startdate" className="d-flex">
+              <Form.Label>From</Form.Label>
+              <Form.Control
+                type="date"
+                name="startdate"
+                {...register("start_date")}
+                style={{ height: "40px" }}
+                className="mx-2 "
+              />
+            </Form.Group>
+            <Form.Group controlId="enddate" className="d-flex">
+              <Form.Label>To</Form.Label>
+              <Form.Control
+                type="date"
+                name="enddate"
+                {...register("end_date")}
+                style={{ height: "40px" }}
+                className="mx-2 "
+              />
+            </Form.Group>
+            <Form.Group controlId="submit">
+              <Button variant="dark" type="submit">
+                Submit
+              </Button>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
       <Row>
         <Col className="appointments mt-3 p-1" sm={6}>
           <LineChart />

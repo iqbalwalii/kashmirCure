@@ -18,3 +18,7 @@ export async function getDashboard() {
   const { data } = await Axios.get(`dashboard`);
   return data;
 }
+export async function setDashboard(dates) {
+  const { data } = await Axios.post(`dashboard`, dates);
+  return data;
+}
