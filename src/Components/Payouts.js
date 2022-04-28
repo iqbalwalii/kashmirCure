@@ -10,10 +10,10 @@ const Payouts = (props) => {
   useEffect(() => {
     getPayouts().then((res) => {
       console.log("payouts", res);
-      // props.dispatch({
-      //   type: "GET_PAYOUTS",
-      //   payload: res.payouts,
-      // });
+      props.dispatch({
+        type: "GET_PAYOUTS",
+        payload: res.data.payouts,
+      });
     });
   }, []);
 
@@ -24,45 +24,32 @@ const Payouts = (props) => {
         <Col>
           <h4>Payouts</h4>
         </Col>
-        <Col xs={2}>
-          <Button
-            variant="dark"
-            onClick={() =>
-              props.dispatch({
-                type: "SET_COUPON_BTN",
-                payload: !button,
-              })
-            }
-          >
-            Create
-          </Button>
-        </Col>
       </Row>
       <Table striped hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Percentage</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Mode</th>
             <th>Status</th>
           </tr>
         </thead>
-        {/* <tbody>
-            {coupons?.map((coupon, index) => {
-              return (
-                <>
-                  <Link href={`/coupon/${coupon._id}`} key={coupon._id}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{coupon.name}</td>
-                      <td>{coupon.percentage}</td>
-                      <td>{coupon.isActive ? "Active" : " InActice"}</td>
-                    </tr>
-                  </Link>
-                </>
-              );
-            })}
-          </tbody> */}
+        <tbody>
+          {payouts?.map((payout, index) => {
+            return (
+              <>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{payout?.amount}</td>
+                  <td>{payout?.currency}</td>
+                  <td>{payout?.mode}</td>
+                  <td>{payout?.status}</td>
+                </tr>
+              </>
+            );
+          })}
+        </tbody>
       </Table>
 
       {/* <Row>

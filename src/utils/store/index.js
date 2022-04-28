@@ -160,6 +160,20 @@ const reducer = (state = initialState, action) => {
         couponBtn: payload,
       };
     }
+    case ACTIONS.getPayouts: {
+      console.log(payload);
+      return {
+        ...state,
+        payouts: payload,
+      };
+    }
+    case ACTIONS.setPayout: {
+      console.log(payload);
+      return {
+        ...state,
+        payout: payload,
+      };
+    }
     default:
       return state;
   }

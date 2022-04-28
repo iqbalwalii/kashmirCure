@@ -25,5 +25,7 @@ const ACTIONS = {
   getCoupons: "GET_COUPONS",
   getCoupon: "GET_COUPON",
   getCouponBtn: "SET_COUPON_BTN",
+  getPayouts: "GET_PAYOUTS",
+  setPayout: "SET_PAYOUT",
 };
 export default ACTIONS;
