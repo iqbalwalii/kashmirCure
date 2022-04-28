@@ -29,9 +29,12 @@ const Payouts = (props) => {
         <thead>
           <tr>
             <th>#</th>
+            <th>Id</th>
             <th>Amount</th>
-            <th>Currency</th>
             <th>Mode</th>
+            <th>Doctor</th>
+            <th>Fee</th>
+            <th>Tax</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -40,9 +43,16 @@ const Payouts = (props) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{payout?.amount}</td>
-                <td>{payout?.currency}</td>
+                <td>{payout?.id}</td>
+                <td>
+                  {payout?.amount}&nbsp;
+                  {payout?.currency}
+                </td>
                 <td>{payout?.mode}</td>
+                <td>{payout?.notes?.id}</td>
+
+                <td>{payout?.fees}</td>
+                <td>{payout?.tax}</td>
                 <td>{payout?.status}</td>
               </tr>
             );
