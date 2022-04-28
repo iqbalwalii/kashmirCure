@@ -33,6 +33,7 @@ const Payouts = (props) => {
             <th>Amount</th>
             <th>Mode</th>
             <th>Doctor</th>
+            <th>A/C ID</th>
             <th>Fee</th>
             <th>Tax</th>
             <th>Status</th>
@@ -49,8 +50,14 @@ const Payouts = (props) => {
                   {payout?.currency}
                 </td>
                 <td>{payout?.mode}</td>
-                <td>{payout?.notes?.id}</td>
-
+                <td>
+                  {payout?.notes?.id && (
+                    <Link href={`/doctor/${payout?.notes?.id}`}>
+                      <Button>View Doctor</Button>
+                    </Link>
+                  )}
+                </td>
+                <td>{payout?.fund_account_id}</td>
                 <td>{payout?.fees}</td>
                 <td>{payout?.tax}</td>
                 <td>{payout?.status}</td>
