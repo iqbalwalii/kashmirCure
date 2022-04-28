@@ -38,15 +38,13 @@ const Payouts = (props) => {
         <tbody>
           {payouts?.map((payout, index) => {
             return (
-              <>
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{payout?.amount}</td>
-                  <td>{payout?.currency}</td>
-                  <td>{payout?.mode}</td>
-                  <td>{payout?.status}</td>
-                </tr>
-              </>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{payout?.amount}</td>
+                <td>{payout?.currency}</td>
+                <td>{payout?.mode}</td>
+                <td>{payout?.status}</td>
+              </tr>
             );
           })}
         </tbody>
