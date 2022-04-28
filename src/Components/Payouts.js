@@ -59,7 +59,7 @@ const Payouts = (props) => {
                 <td>{index + 1}</td>
                 <td>{payout?.id}</td>
                 <td>
-                  {payout?.amount}&nbsp;
+                  {payout?.amount / 100}&nbsp;
                   {payout?.currency}
                 </td>
                 <td>{payout?.mode}</td>
