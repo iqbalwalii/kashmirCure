@@ -74,8 +74,8 @@ const Consultations = (props) => {
         </Table>
 
         <Row>
-          <Col md={{ span: 2, offset: 5 }}>
-            <Pagination size="sm">{items}</Pagination>
+          <Col>
+            <Pagination>{items}</Pagination>
           </Col>
         </Row>
       </div>

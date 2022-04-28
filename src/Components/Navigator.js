@@ -20,6 +20,8 @@ import {
   PhoneFill,
   Heart,
   HeartFill,
+  WalletFill,
+  Wallet,
 } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -190,6 +192,19 @@ const Navigator = (props) => {
             <div>
               <Heart /> &nbsp;
               <span>Coupons</span>
+            </div>
+          )}
+        </li>
+        <li onClick={() => onTabHandler("payouts")}>
+          {props.tab === "payouts" ? (
+            <div style={{ color: "#0579ff" }}>
+              <WalletFill /> &nbsp;
+              <span>Payouts</span>
+            </div>
+          ) : (
+            <div>
+              <Wallet /> &nbsp;
+              <span>Payouts</span>
             </div>
           )}
         </li>

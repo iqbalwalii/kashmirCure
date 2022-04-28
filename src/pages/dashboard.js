@@ -13,6 +13,7 @@ import Ads from "../Components/Advertisements";
 import Notifications from "../Components/Notifications";
 import Contact from "../Components/Contact";
 import Coupons from "../Components/Coupons";
+import Payouts from "../Components/Payouts";
 
 function Home(props) {
   const { tab, user } = props;
@@ -44,6 +45,8 @@ function Home(props) {
               <Contact />
             ) : tab === "coupons" ? (
               <Coupons />
+            ) : tab === "payouts" ? (
+              <Payouts />
             ) : (
               <Reviews />
             )}
