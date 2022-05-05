@@ -9,7 +9,11 @@ import {
 	Dropdown,
 	Form,
 } from "react-bootstrap";
-import { getDoctor, setDoctor } from "../../services/DoctorService";
+import {
+	getDoctor,
+	setDoctor,
+	deleteDoctor,
+} from "../../services/DoctorService";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Side from "../../Components/Navigator";
@@ -51,6 +55,13 @@ const Doctor = (props) => {
 			setChange(!change);
 		});
 	};
+	const onDeleteHandler = (id) => {
+		console.log(id);
+		deleteDoctor(id).then((res) => {
+			console.log(res);
+			router.push("/dashboard");
+		});
+	};
 	useEffect(() => {
 		try {
 			axios
@@ -90,10 +101,6 @@ const Doctor = (props) => {
 							<tr>
 								<td>Phone</td>
 								<td>{doctor?.phone}</td>
-							</tr>
-							<tr>
-								<td>Fee</td>
-								<td>{doctor?.consultation_fee}</td>
 							</tr>
 							<tr>
 								<td>Category</td>
@@ -159,6 +166,19 @@ const Doctor = (props) => {
 											);
 										}
 									)}
+								</td>
+							</tr>
+							<tr>
+								<td>Action</td>
+								<td>
+									<Button
+										variant="danger"
+										onClick={() =>
+											onDeleteHandler(doctor?._id)
+										}
+									>
+										Delete
+									</Button>
 								</td>
 							</tr>
 						</tbody>

@@ -22,12 +22,11 @@ const Appointment = (props) => {
   }, [router, id]);
   const onClickHandler = () => {
     deleteBlog(id).then((res) => {
-      if (res.status === 204) {
-        props.dispatch({
-          type: "SET_ACTIVE_TAB",
-          payload: "dashboard",
-        });
-      }
+      props.dispatch({
+        type: "SET_ACTIVE_TAB",
+        payload: "dashboard",
+      });
+      router.push("/dashboard");
     });
   };
   return (
