@@ -20,12 +20,14 @@ import Side from "../../Components/Navigator";
 import Image from "next/image";
 import Link from "next/link";
 import Switch from "react-switch";
+import axios from "../../utils/axios";
 // import UpdateDoctor from "../../Components/UpdateDoctor";
 const Doctor = (props) => {
   const { doctor } = props;
   const router = useRouter();
   const id = router.query.id;
   const [change, setChange] = useState(false);
+  const [payouts, setPayouts] = useState([]);
   useEffect(() => {
     if (router.isReady) {
       getDoctor(id).then((res) => {
@@ -58,7 +60,19 @@ const Doctor = (props) => {
       router.push("/dashboard");
     });
   };
-
+  useEffect(() => {
+    try {
+      axios
+        .get(`/doctors/payouts/${id}`, {
+          method: "GET",
+        })
+        .then((res) => {
+          console.log("ressss", res);
+          setPayouts(res?.data?.data?.payouts);
+        })
+        .catch((err) => console.log("ressss catch", err));
+    } catch (error) {}
+  }, []);
   return (
     <>
       <Row>
@@ -160,6 +174,62 @@ const Doctor = (props) => {
               </tr>
             </tbody>
           </Table>
+          <h2 className="mt-4 text-center">Payouts</h2>
+          <div className="d-flex flex-wrap">
+            {payouts?.map((pay) => {
+              return (
+                <div className="border border-rounded p-3 m-3">
+                  <p>
+                    <span className="text-primary">payout id:</span>
+                    &nbsp; &nbsp; &nbsp;
+                    {pay.id}
+                  </p>
+                  <p>
+                    <span className="text-primary">fund account id:</span>
+                    &nbsp; &nbsp; &nbsp; {pay.fund_account_id}
+                  </p>
+                  <p>
+                    <span className="text-primary">payout amount:</span>
+                    &nbsp; &nbsp; &nbsp;
+                    {pay.amount / 100}&nbsp;{pay.currency}
+                  </p>
+                  <p>
+                    <span className="text-primary">payout charges :</span>
+                    &nbsp; &nbsp; &nbsp;
+                    {parseInt(pay.fees) + parseInt(pay.tax)}
+                    {" INR"}
+                    &nbsp;&nbsp;&nbsp;
+                    {pay.tax} tax&nbsp;
+                    {pay.fees} fee &nbsp;
+                  </p>
+                  <p>
+                    <span className="text-primary">payout mode:</span>
+                    &nbsp; &nbsp; &nbsp;
+                    {pay.mode}
+                  </p>
+                  <p>
+                    <span className="text-primary">payout status:</span>
+                    &nbsp; &nbsp; &nbsp;
+                    {pay.status}
+                  </p>
+                  <p>
+                    <span className="text-primary">payout reference id:</span>
+                    &nbsp; &nbsp; &nbsp;
+                    {pay.reference_id}
+                  </p>
+                  {pay.failure_reason && (
+                    <p>
+                      <span className="text-primary">
+                        payout failure reason :
+                      </span>
+                      &nbsp; &nbsp; &nbsp;
+                      {pay.failure_reason}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </Col>
       </Row>
     </>
