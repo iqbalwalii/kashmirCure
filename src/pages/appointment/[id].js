@@ -111,7 +111,21 @@ const Appointment = (props) => {
 							</tr>
 							<tr>
 								<td>Started treatment</td>
-								<td>{data?.has_started ? "Yes" : "No"}</td>
+								<td>
+									{data?.has_started ? "Yes" : "No"} <br />
+									start time:- &nbsp;
+									{data?.started_at ? (
+										<span>
+											{data?.started_at.slice(11, 19)}
+										</span>
+									) : (
+										""
+									)}
+									<br /> end time:- &nbsp;
+									{data?.ended_at
+										? data.ended_at.slice(11, 19)
+										: ""}
+								</td>
 							</tr>
 							{/* <tr>
                 <td>Followed Up</td>

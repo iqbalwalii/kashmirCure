@@ -92,6 +92,10 @@ const Doctor = (props) => {
 								<td>{doctor?.phone}</td>
 							</tr>
 							<tr>
+								<td>Fee</td>
+								<td>{doctor?.consultation_fee}</td>
+							</tr>
+							<tr>
 								<td>Category</td>
 								<td>
 									<Form>
