@@ -172,13 +172,17 @@ const Doctor = (props) => {
                   </Button>
                 </td>
               </tr>
+              <tr>
+                <td>Consultation Fee</td>
+                <td>{doctor?.consultation_fee}</td>
+              </tr>
             </tbody>
           </Table>
           <h2 className="mt-4 text-center">Payouts</h2>
           <div className="d-flex flex-wrap">
-            {payouts?.map((pay) => {
+            {payouts?.map((pay, idx) => {
               return (
-                <div className="border border-rounded p-3 m-3">
+                <div className="border border-rounded p-3 m-3" key={idx}>
                   <p>
                     <span className="text-primary">payout id:</span>
                     &nbsp; &nbsp; &nbsp;
