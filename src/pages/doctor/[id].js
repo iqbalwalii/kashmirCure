@@ -122,6 +122,10 @@ const Doctor = (props) => {
                 <td>{doctor?.createdAt?.slice(0, 10)}</td>
               </tr>
               <tr>
+                <td>Fees</td>
+                <td>{doctor?.consultation_fee}</td>
+              </tr>
+              <tr>
                 <td>Approval</td>
                 <td>
                   <Switch
