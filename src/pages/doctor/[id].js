@@ -172,10 +172,6 @@ const Doctor = (props) => {
                   </Button>
                 </td>
               </tr>
-              <tr>
-                <td>Consultation Fee</td>
-                <td>{doctor?.consultation_fee}</td>
-              </tr>
             </tbody>
           </Table>
           <h2 className="mt-4 text-center">Payouts</h2>
