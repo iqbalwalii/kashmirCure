@@ -124,6 +124,9 @@ const Doctor = (props) => {
               <tr>
                 <td>Fees</td>
                 <td>{doctor?.consultation_fee}</td>
+                <td>{doctor?.consultation_fee}</td>
+                <td>{doctor?.consultation_fee}</td>
+                <td>{doctor?.consultation_fee}</td>
               </tr>
               <tr>
                 <td>Approval</td>

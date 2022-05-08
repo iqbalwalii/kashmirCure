@@ -10,6 +10,7 @@ import Side from "../../Components/Navigator";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 const Coupon = (props) => {
+  const { coupon, button } = props;
   const router = useRouter();
   const id = router.query.id;
   const { register, handleSubmit } = useForm();
@@ -33,8 +34,7 @@ const Coupon = (props) => {
         });
       });
     }
-  }, []);
-  const { coupon, button } = props;
+  }, [coupon]);
   return (
     <>
       <Row>
@@ -90,6 +90,14 @@ const Coupon = (props) => {
                   <td>{coupon?.percentage}</td>
                 </tr>
                 <tr>
+                  <td>Total Limit</td>
+                  <td>{coupon?.limit}</td>
+                </tr>
+                <tr>
+                  <td>Limit Per User</td>
+                  <td>{coupon?.user_limit}</td>
+                </tr>
+                <tr>
                   <td>Status</td>
                   <td>{coupon?.isActive ? "Active" : "InActive"}</td>
                 </tr>
@@ -115,6 +123,22 @@ const Coupon = (props) => {
                   {...register("percentage")}
                 />
               </Form.Group>
+              <Form.Group controlId="formBasicNumber">
+                <Form.Label>Total Limit</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder={coupon?.limit}
+                  {...register("limit")}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicNumber">
+                <Form.Label>Limit Per User</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder={coupon?.user_limit}
+                  {...register("user_limit")}
+                />
+              </Form.Group>
               <Form.Group controlId="formBasicActive">
                 <Form.Label>Status</Form.Label>
                 <Form.Control as="select" {...register("isActive")}>
@@ -127,7 +151,7 @@ const Coupon = (props) => {
               </Form.Group>
               <div className="d-grid mt-4">
                 <Button type="submit" variant="dark">
-                  Create
+                  Update
                 </Button>
               </div>
             </Form>

@@ -31,3 +31,9 @@ export async function getAd(id) {
   const { data } = await Axios.get(`/ads/${id}`);
   return data;
 }
+
+//update ad
+export async function updateAd(id, input) {
+  const { data } = await Axios.patch(`ads/${id}`, input);
+  return data;
+}

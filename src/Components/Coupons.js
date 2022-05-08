@@ -61,6 +61,8 @@ const Coupons = (props) => {
               <th>#</th>
               <th>Name</th>
               <th>Percentage</th>
+              <th>Limit</th>
+              <th>User Limit</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -73,6 +75,8 @@ const Coupons = (props) => {
                       <td>{index + 1}</td>
                       <td>{coupon.name}</td>
                       <td>{coupon.percentage}</td>
+                      <td>{coupon.limit}</td>
+                      <td>{coupon.user_limit}</td>
                       <td>{coupon.isActive ? "Active" : " InActice"}</td>
                     </tr>
                   </Link>
@@ -103,6 +107,21 @@ const Coupons = (props) => {
               {...register("percentage")}
             />
           </InputGroup>
+
+          <Form.Group controlId="formBasicLimit" className="mt-3">
+            <Form.Control
+              type="number"
+              placeholder="Coupon Limit"
+              {...register("limit")}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicLimit" className="mt-3">
+            <Form.Control
+              type="number"
+              placeholder="Limit Per User"
+              {...register("user_limit")}
+            />
+          </Form.Group>
           <div className="d-grid mt-4">
             <Button type="submit" variant="dark">
               Create
