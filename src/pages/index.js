@@ -1,13 +1,22 @@
-import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { login } from "../services/loginService";
 import { useRouter } from "next/router";
 import Device from "../Components/Device";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Index = (props) => {
   const { user } = props;
   const router = useRouter();
+  const [errr, setErrr] = useState("");
   useEffect(() => {
     if (user?.token) {
       router.push("/dashboard");
@@ -15,13 +24,17 @@ const Index = (props) => {
   }, [router, user?.token]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    login(data).then((res) => {
-      props.dispatch({
-        type: "SET_USER",
-        payload: res.data,
+    login(data)
+      .then((res) => {
+        props.dispatch({
+          type: "SET_USER",
+          payload: res.data,
+        });
+        router.push("/dashboard");
+      })
+      .catch((err) => {
+        setErrr("Invalid Email or Password");
       });
-      router.push("/dashboard");
-    });
   };
   return (
     <Container>
@@ -31,6 +44,8 @@ const Index = (props) => {
           <Row className="login">
             <Col xs={12} md={{ span: 4, offset: 4 }}>
               <h3 className="text-center">LOGIN</h3>
+              {errr.length > 0 && <Alert variant="danger">{errr}</Alert>}
+
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email</Form.Label>
