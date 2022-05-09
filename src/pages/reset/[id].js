@@ -9,14 +9,15 @@ import {
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
-import { login } from "../services/loginService";
+import { forgetPassword, reset } from "../../services/loginService";
 import { useRouter } from "next/router";
-import Device from "../Components/Device";
+import Device from "../../Components/Device";
 import { useEffect, useState } from "react";
-const Index = (props) => {
-  const [errr, setErrr] = useState("");
+function Reset(props) {
   const { user } = props;
   const router = useRouter();
+  const id = router.query.id;
+  const [errr, setErrr] = useState({ type: "", message: "" });
   useEffect(() => {
     if (user?.token) {
       router.push("/dashboard");
@@ -24,17 +25,12 @@ const Index = (props) => {
   }, [router, user?.token]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    login(data)
-      .then((res) => {
-        props.dispatch({
-          type: "SET_USER",
-          payload: res.data,
-        });
-        router.push("/dashboard");
-      })
-      .catch((err) => {
-        setErrr("Incorrect username or password");
-      });
+    console.log(data);
+    data?.password1 === data?.password2
+      ? reset(id, data?.password1).then((res) => {
+          router.push("/");
+        })
+      : setErrr({ type: "danger", message: "Passwords don't match" });
   };
   return (
     <Container>
@@ -43,33 +39,27 @@ const Index = (props) => {
           <Device />
           <Row className="login">
             <Col xs={12} md={{ span: 4, offset: 4 }}>
-              <h3 className="text-center">LOGIN</h3>
-              {errr && <Alert variant="danger">{errr}</Alert>}
+              <h3 className="text-center">NEW PASSWORD</h3>
+              {errr && <Alert variant={errr.type}>{errr.message}</Alert>}
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter username"
-                    {...register("email")}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
+                <Form.Group controlId="formBasicPassword1">
                   <Form.Control
                     type="password"
-                    placeholder="Password"
-                    {...register("password")}
+                    placeholder="Enter Password"
+                    {...register("password1")}
                   />
                 </Form.Group>
+                <Form.Group controlId="formBasicPassword2" className="mt-2">
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm Password"
+                    {...register("password2")}
+                  />
+                </Form.Group>
+
                 <div className="d-grid mt-3">
                   <Button variant="dark" type="submit">
                     Submit
-                  </Button>
-                </div>
-                <div className="d-grid mt-3">
-                  <Button variant="dark" onClick={(e) => router.push("/reset")}>
-                    Forgot Password
                   </Button>
                 </div>
               </Form>
@@ -83,8 +73,9 @@ const Index = (props) => {
       )}
     </Container>
   );
-};
+}
+
 const mapStateToProps = (state) => {
   return { ...state, user: state.user };
 };
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(Reset);
