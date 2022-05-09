@@ -68,6 +68,9 @@ const Appointment = (props) => {
                   <Button variant="danger" onClick={onClickHandler}>
                     Delete
                   </Button>
+                  <Button variant="primary" className="mx-3" onClick={() => {}}>
+                    Edit
+                  </Button>
                 </td>
               </tr>
             </tbody>
