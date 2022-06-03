@@ -54,7 +54,10 @@ const Patients = (props) => {
 					<tbody>
 						{patients?.slice(0, list)?.map((patient, index) => {
 							return (
-								<Link href={`/patient/${patient._id}`}>
+								<Link
+									href={`/patient/${patient._id}`}
+									key={index}
+								>
 									<tr key={patient?._id}>
 										<td>{index + 1}</td>
 										<td>{patient?.name}</td>
