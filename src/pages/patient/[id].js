@@ -8,9 +8,7 @@ const Patient = (props) => {
   const router = useRouter();
   const id = router.query.id;
   const onDeleteHandler = (id) => {
-    console.log(id);
     deletePatient(id).then((res) => {
-      console.log(res);
       router.push("/dashboard");
     });
   };
@@ -21,7 +19,6 @@ const Patient = (props) => {
           type: "GET_PATIENT",
           payload: res.patient,
         });
-        console.log(res);
       });
     }
   }, []);

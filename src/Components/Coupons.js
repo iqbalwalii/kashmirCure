@@ -33,7 +33,6 @@ const Coupons = (props) => {
   };
 
   const { coupons, button } = props;
-  console.log(button);
   return (
     <div className="appointments">
       <Row>
@@ -138,7 +137,6 @@ const Coupons = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log("jall", state.couponBtn);
   return {
     coupons: state.coupons,
     button: state.couponBtn,

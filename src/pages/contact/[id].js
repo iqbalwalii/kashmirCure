@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { updateContact } from "../../services/ContactService";
 const Contact = (props) => {
-  console.log(props);
   const router = useRouter();
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState("");
@@ -14,7 +13,6 @@ const Contact = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     updateContact(contact?._id, edit, data).then((res) => {
-      console.log(res);
       props.dispatch({
         type: "GET_CONTACT",
         payload: res.data,

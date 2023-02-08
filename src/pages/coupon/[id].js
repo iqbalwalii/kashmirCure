@@ -15,9 +15,7 @@ const Coupon = (props) => {
   const id = router.query.id;
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     updateCoupon(id, data).then((res) => {
-      console.log(res);
       router.push("/dashboard");
       props.dispatch({
         type: "SET_COUPON_BTN",

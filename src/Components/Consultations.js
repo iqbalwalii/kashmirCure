@@ -10,7 +10,6 @@ const Consultations = (props) => {
   let items = [];
   const pages = Math.ceil(dashboard?.total_appointments / 10);
   const handleRequest = (num) => {
-    console.log(num);
     getAppointments(num).then((res) => {
       setActive(num);
       props.dispatch({

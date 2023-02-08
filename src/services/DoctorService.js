@@ -5,7 +5,6 @@ export async function getDoctors(page, category) {
   if (category) {
     url = url + `&category=${category}`;
   }
-  console.log("url", url);
   const res = await Axios.get(url + "&is_verified=true");
   let doctors = res.data.data.doctors;
   const { data } = await Axios.get(`${url}&is_verified=false`);

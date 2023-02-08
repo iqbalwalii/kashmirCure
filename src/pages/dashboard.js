@@ -17,7 +17,6 @@ import Payouts from "../Components/Payouts";
 
 function Home(props) {
   const { tab, user } = props;
-  console.log(user);
   return (
     <>
       <Device />

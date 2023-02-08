@@ -28,7 +28,6 @@ function Reset(props) {
       .then((res) => {
         setErrr({ type: "success", message: "Verified" });
         router.push(`/reset/${res.id}`);
-        console.log(res);
       })
       .catch((err) => {
         setErrr({ type: "danger", message: "Email doesn't Exist" });

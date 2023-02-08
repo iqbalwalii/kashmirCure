@@ -22,7 +22,6 @@ ChartJS.register(
 
 const BarChart = (props) => {
   const { dashboard } = props;
-  console.log(dashboard);
   const options = {
     responsive: +true,
     plugins: {

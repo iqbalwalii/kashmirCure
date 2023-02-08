@@ -8,13 +8,11 @@ import Link from "next/link";
 const Contact = (props) => {
   const router = useRouter();
   const { contacts, dashboard } = props;
-  console.log("sssssssssssssssss", props);
   let [active, setActive] = useState(1);
   let items = [];
   const pages = Math.ceil(dashboard?.total_contacts / 10);
   const handleRequest = (num) => {
     getContact(num).then((res) => {
-      console.log("contact", res.data.contact);
       setActive(num);
       props.dispatch({
         type: "GET_CONTACTS",
@@ -86,7 +84,6 @@ const Contact = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     ...state,
     contacts: state.contacts,

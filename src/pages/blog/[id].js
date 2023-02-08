@@ -17,7 +17,6 @@ const Appointment = (props) => {
     description: [""],
   };
   const [details, setDetails] = useState(editDetails);
-  console.log(blog, "oo");
   useEffect(() => {
     if (router.isReady) {
       getBlog(id).then((res) => {
@@ -38,12 +37,9 @@ const Appointment = (props) => {
       router.push("/dashboard");
     });
   };
-  console.log(details, "det");
   function onSubmit(data) {
     const img = data.image[0];
-    updateBlog(id, data).then((res) => {
-      console.log(res);
-    });
+    updateBlog(id, data).then((res) => {});
   }
   return (
     <>

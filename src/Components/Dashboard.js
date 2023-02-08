@@ -27,7 +27,6 @@ import BarChart from "./BarChart";
 const Dashboard = (props) => {
   const { register, handleSubmit } = useForm();
   const { patients, appointments, user, blogs, doctors, dashboard } = props;
-  console.log(dashboard);
   useEffect(() => {
     // const user = JSON.parse(Cookie.get("user"));
     if (user?.token) {
@@ -35,7 +34,6 @@ const Dashboard = (props) => {
         props.dispatch({ type: "GET_DOCTORS", payload: res });
       });
       getDashboard().then((res) => {
-        console.log(res);
         props.dispatch({ type: "SET_DASHBOARD", payload: res });
       });
       getPatients().then((res) => {
@@ -74,9 +72,7 @@ const Dashboard = (props) => {
     }
   }, []);
   const onSubmit = (data) => {
-    console.log(data);
     setDashboard(data).then((res) => {
-      console.log(res.data);
       props.dispatch({
         type: "SET_DASHBOARD",
         payload: res.data,

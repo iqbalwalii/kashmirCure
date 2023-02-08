@@ -25,7 +25,6 @@ function Reset(props) {
   }, [router, user?.token]);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     data?.password1 === data?.password2
       ? reset(id, data?.password1).then((res) => {
           router.push("/");

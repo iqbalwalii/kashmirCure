@@ -54,9 +54,7 @@ const Doctor = (props) => {
     });
   };
   const onDeleteHandler = (id) => {
-    console.log(id);
     deleteDoctor(id).then((res) => {
-      console.log(res);
       router.push("/dashboard");
     });
   };
@@ -67,10 +65,8 @@ const Doctor = (props) => {
           method: "GET",
         })
         .then((res) => {
-          console.log("ressss", res);
           setPayouts(res?.data?.data?.payouts);
-        })
-        .catch((err) => console.log("ressss catch", err));
+        });
     } catch (error) {}
   }, []);
   return (
@@ -124,7 +120,6 @@ const Doctor = (props) => {
               <tr>
                 <td>Fees</td>
                 <td>{doctor?.consultation_fee}</td>
-                
               </tr>
               <tr>
                 <td>Approval</td>

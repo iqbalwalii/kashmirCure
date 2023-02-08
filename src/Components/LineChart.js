@@ -26,7 +26,6 @@ const LineChart = (props) => {
   let patients = new Array(12).fill(0);
   dashboard?.monthly_doctors.map((doc) => (docs[doc._id - 1] = doc.total));
   dashboard?.monthly_patients.map((pat) => (patients[pat._id - 1] = pat.total));
-  console.log(docs, patients);
   const labels = [
     "Jan",
     "Feb",
