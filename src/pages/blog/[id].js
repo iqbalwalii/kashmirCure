@@ -11,12 +11,6 @@ const Appointment = (props) => {
   const id = router.query.id;
   const { blog } = props;
   const { register, handleSubmit } = useForm();
-  const editDetails = {
-    title: "",
-    image: "",
-    description: [""],
-  };
-  const [details, setDetails] = useState(editDetails);
   useEffect(() => {
     if (router.isReady) {
       getBlog(id).then((res) => {
@@ -37,6 +31,7 @@ const Appointment = (props) => {
       router.push("/dashboard");
     });
   };
+
   function onSubmit(data) {
     const img = data.image[0];
     updateBlog(id, data).then((res) => {});

@@ -27,13 +27,13 @@ export async function updateBlog(id, { ...input }) {
         }
       ).then((res) => console.log(""))
   );
-
   return data;
 }
 export async function deleteBlog(id) {
   const { data } = await Axios.delete(`/posts/${id}`);
   return data;
 }
+
 export async function createPost(input) {
   const { data } = await Axios.post(`/posts`, input);
   return data;

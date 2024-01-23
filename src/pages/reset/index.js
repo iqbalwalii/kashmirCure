@@ -13,6 +13,7 @@ import { forgetPassword, reset } from "../../services/loginService";
 import { useRouter } from "next/router";
 import Device from "../../Components/Device";
 import { useEffect, useState } from "react";
+
 function Reset(props) {
   const { user } = props;
   const router = useRouter();
@@ -22,7 +23,9 @@ function Reset(props) {
       router.push("/dashboard");
     }
   }, [router, user?.token]);
+
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (data) => {
     forgetPassword(data?.email)
       .then((res) => {
@@ -33,6 +36,7 @@ function Reset(props) {
         setErrr({ type: "danger", message: "Email doesn't Exist" });
       });
   };
+
   return (
     <Container>
       {user?.loggedIn !== true ? (
